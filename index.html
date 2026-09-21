@@ -6,165 +6,340 @@
 <title>Us</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Pixelify+Sans:wght@400..700&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#EFE9FA; --ink:#2A1740; --muted:#6B5A82; --surface:#FFFFFF; --line:#2A1740; --shadow:#2A1740;
-  --coral:#FF6B81; --butter:#FFD76A; --mint:#86DDB8; --sky:#9CC0FF; --pink:#FFB3D1;
-  --on:#2A1740; --paper:#FFF3CC;
-  --font:"Bricolage Grotesque", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --hand:"Caveat", "Bradley Hand", "Segoe Script", "Comic Sans MS", cursive;
+  /* light = manga page */
+  --bg:#EEE5F2; --panel:#FBF7FD; --ink:#180A2B; --muted:#5E4A7A; --line:#180A2B; --shadow:#7D1029;
+  --red:#A8122F; --red2:#6E0E24; --purple:#4E20A0; --purple2:#3A1878; --on:#FFFFFF;
+  --dot:rgba(24,10,43,.11);
+  --display:"Pixelify Sans", "Press Start 2P", ui-monospace, Menlo, Consolas, monospace;
+  --font:"Chakra Petch", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   box-sizing:border-box;
   padding-top:env(safe-area-inset-top,0px);
   padding-bottom:env(safe-area-inset-bottom,0px);
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --bg:#191029; --ink:#F3EBFF; --muted:#B9A6D6; --surface:#2A1B42; --line:#CBB6F2; --shadow:#7A5FB0; --paper:#3A2A55;
+    /* dark = arcade cabinet */
+    --bg:#0E0418; --panel:#1B0A30; --ink:#F6EAFF; --muted:#B49AD6; --line:#B58CFF; --shadow:#C4173F;
+    --red:#C4173F; --red2:#8E1030; --purple:#6D33D6; --purple2:#3F1B87; --dot:rgba(181,140,255,.09);
   }
 }
 :root[data-theme="dark"]{
-  --bg:#191029; --ink:#F3EBFF; --muted:#B9A6D6; --surface:#2A1B42; --line:#CBB6F2; --shadow:#7A5FB0; --paper:#3A2A55;
+  --bg:#0E0418; --panel:#1B0A30; --ink:#F6EAFF; --muted:#B49AD6; --line:#B58CFF; --shadow:#C4173F;
+  --red:#C4173F; --red2:#8E1030; --purple:#6D33D6; --purple2:#3F1B87; --dot:rgba(181,140,255,.09);
 }
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 *,*::before,*::after{box-sizing:inherit}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:17px;line-height:1.5;min-height:100vh;-webkit-font-smoothing:antialiased}
-button{font:inherit;color:inherit;cursor:pointer}
+body{margin:0;background:var(--bg);background-image:radial-gradient(var(--dot) 1.2px,transparent 1.7px);background-size:9px 9px;color:var(--ink);font-family:var(--font);font-weight:500;font-size:17px;line-height:1.5;min-height:100vh;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;cursor:pointer;border-radius:0}
 a{color:inherit}
-:focus-visible{outline:3px solid var(--coral);outline-offset:3px}
-.wrap{max-width:760px;margin:0 auto;padding:0 20px 64px}
+:focus-visible{outline:3px solid var(--red);outline-offset:3px}
+.wrap{max-width:760px;margin:0 auto;padding:0 20px 72px}
+svg{image-rendering:pixelated}
 
 /* top bar */
-#bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg)}
-.bar{display:flex;align-items:center;gap:14px;padding:12px 20px;max-width:760px;margin:0 auto}
-.back{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border:2px solid var(--line);border-radius:999px;text-decoration:none;font-weight:600;background:var(--surface)}
-.bar h2{margin:0;font-size:1.25rem;font-weight:700;letter-spacing:-.01em}
+#bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:3px solid var(--line)}
+#bar:empty{display:none}
+.bar{display:flex;align-items:center;gap:14px;padding:10px 20px;max-width:760px;margin:0 auto}
+.back{display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:0 16px 0 12px;border:3px solid var(--line);background:var(--panel);text-decoration:none;font-family:var(--display);font-weight:600;text-transform:uppercase;letter-spacing:.05em}
+.back::before{content:"";border:6px solid transparent;border-right:9px solid currentColor;border-left:0}
+.bar h2{margin:0;font:700 1.25rem/1.1 var(--display);text-transform:uppercase;letter-spacing:.05em}
 
-/* hero */
-.hero{padding:44px 0 26px}
-.names{margin:0;font-size:clamp(3rem,13vw,6.6rem);line-height:.95;font-weight:800;letter-spacing:-.045em;font-variation-settings:"opsz" 96}
-.amp{font-family:var(--hand);font-weight:700;letter-spacing:0;font-size:1.05em;color:var(--coral);padding:0 .08em}
-.tag{margin:14px 0 0;font-size:1.25rem;color:var(--muted)}
-.hero-row{display:flex;align-items:center;gap:12px;margin-top:20px;flex-wrap:wrap}
-.heart{width:44px;height:44px;border-radius:50%;border:2px solid var(--line);background:var(--surface);font-size:1.2rem;line-height:1}
-.heart:active{transform:scale(.9)}
-.chip-days{padding:8px 16px;border:2px solid var(--line);border-radius:999px;font-weight:600;background:var(--butter);color:var(--on)}
-.banner{margin-top:18px;padding:14px 18px;border:2px solid var(--line);border-radius:18px;background:var(--pink);color:var(--on);font-weight:600}
+/* home */
+.hud{display:flex;justify-content:space-between;align-items:center;font-family:var(--display);font-weight:600;font-size:1rem;letter-spacing:.1em;text-transform:uppercase;padding:14px 0}
+.hud .lives{display:flex;align-items:center;gap:10px}
+.hbtn{background:none;border:0;padding:10px;margin:-10px 0;line-height:0}
+.stage{position:relative;width:min(270px,100%);height:262px;margin:0 auto;border:3px solid var(--line);box-shadow:6px 6px 0 var(--shadow);background:var(--purple2);overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:10px;padding-bottom:12px}
+.stage::before{content:"";position:absolute;inset:0;background:repeating-conic-gradient(from 0deg at 50% 55%,rgba(255,255,255,.17) 0 1.4deg,transparent 1.4deg 7deg);-webkit-mask-image:radial-gradient(circle at 50% 55%,transparent 0,transparent 55px,#000 160px);mask-image:radial-gradient(circle at 50% 55%,transparent 0,transparent 55px,#000 160px)}
+.stage>*{position:relative;z-index:1}
+.pet{background:none;border:0;padding:0;line-height:0}
+.pet svg{display:block}
+.pet.on svg{animation:squish .36s steps(3)}
+@keyframes bob{50%{transform:translateY(-5px)}}
+@keyframes squish{30%{transform:scale(1.08,.9)}70%{transform:scale(.95,1.06)}}
+.bubble{position:absolute;z-index:2;top:22px;right:9%;background:#fff;color:#180A2B;border:3px solid #180A2B;padding:2px 12px;font-family:var(--display);font-weight:700;font-size:1.1rem;opacity:0;transform:translateY(6px);transition:opacity .1s,transform .1s}
+.bubble.on{opacity:1;transform:none}
+.bubble::after{content:"";position:absolute;left:14px;bottom:-15px;border-left:8px solid transparent;border-right:8px solid transparent;border-top:12px solid #180A2B}
+.hp{position:absolute;bottom:52%;z-index:3;pointer-events:none;animation:hp 1.2s steps(10) forwards}
+@keyframes hp{from{transform:translate(0,0);opacity:1}to{transform:translate(var(--dx),-130px);opacity:0}}
+.names{margin:30px 0 0;font-family:var(--display);font-weight:700;font-size:clamp(2.6rem,12vw,5.2rem);line-height:.98;text-transform:uppercase;letter-spacing:.02em;text-shadow:4px 4px 0 var(--red)}
+.names .amp{color:var(--red);text-shadow:4px 4px 0 var(--ink)}
+.tag{margin:14px 0 0;font-size:1.2rem;color:var(--muted)}
+.sel{margin:26px 0 12px;font-family:var(--display);font-weight:600;letter-spacing:.12em;text-transform:uppercase}
+.cursor{display:inline-block;width:.6em;height:1em;margin-left:8px;background:var(--red);vertical-align:-.12em;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.banner{margin:0 0 18px;padding:14px 18px;border:3px solid var(--line);background:var(--red);color:var(--on);font-weight:700;box-shadow:5px 5px 0 var(--line)}
+.menu{list-style:none;margin:0;padding:0;border:3px solid var(--line);box-shadow:6px 6px 0 var(--shadow);background:var(--panel)}
+.menu li+li{border-top:3px solid var(--line)}
+.menu li:nth-child(even) a{background:color-mix(in srgb,var(--purple) 11%,var(--panel))}
+.menu a{position:relative;display:grid;grid-template-columns:42px 1fr;gap:10px;align-items:center;min-height:62px;padding:12px 16px 12px 20px;text-decoration:none}
+.menu .n{font-family:var(--display);font-weight:600;font-size:1.1rem;color:var(--muted)}
+.menu b{display:block;font-family:var(--display);font-weight:700;font-size:1.35rem;line-height:1.1;text-transform:uppercase;letter-spacing:.03em}
+.menu small{display:block;font-size:.92rem;color:var(--muted)}
+.menu a::before{content:"";position:absolute;left:4px;top:50%;margin-top:-7px;border:7px solid transparent;border-left:9px solid var(--on);border-right:0;opacity:0}
+.menu a:hover,.menu a:focus-visible{background:var(--red);color:var(--on)}
+.menu a:hover .n,.menu a:hover small,.menu a:focus-visible .n,.menu a:focus-visible small{color:inherit;opacity:.9}
+.menu a:hover::before,.menu a:focus-visible::before{opacity:1}
 
-/* tiles */
-.tiles{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;grid-auto-flow:dense;margin-top:10px}
-.tile{display:flex;flex-direction:column;justify-content:space-between;gap:26px;min-height:150px;padding:18px;text-align:left;text-decoration:none;background:var(--c);color:var(--on);border:2.5px solid var(--line);border-radius:26px 26px 26px 10px;box-shadow:5px 5px 0 var(--shadow);transition:transform .12s,box-shadow .12s}
-.tile:nth-child(even){border-radius:26px 26px 10px 26px}
-.tile:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--shadow)}
-.tile:active{transform:translate(4px,4px);box-shadow:1px 1px 0 var(--shadow)}
-.tile .em{font-size:2rem;line-height:1}
-.tile b{display:block;font-size:1.2rem;line-height:1.15;font-weight:700;letter-spacing:-.01em}
-.tile span.s{display:block;margin-top:4px;font-size:.92rem;opacity:.8}
-.tile.wide{grid-column:span 2}
-@media (min-width:700px){
-  .tiles{grid-template-columns:repeat(3,1fr)}
-  .tile.wide{grid-column:span 2}
-}
-
-/* generic bits */
-.lead{color:var(--muted);margin:6px 0 18px}
-.row{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
-.chip{min-height:44px;padding:0 16px;border:2px solid var(--line);border-radius:999px;background:var(--surface);font-weight:600}
-.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
-.chip.locked{opacity:.6;border-style:dashed}
-.btn{min-height:48px;padding:0 22px;border:2.5px solid var(--line);border-radius:16px 16px 16px 6px;background:var(--coral);color:var(--on);font-weight:700;box-shadow:3px 3px 0 var(--shadow)}
-.btn:active{transform:translate(3px,3px);box-shadow:0 0 0 var(--shadow)}
-.btn.ghost{background:var(--surface);color:var(--ink)}
-.btn[disabled]{opacity:.5;cursor:default}
-.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
-.panel{position:relative;background:var(--surface);border:2.5px solid var(--line);border-radius:26px 26px 26px 8px;padding:26px 22px 24px;box-shadow:5px 5px 0 var(--shadow);margin:18px 0}
-.panel .kind{display:inline-block;font-weight:600;font-size:.95rem;color:var(--muted);margin-bottom:10px}
-.panel .big{margin:0;font-size:clamp(1.55rem,5.4vw,2.2rem);line-height:1.2;font-weight:700;letter-spacing:-.02em}
-.panel.note{background:var(--paper)}
-.panel.hand .big{font-family:var(--hand);font-weight:700;font-size:clamp(1.9rem,6vw,2.5rem);line-height:1.15;letter-spacing:0}
-.switch{display:flex;align-items:center;gap:10px;margin:8px 0;font-weight:500}
-.switch input{width:22px;height:22px;accent-color:var(--coral)}
+/* shared */
+.lead{color:var(--muted);margin:18px 0 8px}
+.step{margin:24px 0 8px;font-family:var(--display);font-weight:600;font-size:1rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.row{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0}
+.chip{min-height:44px;padding:0 14px;border:3px solid var(--line);background:var(--panel);color:var(--ink);font-family:var(--display);font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+.chip[aria-pressed="true"]{background:var(--purple);color:var(--on)}
+.chip.locked{border-style:dashed;color:var(--muted)}
+.chip small{font:inherit;opacity:.7;margin-left:6px}
+.btn{min-height:48px;padding:0 22px;border:3px solid var(--line);background:var(--red);color:var(--on);font-family:var(--display);font-weight:700;font-size:1.05rem;letter-spacing:.06em;text-transform:uppercase;box-shadow:4px 4px 0 var(--line)}
+.btn.alt{background:var(--purple)}
+.btn.ghost{background:var(--panel);color:var(--ink)}
+.btn:active{transform:translate(4px,4px);box-shadow:0 0 0 var(--line)}
+.btn[disabled]{opacity:.45;cursor:default;box-shadow:none}
+.btn.xl{min-height:64px;font-size:1.4rem;padding:0 30px}
+.actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:20px}
+.panel{position:relative;background:var(--panel);border:3px solid var(--line);box-shadow:6px 6px 0 var(--shadow);padding:30px 20px 22px;margin:28px 0 20px}
+.tab{position:absolute;top:-16px;left:14px;max-width:calc(100% - 28px);padding:1px 10px;background:var(--red);color:var(--on);border:3px solid var(--line);font-family:var(--display);font-weight:600;font-size:.95rem;letter-spacing:.08em;text-transform:uppercase}
+.big{margin:0;font-family:var(--display);font-weight:600;font-size:clamp(1.5rem,5.6vw,2.15rem);line-height:1.2;letter-spacing:.005em}
+.panel p.sub{margin:12px 0 0;color:var(--muted)}
+.switch{display:flex;align-items:center;gap:12px;margin:12px 0;font-weight:600}
+.switch input{width:22px;height:22px;accent-color:var(--red)}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:8px}
-.mode{min-height:84px;border:2.5px solid var(--line);border-radius:22px;font-size:1.5rem;font-weight:800;letter-spacing:-.02em;box-shadow:4px 4px 0 var(--shadow)}
-.mode.truth{background:var(--sky);color:var(--on)}
-.mode.dare{background:var(--coral);color:var(--on)}
-.mode[aria-pressed="true"]{transform:translate(4px,4px);box-shadow:0 0 0 var(--shadow);outline:3px solid var(--ink);outline-offset:2px}
+.mode{min-height:88px;border:3px solid var(--line);color:var(--on);font-family:var(--display);font-weight:700;font-size:1.7rem;letter-spacing:.06em;text-transform:uppercase;box-shadow:5px 5px 0 var(--line)}
+.mode.truth{background:var(--purple)}
+.mode.dare{background:var(--red)}
+.mode:active:not([disabled]){transform:translate(5px,5px);box-shadow:0 0 0 var(--line)}
+.mode[disabled]{opacity:.4;cursor:default;box-shadow:none}
 
 /* cards */
-.deal{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:20px 0}
+.deal{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:22px 0}
 .pc{perspective:800px;aspect-ratio:2/3;background:none;border:0;padding:0}
-.pc .in{position:relative;width:100%;height:100%;transition:transform .55s;transform-style:preserve-3d}
+.pc .in{position:relative;display:block;width:100%;height:100%;transition:transform .55s;transform-style:preserve-3d}
 .pc.flipped .in{transform:rotateY(180deg)}
 .pc.dim{opacity:.35}
-.pc .face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border:2.5px solid var(--line);border-radius:12px;display:grid;place-items:center}
-.pc .back{background-color:var(--deck,var(--coral));background-image:radial-gradient(circle,rgba(255,255,255,.55) 2px,transparent 2.6px);background-size:16px 16px}
-.pc .front{background:var(--butter);color:var(--on);transform:rotateY(180deg);font-weight:800;font-size:clamp(1rem,4.5vw,1.6rem)}
+.pc .face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border:3px solid var(--line);display:grid;place-items:center}
+.pc .back{background-color:var(--deck,var(--red));background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.2) 0 3px,transparent 3px 10px)}
+.pc .front{background:var(--panel);color:var(--ink);transform:rotateY(180deg);font-family:var(--display);font-weight:700;font-size:clamp(1rem,4.5vw,1.6rem)}
 .pc:not(.flipped):not([disabled]):hover .in{transform:translateY(-6px)}
-details.kept{margin-top:26px}
-details.kept summary{cursor:pointer;font-weight:700;min-height:44px;display:flex;align-items:center}
-details.kept ul{padding-left:0;list-style:none;display:grid;gap:10px}
-details.kept li{padding:12px 14px;border:2px solid var(--line);border-radius:14px;background:var(--surface)}
-details.kept small{color:var(--muted);display:block}
+details.kept{margin-top:28px}
+details.kept summary{cursor:pointer;font-family:var(--display);font-weight:600;text-transform:uppercase;letter-spacing:.06em;min-height:44px;display:flex;align-items:center}
+details.kept ul{padding:0;list-style:none;display:grid;gap:10px}
+details.kept li{padding:12px 14px;border:3px solid var(--line);background:var(--panel)}
+details.kept small{display:block;color:var(--muted)}
 
 /* quiz */
-.opts{display:grid;gap:10px;margin-top:18px}
-.opt{display:flex;gap:12px;align-items:center;text-align:left;min-height:52px;padding:10px 16px;border:2.5px solid var(--line);border-radius:16px;background:var(--surface);font-weight:500}
-.opt i{font-style:normal;font-weight:800;width:28px;height:28px;flex:none;display:grid;place-items:center;border-radius:50%;background:var(--ink);color:var(--bg);font-size:.9rem}
-.opt.correct{background:var(--mint);color:var(--on)}
-.opt.wrong{background:var(--coral);color:var(--on);text-decoration:line-through}
-.opt.correct i,.opt.wrong i{background:var(--on);color:#fff}
-.verdict{font-size:1.5rem;font-weight:800;letter-spacing:-.02em;margin:0 0 6px}
-.progress{font-weight:600;color:var(--muted)}
+.score{display:flex;justify-content:space-between;gap:12px;font-family:var(--display);font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-top:18px}
+.score span{padding:4px 12px;border:3px solid var(--line);background:var(--panel)}
+.score span.on{background:var(--purple);color:var(--on)}
+.opts{display:grid;gap:12px;margin-top:20px}
+.opt{display:flex;gap:14px;align-items:center;text-align:left;min-height:54px;padding:8px 14px;border:3px solid var(--line);background:var(--panel);font-weight:600}
+.opt i{font-style:normal;font-family:var(--display);font-weight:700;width:30px;height:30px;flex:none;display:grid;place-items:center;background:var(--ink);color:var(--bg)}
+.opt.picked{background:var(--purple);color:var(--on)}
+.opt.correct{background:var(--purple);color:var(--on)}
+.opt.wrong{background:var(--red);color:var(--on);text-decoration:line-through}
+.opt.correct i,.opt.wrong i,.opt.picked i{background:var(--on);color:#180A2B}
+.verdict{margin:0 0 6px;font-family:var(--display);font-weight:700;font-size:1.8rem;text-transform:uppercase;letter-spacing:.03em}
 
 /* letters */
 .env-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:8px}
 @media (min-width:700px){.env-grid{grid-template-columns:repeat(3,1fr)}}
-.env{position:relative;min-height:120px;padding:16px 14px;text-align:left;border:2.5px solid var(--line);border-radius:10px 10px 22px 22px;background:var(--paper);box-shadow:4px 4px 0 var(--shadow);font-weight:600;line-height:1.25;overflow:hidden}
-.env::before{content:"";position:absolute;left:0;right:0;top:0;height:46px;background:linear-gradient(to bottom right,transparent 49.5%,var(--line) 49.5%,var(--line) 51%,transparent 51%) left/50% 100% no-repeat,linear-gradient(to bottom left,transparent 49.5%,var(--line) 49.5%,var(--line) 51%,transparent 51%) right/50% 100% no-repeat;opacity:.5}
-.env span{display:block;margin-top:48px}
-.env.opened{opacity:.65}
-.env.lock{border-style:dashed;background:var(--surface)}
-.env.shake{animation:shake .4s}
+.env{position:relative;min-height:124px;padding:0;text-align:left;border:3px solid var(--line);background:var(--panel);box-shadow:5px 5px 0 var(--shadow);overflow:hidden}
+.env::before{content:"";position:absolute;left:0;right:0;top:0;height:48px;background:linear-gradient(to bottom right,transparent calc(50% - 1.5px),var(--line) calc(50% - 1.5px),var(--line) calc(50% + 1.5px),transparent calc(50% + 1.5px)) left/50% 100% no-repeat,linear-gradient(to bottom left,transparent calc(50% - 1.5px),var(--line) calc(50% - 1.5px),var(--line) calc(50% + 1.5px),transparent calc(50% + 1.5px)) right/50% 100% no-repeat}
+.env span{display:block;padding:58px 12px 12px;font-family:var(--display);font-weight:600;font-size:1.05rem;line-height:1.2;text-transform:uppercase}
+.env.opened{background:color-mix(in srgb,var(--purple) 16%,var(--panel))}
+.env.lock{border-style:dashed}
+.env.lock span::after{content:"Locked";display:inline-block;margin-left:8px;padding:0 6px;background:var(--red);color:var(--on);font-size:.8rem;vertical-align:.1em}
+.env.shake{animation:shake .4s steps(4)}
 @keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
 
 /* memories */
-.timeline{list-style:none;margin:18px 0 0;padding:0 0 0 22px;border-left:3px solid var(--line)}
-.timeline li{position:relative;margin:0 0 26px;padding-left:16px}
-.timeline li::before{content:"";position:absolute;left:-33px;top:6px;width:16px;height:16px;border-radius:50%;background:var(--coral);border:3px solid var(--line)}
-.timeline time{font-weight:600;color:var(--muted);font-size:.95rem}
-.timeline h3{margin:2px 0 4px;font-size:1.25rem;letter-spacing:-.01em}
+.timeline{list-style:none;margin:18px 0 0;padding:0 0 0 24px;border-left:4px solid var(--line)}
+.timeline li{position:relative;margin:0 0 28px;padding-left:16px}
+.timeline li::before{content:"";position:absolute;left:-36px;top:5px;width:16px;height:16px;background:var(--red);border:3px solid var(--line)}
+.timeline time{font-family:var(--display);font-weight:600;color:var(--muted);letter-spacing:.04em}
+.timeline h3{margin:2px 0 4px;font-family:var(--display);font-weight:700;font-size:1.4rem;text-transform:uppercase;letter-spacing:.02em}
 .timeline p{margin:0;max-width:60ch}
 
-/* together */
-.tcard{background:var(--surface);border:2.5px solid var(--line);border-radius:22px;padding:20px;margin:18px 0;box-shadow:4px 4px 0 var(--shadow)}
-.tcard h3{margin:0 0 10px;font-size:1.25rem;letter-spacing:-.01em}
-.result{margin:12px 0 0;padding:0;list-style:none;display:grid;gap:8px;font-weight:600}
-.result li{padding:10px 14px;border-radius:12px;background:var(--bg);border:2px solid var(--line)}
-.timer{font-size:3.6rem;font-weight:800;letter-spacing:-.03em;font-variant-numeric:tabular-nums;margin:6px 0}
-.counter{display:flex;align-items:center;gap:16px}
-.counter output{font-size:2.4rem;font-weight:800;min-width:2.4ch;text-align:center;font-variant-numeric:tabular-nums}
-.round{width:48px;height:48px;border-radius:50%;border:2.5px solid var(--line);background:var(--butter);color:var(--on);font-size:1.5rem;font-weight:800;line-height:1}
+/* together, chaos */
+.tcard{position:relative;background:var(--panel);border:3px solid var(--line);padding:26px 20px 20px;margin:28px 0;box-shadow:6px 6px 0 var(--shadow)}
+.result{margin:14px 0 0;padding:0;list-style:none;display:grid;gap:10px;font-weight:700}
+.result li{padding:10px 14px;border:3px solid var(--line);background:var(--bg)}
+.result small{display:block;font-weight:500;color:var(--muted)}
+.timer{font-family:var(--display);font-weight:700;font-size:3.6rem;line-height:1.1;letter-spacing:.02em;font-variant-numeric:tabular-nums;margin:8px 0 0}
+
+/* heads up */
+.hu-top{display:flex;justify-content:space-between;font-family:var(--display);font-weight:600;font-size:1.3rem;text-transform:uppercase;letter-spacing:.08em;margin:22px 0 12px}
+.hu-word{display:grid;place-items:center;text-align:center;min-height:40vh;padding:24px;border:3px solid var(--line);background:var(--red);color:var(--on);box-shadow:6px 6px 0 var(--shadow);font-family:var(--display);font-weight:700;font-size:clamp(2.2rem,11vw,4.4rem);line-height:1.05;text-transform:uppercase;overflow-wrap:anywhere}
+.hu-word.ok{background:var(--purple)}
+.hu-btns{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:22px}
+.hu-btns .btn{min-height:76px;font-size:1.5rem}
+.count{display:grid;place-items:center;min-height:50vh;font-family:var(--display);font-weight:700;font-size:8rem;text-shadow:5px 5px 0 var(--red)}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.two-col ul{margin:8px 0 0;padding-left:18px}
+
+/* witch's hut */
+.scene{border:3px solid var(--line);box-shadow:6px 6px 0 var(--shadow);background:#1B0A30;display:grid;place-items:center;padding:16px}
+.scene svg{width:min(340px,100%);height:auto}
+.tarot-wrap{display:grid;place-items:center;margin:20px 0 8px}
+.t3{width:min(220px,66vw);aspect-ratio:2/3;perspective:900px}
+.t3 .in{position:relative;display:block;width:100%;height:100%;transform-style:preserve-3d;transition:transform .8s}
+.t3.flipped .in{transform:rotateY(180deg)}
+.t3 .face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border:3px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:16px;text-align:center}
+.t3 .back{background-color:var(--purple);background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.16) 0 4px,transparent 4px 12px);color:var(--on)}
+.t3 .front{transform:rotateY(180deg);background:#F4EEFF;color:#180A2B;box-shadow:inset 0 0 0 5px #F4EEFF,inset 0 0 0 8px #A8122F}
+.t3 .num{font-family:var(--display);font-weight:700;font-size:1.3rem;letter-spacing:.1em}
+.t3 .nm{font-family:var(--display);font-weight:700;font-size:1.25rem;line-height:1.1;text-transform:uppercase}
+.t3.rev .art{transform:rotate(180deg)}
+.rev-tag{display:inline-block;background:var(--red);color:var(--on);padding:0 8px;font-family:var(--display);font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+.ball{position:relative;width:190px;height:190px;border-radius:50%;background:#0B0314;border:3px solid var(--line);display:grid;place-items:center;margin:14px auto;box-shadow:6px 6px 0 var(--shadow)}
+.ball::before{content:"";position:absolute;left:34px;top:24px;width:36px;height:16px;background:rgba(255,255,255,.2);border-radius:50%;transform:rotate(-30deg)}
+.ball .win{width:104px;height:100px;background:var(--purple);clip-path:polygon(50% 4%,98% 94%,2% 94%);display:grid;place-items:center;padding-top:34px;text-align:center;color:var(--on);font-family:var(--display);font-weight:700;font-size:1.1rem;line-height:1.05}
+.ball.eight .win{font-size:2.2rem;padding-top:26px}
+.ball.shake{animation:ballshake .7s steps(7)}
+@keyframes ballshake{15%{transform:translate(-10px,4px) rotate(-6deg)}35%{transform:translate(10px,-4px) rotate(6deg)}55%{transform:translate(-8px,-3px) rotate(-4deg)}75%{transform:translate(8px,3px) rotate(4deg)}}
+.catbox{position:relative;border:3px solid var(--line);background:var(--purple2);display:grid;place-items:center;padding:22px 14px 14px;overflow:hidden;min-height:230px}
+.catbox svg{width:min(360px,100%);height:auto;display:block}
+.catbox .pet svg{animation:none}
+.catbox .pet.on svg{animation:squish .36s steps(3)}
+.zzz{position:absolute;right:16%;top:20px;color:#fff;font-family:var(--display);font-weight:700;font-size:1.4rem;animation:zzz 2.4s steps(6) infinite}
+.zzz.b{right:9%;top:38px;font-size:1rem;animation-delay:1.1s}
+@keyframes zzz{0%{opacity:0;transform:translateY(12px)}30%{opacity:1}100%{opacity:0;transform:translateY(-14px)}}
 
 /* stats */
-.ledger{list-style:none;margin:8px 0 0;padding:0;border:2.5px solid var(--line);border-radius:22px;background:var(--surface);box-shadow:5px 5px 0 var(--shadow);overflow:hidden}
-.ledger li{display:flex;justify-content:space-between;gap:16px;align-items:baseline;padding:14px 20px;border-top:2px dashed color-mix(in srgb,var(--line) 35%,transparent)}
-.ledger li:first-child{border-top:0}
-.ledger b{font-size:1.35rem;font-variant-numeric:tabular-nums;text-align:right}
+.ledger{list-style:none;margin:10px 0 0;padding:0;border:3px solid var(--line);background:var(--panel);box-shadow:6px 6px 0 var(--shadow)}
+.ledger li{display:flex;justify-content:space-between;gap:16px;align-items:baseline;padding:14px 20px}
+.ledger li+li{border-top:3px dashed color-mix(in srgb,var(--line) 45%,transparent)}
+.ledger b{font-family:var(--display);font-weight:700;font-size:1.5rem;font-variant-numeric:tabular-nums;text-align:right}
 .ledger .tap{cursor:pointer}
 .reset{margin-top:28px;background:none;border:0;color:var(--muted);text-decoration:underline;min-height:44px}
 
-/* overlay + toast + hearts */
-.overlay{position:fixed;inset:0;z-index:20;background:rgba(20,8,36,.6);display:grid;place-items:center;padding:20px;padding-top:calc(20px + env(safe-area-inset-top,0px));padding-bottom:calc(20px + env(safe-area-inset-bottom,0px))}
-.sheet{width:min(560px,100%);max-height:100%;overflow:auto;background:var(--paper);border:2.5px solid var(--line);border-radius:26px 26px 26px 8px;padding:26px 24px;box-shadow:6px 6px 0 var(--shadow)}
-.sheet .title{font-weight:700;color:var(--muted);margin:0 0 8px}
-.sheet .letter{font-family:var(--hand);font-size:clamp(1.7rem,5.6vw,2.2rem);line-height:1.2;margin:0 0 22px;white-space:pre-line}
-#toast{position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;justify-content:center;padding:0 16px calc(20px + env(safe-area-inset-bottom,0px));pointer-events:none;opacity:0;transform:translateY(12px);transition:opacity .2s,transform .2s}
+/* dialog, toast */
+.overlay{position:fixed;inset:0;z-index:20;background:rgba(10,2,20,.7);display:grid;place-items:center;padding:20px;padding-top:calc(28px + env(safe-area-inset-top,0px));padding-bottom:calc(20px + env(safe-area-inset-bottom,0px))}
+.sheet{position:relative;width:min(580px,100%);max-height:100%;overflow:auto;background:var(--panel);border:3px solid var(--line);box-shadow:6px 6px 0 var(--shadow);padding:34px 22px 22px}
+.letter{margin:0 0 22px;white-space:pre-line;font-family:var(--display);font-weight:500;font-size:1.4rem;line-height:1.35}
+.letter .rest{visibility:hidden}
+#toast{position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;justify-content:center;padding:0 16px calc(20px + env(safe-area-inset-bottom,0px));pointer-events:none;opacity:0;transform:translateY(12px);transition:opacity .15s,transform .15s}
 #toast.on{opacity:1;transform:none}
-#toast span{background:var(--ink);color:var(--bg);padding:12px 18px;border-radius:14px;font-weight:600;max-width:420px;text-align:center}
-.fly{position:fixed;bottom:-40px;z-index:25;pointer-events:none;animation:rise 2.4s ease-in forwards}
-@keyframes rise{to{transform:translateY(-115vh) rotate(24deg);opacity:0}}
+#toast span{background:var(--red);color:var(--on);border:3px solid var(--line);padding:10px 16px;font-family:var(--display);font-weight:600;max-width:440px;text-align:center}
+.fly{position:fixed;bottom:-40px;z-index:25;pointer-events:none;animation:rise 2.4s steps(24) forwards;line-height:0}
+@keyframes rise{to{transform:translateY(-115vh);opacity:0}}
+/* ---- v3 additions ---- */
+#app{position:relative}
+.btn.sm{min-height:40px;padding:0 16px;font-size:.95rem}
+.more{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.mt{display:flex;flex-direction:column;text-decoration:none;border:3px solid var(--line);background:var(--panel);box-shadow:5px 5px 0 var(--shadow)}
+.mt .ic{display:grid;place-items:center;min-height:104px;background:var(--purple2);border-bottom:3px solid var(--line)}
+.mt .ic svg{max-width:100%;height:auto}
+.mt b{display:block;flex:1;padding:10px 12px;font-family:var(--display);font-weight:700;font-size:1.05rem;line-height:1.15;text-transform:uppercase;letter-spacing:.03em}
+.mt:hover,.mt:focus-visible{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--shadow)}
+.mt:hover b,.mt:focus-visible b{background:var(--red);color:var(--on)}
+.keyi{display:inline-flex;margin-left:6px;line-height:0}
+
+/* record player */
+.gwrap{display:grid;place-items:center;background:var(--purple2);border:3px solid var(--line);padding:18px 10px 10px;margin-top:4px}
+.gs{position:relative;width:fit-content;max-width:100%;line-height:0}
+.spin{position:absolute;top:calc(63% - 3px);left:28%;width:9px;height:6px;background:#fff;opacity:0}
+.gs.on .spin{opacity:1;animation:orbit 1.1s steps(14) infinite}
+@keyframes orbit{0%{left:28%}50%{left:66%}100%{left:28%}}
+.nt{position:absolute;left:14%;top:16%;line-height:0;pointer-events:none;animation:note 2s steps(14) forwards}
+@keyframes note{to{transform:translate(var(--dx),-70px);opacity:0}}
+.now{margin:16px 0 0;font-family:var(--display);font-weight:600;text-transform:uppercase;letter-spacing:.05em}
+.tracks{list-style:none;margin:12px 0 0;padding:0;border:3px solid var(--line)}
+.tracks li+li{border-top:3px solid var(--line)}
+.track{display:grid;grid-template-columns:34px 1fr;align-items:center;width:100%;min-height:54px;padding:8px 12px;text-align:left;background:var(--panel);border:0}
+.track .tn{font-family:var(--display);font-weight:700;color:var(--muted)}
+.track .tt{font-weight:700}
+.track small{display:block;font-weight:500;color:var(--muted)}
+.track.on{background:var(--red);color:var(--on)}
+.track.on small,.track.on .tn{color:inherit}
+.gact a.btn{display:inline-flex;align-items:center;text-decoration:none}
+
+/* snake */
+.snb{position:relative;display:grid;place-items:end center;min-height:260px;background:var(--purple2);border:3px solid var(--line);padding:70px 10px 14px;margin-top:4px}
+.snb .bubble{top:14px;left:12px;right:auto}
+.paper{position:absolute;right:8px;top:8px;z-index:4;width:min(240px,64%);padding:10px 12px;background:#F4EEFF;color:#180A2B;border:3px solid #180A2B;box-shadow:4px 4px 0 rgba(0,0,0,.4);font-family:var(--display);font-weight:600;line-height:1.2;transform:rotate(-3deg)}
+.paper b{display:block;margin-bottom:4px;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:#A8122F}
+.paper.pop{animation:ppop .5s steps(6)}
+@keyframes ppop{from{transform:translate(-50px,70px) rotate(-30deg) scale(.3);opacity:0}to{transform:rotate(-3deg);opacity:1}}
+
+/* nook: door + mushroom */
+.nook{display:flex;justify-content:space-between;align-items:flex-end;margin-top:40px;padding:0 8px}
+.doorw{display:flex;flex-direction:column;align-items:center;gap:4px}
+.door{background:none;border:0;padding:6px;line-height:0}
+.door.shake{animation:shake .4s steps(4)}
+.door.glint svg{animation:glint 1.4s steps(2) infinite}
+@keyframes glint{50%{filter:brightness(1.6)}}
+.dlab{font-family:var(--display);font-weight:600;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.mushw{position:relative}
+.mush{background:none;border:0;padding:8px;line-height:0}
+.mush.wob svg{animation:wob .35s steps(4)}
+@keyframes wob{25%{transform:rotate(-8deg)}75%{transform:rotate(8deg)}}
+.mushw .bubble{top:-36px;right:-6px;left:auto;white-space:nowrap;font-size:.95rem}
+
+/* footer */
+.foot{margin-top:48px;text-align:center}
+.sky{display:flex;justify-content:center;align-items:flex-end;gap:24px;padding:34px 10px 18px;background:var(--purple2);border:3px solid var(--line);box-shadow:6px 6px 0 var(--shadow)}
+.sky .st{align-self:flex-start;animation:twinkle 1.6s steps(2) infinite}
+@keyframes twinkle{50%{opacity:.35}}
+.foot p{margin:18px 0 0;font-family:var(--display);font-weight:600;font-size:1.3rem;letter-spacing:.04em}
+
+/* wandering cat */
+.wcat{position:absolute;left:0;top:0;z-index:4;width:64px;height:56px;padding:0;border:0;background:none;display:flex;align-items:flex-end;justify-content:center;cursor:pointer;transition:transform 1s linear;will-change:transform}
+.wcat .csp{display:block;line-height:0;filter:drop-shadow(1.5px 0 0 var(--line)) drop-shadow(-1.5px 0 0 var(--line)) drop-shadow(0 1.5px 0 var(--line)) drop-shadow(0 -1.5px 0 var(--line))}
+.wcat .zz{position:absolute;top:-4px;right:2px;display:none;font-family:var(--display);font-weight:700;color:var(--ink);animation:zzz 2.4s steps(6) infinite}
+.wcat .cb{top:-34px;left:50%;right:auto;font-size:.9rem;white-space:nowrap;transform:translateX(-50%)}
+.wcat .cb.on{transform:translateX(-50%)}
+
+/* fantasy quiz result */
+.res h3{margin:0 0 6px;font-family:var(--display);font-weight:700;font-size:1.8rem;line-height:1.1;text-transform:uppercase}
+.res p{margin:0}
+.result li.emo{font-size:2.4rem;text-align:center;line-height:1.2}
+
+/* the door room */
+body.hush{background:#1A0E22;background-image:none;color:#F7E9E4}
+.hushpage{min-height:82vh;display:flex;flex-direction:column;justify-content:center;gap:24px;padding:64px 4px;text-align:center;font-family:"Cormorant Garamond",Georgia,"Times New Roman",serif;font-weight:500;font-size:clamp(1.5rem,5.4vw,2.1rem);line-height:1.3}
+.hushpage p{margin:0}
+.hl{opacity:0;animation:hfade 1.8s ease forwards}
+@keyframes hfade{to{opacity:1}}
+.hushpage .msg{font-style:italic;color:#F3C9D2}
+.hphoto img{max-width:100%;border:10px solid #F7E9E4;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+.hlink,.hback{display:inline-block;align-self:center;padding:12px 26px;border:2px solid #F7E9E4;color:#F7E9E4;text-decoration:none;font-size:1.2rem;font-style:italic}
+.hlink:hover,.hback:hover{background:#F7E9E4;color:#1A0E22}
+
+.t3 .face{gap:8px}
+.t3 .art{display:block;width:100%}
+.t3 .art svg{display:block;width:100%;height:auto;border:2px solid #180A2B}
+/* ---- v4 ---- */
+body{overflow-x:clip}
+.bubble{pointer-events:none}
+.pet svg{display:block}
+.perch{position:relative;height:100px;margin-top:6px;display:flex;align-items:flex-end}
+.bwrap{position:absolute;right:calc(50% - 50vw);top:0;width:138px;height:87px}
+.bwrap .br{position:absolute;left:0;top:27px;line-height:0}
+.bwrap .bird{position:absolute;left:48px;top:0;background:none;border:0;padding:0;line-height:0}
+.bird.hop{animation:hop .4s steps(4)}
+@keyframes hop{40%{transform:translateY(-9px)}}
+.bwrap .bubble{top:-8px;left:-6px;right:auto}
+.abanner{margin:14px 0 0;padding:12px 14px;background:var(--red);color:var(--on);border:3px solid var(--line);box-shadow:5px 5px 0 var(--line);text-align:center;font-family:var(--display);text-transform:uppercase;letter-spacing:.06em}
+.abanner .ar{display:flex;align-items:center;justify-content:center;gap:14px}
+.abanner b{display:block;font-size:1.3rem;font-weight:700}
+.abanner small{display:block;margin-top:2px;font-family:var(--font);font-size:.8rem;font-weight:500;letter-spacing:0;text-transform:none;opacity:.9}
+.abanner svg{flex:none;animation:twinkle 1.2s steps(2) infinite}
+.skywrap{position:relative}
+.snkrow{position:absolute;right:7%;bottom:100%;margin-bottom:-3px;z-index:2;display:flex;align-items:flex-end;gap:10px}
+.snkrow .btn.sm{margin-bottom:6px}
+.pet.snake{background:none;border:0;padding:0;line-height:0;transform-origin:15% 100%;animation:sway 3.2s steps(6) infinite}
+@keyframes sway{0%,100%{transform:rotate(-1.6deg)}50%{transform:rotate(1.6deg)}}
+.snkrow .bubble{top:-26px;right:8px;left:auto;white-space:nowrap}
+.snkrow .paper{top:auto;right:0;bottom:calc(100% + 10px);width:min(230px,80vw)}
+.ytbox{position:relative;padding-top:56.25%;margin-top:14px;border:3px solid var(--line);background:#000}
+.ytbox iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.hlink{background:none;cursor:pointer}
+.vidsheet{padding:14px 14px 18px;background:#000}
+.vidsheet video{display:block;width:100%;max-height:68vh;margin-bottom:14px;background:#000}
 @media (prefers-reduced-motion: reduce){
-  *{transition:none!important;animation:none!important}
+  .hl{opacity:1!important}
+  *,*::before,*::after{transition:none!important;animation:none!important}
 }
 </style>
 </head>
@@ -174,59 +349,71 @@ details.kept small{color:var(--muted);display:block}
 <div id="toast" role="status" aria-live="polite"><span></span></div>
 
 <script>
+const PAL = {"K": "#12051F", "W": "#F4EEFF", "V": "#8F63F0", "L": "#C9B2FF", "D": "#4B2A9A", "C": "#5B2BB0", "Y": "#F2B33D", "P": "#8E1030", "p": "#C4173F", "T": "#3A1F80", "G": "#B49AD6", "S": "#FFC2D4", "R": "#FF4D79", "r": "#FF8FAE", "B": "#2A1247", "b": "#3E1F6B", "Z": "#E9DDFF", "N": "#7D1029", "H": "#5A2A9E", "M": "#FFE3EC", "O": "#F7C6D9", "J": "#FFD766", "j": "#E8A93A", "X": "#FF9FB8", "Q": "#E9DDFF", "q": "#C9B2FF", "U": "#6B3FC8"};
+const SPR = {"bird": [".....KKKKKK.......", "...KKWWWWWWKK.....", "..KWWWWWWWWWWK....", "..KWWWWWKWWWWYY...", "..KWWWWWWWWWWYY...", "..KWWWWCCWWWWK....", "..KVWWWWWWWWK.....", "..KVVLWWWWWK......", ".KVVVLLLLLLLK.....", ".KVVVLLLLLLLLK....", ".KVDVVLLLLLLLK....", "KVDDDVVLLLLLLK....", "KDDDDVVLLLLLK.....", "KDDDDDVVLLLK......", ".KTDDDDVVVK.......", "..KTTDDDDVK.......", "..KDTTDDKYYK......", "...DD....Y.Y......", "pppDDKpppppppppppp", "PPPDDKPPPPPPPPPPPP", "..KDDK............", "..KDK............."], "cat": ["..............................", "..............................", ".................KKKKK.KKKKK..", ".........KKKKKKK.KBOK..KBOK...", ".....KKKKBBBBBBBKKBO...KBO....", "....KBbbbbbbbbbbbKKBKKKBK.....", "..KKBBBBbbbbbbbBBKBbbbbbbbK...", ".KBBBBBBBBBBBBBBBKBBBBBBBBBK..", ".KBBbbbbBBBBBBBBBKBBBBBBBBBK..", "KBBBBBBBBBBBBBBBBKBBGGBBGGBK..", ".KBBBBBBBBBBBBBBBKBBBBSSBBBK..", ".KBBBBBBBBBBBBBBBKBBBBBBBBBK..", "..KBBBBBBBBBBBBBBBKKBBBBBKK...", ".pppppppppppppppppppppppppppp.", ".PPPPPPPPPPPPPPPPPPPPPPPPPPPP.", ".NNNNNNNNNNNNNNNNNNNNNNNNNNNN."], "hut": [".........................KGK......", ".......................KKGKGK.....", "......................KHHHHHHK....", "...............KKKK....KbbbbK.....", ".............KKppppKK..KbbbbK.....", "...........KKNNNNNNNNKKKbbbbK.....", ".........KKppppppppppppKbbbbK.....", ".......KKNNNNNNNNNNNNNNNNbbbK.....", "......KppppppppppppppppppppbK.....", "....KKNNNNNNNNNNNNNNNNNNNNNNKK....", "..KKppppppppppppppppppppppppppKK..", "KKNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNKK", "pppppppppppppppppppppppppppppppppp", "KKKKKHHHbHHHbHHHbHHHbHHHbHHHbKKKKK", "....KHHHbHHHbHHHbHHHbHHHbHHHbK....", "....KHHSMSSHbHHHbHHHbHSMSSHHbK....", "....KHHOMOOHbHBBBBBBbHOMOOHHbK....", "....KHHSMSSHbHBBBBBBbHSMSSHHbK....", "....KHHSMSSHbHBBBBBBbHSMSSHHbK....", "....KHHHbHHHbHBBBBYBbHHHbHHHbK....", "....KHHHbHHHbHBBBBBBbHHHbHHHbK....", "....KHHHbHHHbHBBBBBBbHHHbHHHbK....", "KKKKKHHHbHHHbHBBBBBBbHHHbHHHbKKKKK", "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP", "NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN", "KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK"], "heart": [".RR.RR.", "RrRRRRR", "RRRRRRR", ".RRRRR.", "..RRR..", "...R..."], "icons": {"star": ["....T....", "...TTT...", "...TTT...", "TTTTTTTTT", ".TTTTTTT.", "..TTTTT..", "..TTTTT..", ".TTT.TTT.", ".TT...TT."], "moon": ["...TTTT.p", "..TTT....", ".TTT.....", ".TTT.....", ".TTT.....", ".TTT.....", "..TTT..p.", "...TTTT..", "........."], "sun": ["....p....", ".p..p..p.", "..TTTTT..", "..TTTTT..", "ppTTTTTpp", "..TTTTT..", "..TTTTT..", ".p..p..p.", "....p...."], "eye": [".........", "..TTTTT..", ".TT...TT.", "TT..p..TT", "T..ppp..T", "TT..p..TT", ".TT...TT.", "..TTTTT..", "........."], "key": [".TTTTT...", "TT...TT..", "T..p..T..", "TT...TT..", ".TTTTT...", "...T.....", "...TTT...", "...T.....", "...TTT..."], "skull": ["..TTTTT..", ".TTTTTTT.", "TTTTTTTTT", "TT..T..TT", "TT..T..TT", "TTTTTTTTT", ".TTTTTTT.", "..T.T.T..", "..TTTTT.."], "heart": [".........", ".pp...pp.", "pppp.pppp", "ppppppppp", "ppppppppp", ".ppppppp.", "..ppppp..", "...ppp...", "....p...."]}, "catSit": ["................", "......K....K....", ".....KBKKKKBK...", ".....KBXBBXBK...", "......KBBBBBK...", ".....KBBBBBBBK..", ".....KBBSBSBBK..", ".....KBBBBBXBK..", "..K.KBBBBBBBK...", ".KBKBBBBBBBBK...", "KBKBbbbbbBBBK...", "KBKBBBBBBBBBK...", "KBKBBBBBBBBBK...", "KBKBBBBBBBBBK...", ".KBBBBBBBBBBK...", "..KKBBBBBBBBK...", "....KBBBBBKK...."], "catW0": ["...KK.........K...K.", "..KBBK.......KBKKKBK", ".KBKK..KKKKK.KBBBBBK", ".KBK.KKBBBBBKKBBBBBK", ".KBKKbbbbbbbbBBBBSBK", "..KBBBBBBBBBBBBBBBBX", "..KBBBBBBBBBBBBBBBBK", "...KBBBBBBBBBBBBBBK.", "....KBBBBBBBBBKBKK..", "....KBKBBBBBBKKBK...", "....KBKKBKKKBKKBK...", "....KBK.K...K.KBK...", ".....K.........K....", "...................."], "catW1": ["...KK.........K...K.", "..KBBK.......KBKKKBK", ".KBKK..KKKKK.KBBBBBK", ".KBK.KKBBBBBKKBBBBBK", ".KBKKbbbbbbbbBBBBSBK", "..KBBBBBBBBBBBBBBBBX", "..KBBBBBBBBBBBBBBBBK", "...KBBBBBBBBBBBBBBK.", "....KBBBBBBBBBKBKK..", "....KBKBBBBBBKKBK...", "....KBKKBKKKBKKBK...", ".....K.KBK.KBK.K....", "........K...K.......", "...................."], "catSleep": ["............K..K..", "......KKKKKKBKKBK.", "...KKKBBBBBKBBBBK.", "..KBbbbbbbbBBBBBBK", ".KBBBBBBBBBBBBBBBK", "KBBBBBBBBBBBBGGGBK", ".KBBBBBBBBBBBBBBBK", "..KBBBBBBBBBBBBKK.", "...KKKBBBBBKKKK..."], "gramo": [".....KKVVVVVVVKK............................", "....KVUUUUUVVVVVK...........................", "...KVUUUULLUVVVVVK..........................", "..KVUUDDLDUUUVVVVVK.........................", "..KUUDLDDDDUUUVVVVVK........................", ".KVUUDDDDDDUUUVVVVVK........................", ".KVUULDDDDDUUUVVVVVVK.......................", ".KVUUDDDDDDUUUVVVVVVVK......................", ".KVUUUDDDDUUUUVVVVVVVK......................", ".KVVUUUUUUUUUVVVVVVVVVK.....................", "..KVVUUUUUUUVVVVVVVVVVVK....................", "..KVVVUUUUUVVVVVVVVVVVVVK...................", "...KVVVVVVVVVVVVVVVVVVVVVK..................", "....KVVVVVVVVVVVVVVVVVVVVVK.................", ".....KVVVVVVVVVVVVVVVVVVVVVK................", "......KVVVVVVVVVVVVVVVVVVVVVKK..............", ".......KKVVVVVVVVVVVVVVVVVVVVVKKK...........", ".........KKKKKKKKKKKKKKKVVVVVVKGGK..........", "........................KKKVVVGGK...........", "..........................KGGGKK............", "..........................KGGGK.............", "......................K.KKGGGGK.............", ".............KKKKKKKKKKKGGKKKKKK............", "..........KKKKKKKKKppppGppKKKKKKKKK.........", ".........KKKKKKKKKppppQppppKKKKKKKKK........", "........KKKKKKKKKKKpppppppKKKKKKKKKKKK..KKK.", ".......KpppppKKKKKKKKKKKKKKKKKKKppppppKKGYYK", ".......KppppppppppppppKpppppppppppppppKGKKK.", ".......KPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPKGK...", ".......KPPPPNNNNNNNNPPPPPPPPPPPPPPPPPPGK....", ".......KPPPPNNNYYNNNPPPPPPPPPPPPPPPPPPGK....", ".......KPPPPNNNNNNNNPPPPNNNNNNNNNNPPPPK.....", ".......KPPPPNNNNNNNNPPPPPPPPPPPPPPPPPPK.....", ".......KPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPK.....", ".......KPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPK.....", ".......KNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNK.....", "........KKNNKKKKKKKKKKKKKKKKKKKKKKNNKK......", ".........KNNK....................KNNK......."], "door": ["......KGGGGGGGK.....", "....KKGGGGGGGGGKK...", ".KKKGGGPPPPPPGGGGKK.", "KGGGGPNPPPNPPPNGGGGK", "KGGGPPNPPPNPPPNPGGGK", "KGGPPPNPPPNPPPNPPGGK", "KGGPPPNPPPNPPPNPPGGK", "KGGPPPNPPPNPPPNPPGGK", "KGGKKKKKKKKKKKKKKGGK", "KGGPPPNPPPNPPPNPPGGK", "KGGPPPNPSSSSPPNPPGGK", "KGGPPPNSKPNKSPNPPGGK", "KGGPPPNSPPNPSPNPPGGK", "KGGPPPNSSSSSSPNPPGGK", "KGGPPPNSSSSSSPNPPGGK", "KGGPPPNSSKKSSPNPPGGK", "KGGPPPNSSKKSSPNPPGGK", "KGGPPPNSSKSSSPNPPGGK", "KGGPPPNSSSSSSPNPPGGK", "KGGPPPNPPPNPPPNPPGGK", "KGGPPPNPPPNPPPNPPGGK", "KGGKKKKKKKKKKKKKKGGK", "KGGPPPNPPPNPPPNPPGGK", "KGGPPPNPPPNPPPNPPGGK", "KGGPPPNPPPNPPPNPPGGK", "KGGPPPNPPPNPPPNPPGGK", "KGGPPPNPPPNPPPNPPGGK", ".KKKKKKKKKKKKKKKKKK."], "mush": ["..............", "....KKKKKK....", "..KKppppppKK..", ".KppppppWWppK.", ".KppWWpppWppK.", "KppppppppppppK", "KppWppWWpppppK", "KppppppppppppK", ".KKKKMMMMKKKK.", "....KMMMMK....", "....KMKMKK....", "....KMMXMK....", "...KMMMMMMK...", "....KKKKKK...."], "sun": ["...........KK..........", "..........KjjK.........", "..........KjjK.........", "....KK....KjjK....KK...", "...KjjK...KjjK...KjjK..", "...KjjjKKKKJJKKKKjjjK..", "....KjjKJJJJJJJJKjjK...", ".....KKJJJJJJJJJJKK....", ".....KJJJJJJJJJJJJK....", ".....KJJJJJJJJJJJJK....", ".KKKKKJJJKJJJJKJJJKKKKK", "KjjjjJJJJKJJJJKJJJJjjjj", "KjjjjJJJJJKJJKJJJJJjjjj", ".KKKKKJJXXJKKJXXJJKKKKK", ".....KJJJJJJJJJJJJK....", ".....KJJJJJJJJJJJJK....", ".....KKJJJJJJJJJJKK....", "....KjjKJJJJJJJJKjjK...", "...KjjjKKKKJJKKKKjjjK..", "...KjjK...KjjK...KjjK..", "....KK....KjjK....KK...", "..........KjjK.........", "..........KjjK........."], "moon": ["...................", "........KKK........", "......KKQQQK.......", ".....KQQQKK........", "....KQQQQK.........", "...KQQQQK..........", "...KQQqK...........", "..KQQqQK...........", "..KQQQQK...........", ".KQQKQQ............", ".KQQQKKK...........", ".KQQQQQK...........", ".KQQQQQK...........", ".KQQXXQQK..........", "..KQQQQKQK.........", "..KQQQKQQKK........", "...KQQQQQQQKKK.KK..", "...KQQQQQQQQQQKQQK.", "....KQQQQQQQQQQQK..", ".....KQQQQQQQQQK...", "......KKQQQQQKK....", "........KKKKK......"], "star": ["....J....", "...JJJ...", "...JJJ...", "JJJJJJJJJ", ".JJJJJJJ.", "..JJJJJ..", "..JJ.JJ..", ".JJ...JJ.", ".J.....J."], "key": [".JJJ......", "J...J.....", "J...JJJJJJ", "J...J.J.J.", ".JJJ......"], "env": ["KKKKKKKKKKKKKK", "KWKWWWWWWWWKWK", "KWWKWWWWWWKWWK", "KWWWKWWWWKWWWK", "KWWWWKKKKWWWWK", "KWWWWWWWWWWWWK", "KWWWWWWpWWWWWK", "KWWWWWWWWWWWWK", "KKKKKKKKKKKKKK"], "photo": ["KKKKKKKKKKKKKK", "KXXXXXXXXXXXXK", "KXXXXXXXXpXXXK", "KXXXXXXXXXXXXK", "KXXXXVXXXXXXXK", "KXXXVVVXXXXXXK", "KXXVVVVVXVXXXK", "KPPPPPPPPPPPPK", "KPPPPPPPPPPPPK", "KKKKKKKKKKKKKK"], "bars": ["..............", "..........pp..", "..........pp..", "....VV....pp..", "....VV....pp..", ".UU.VV....pp..", ".UU.VV.LL.pp..", ".UU.VV.LL.pp..", "KKKKKKKKKKKKKK"], "note": ["..KKK", "..K.K", "..K..", "..K..", "KKK..", "KKK.."], "birdA": [".....KKKKKK.......", "...KKWWWWWWKK.....", "..KWWWWWWWWWWK....", "..KWWWWWKWWWWYY...", "..KWWWWWWWWWWYY...", "..KWWWWCCWWWWK....", "..KVWWWWWWWWK.....", "..KVVLWWWWWK......", ".KVVVLLLLLLLK.....", ".KVVVLLLLLLLLK....", ".KVDVVLLLLLLLK....", "KVDDDVVLLLLLLK....", "KDDDDVVLLLLLK.....", "KDDDDDVVLLLK......", ".KTDDDDVVVK.......", "..KTTDDDDVK.......", "..KDTTDDKYYK......", "...DD....Y.Y......", "...DDK............", "...DDK............", "..KDDK............", "..KDK............."], "birdB": [".....KKKKKK.......", "...KKWWWWWWKK.....", "..KWWWWWWWWWWK....", "..KWWWWWWWWWWYY...", "..KWWWWWWWWWWYY...", "..KWWWWCCWWWWK....", "..KVWWWWWWWWK.....", "..KVVLWWWWWK......", ".KVVVLLLLLLLK.....", ".KVVVLLLLLLLLK....", ".KVDVVLLLLLLLK....", "KVDDDVVLLLLLLK....", "KDDDDVVLLLLLK.....", "KDDDDDVVLLLK......", ".KTDDDDVVVK.......", "..KTTDDDDVK.......", "..KDTTDDKYYK......", "...DD....Y.Y......", "...DDK............", "...DDK............", "..KDDK............", "..KDK............."], "branch": ["..............................................", "..............K...............................", ".............KVK..............................", "............KLLVK.............................", "...........KVKVKVK............................", "............KVPVK.............................", ".............KPK..............................", ".............KPK..............................", "...KK........KPK....KKKKKKKKKKKKK.............", "..KVVK.......KPKKKKKpppppppppppppKKKK.........", ".KVKK.....KKKKPKppppPPPPPPPPPPPPPppppKKKKKKKKK", "..KK.K...KppppppPPPPNNNNNNNNNNNNNPPPPppppppppp", ".KVVKVKKKKPPPPPPNNNNKKKKKKKKKKKKKPNNNPPPPPPPPP", "..KpVpppppNNNNNNKKKK............KPKKKNNNNNNNNN", "..KPPPPPPPKKKKKK................KPK..KNNNNNNNN", "..KNNNNNNNK....................KVPVK..KKKKKKKK", "...KKKKKKK....................KVLLKVK.........", "...............................KVVVK..........", "................................KKK...........", ".............................................."], "snakeA": ["..................................", "..................................", ".....................KKKKKK.......", "....................KVVVVVVK......", "...................KVVVVVVVVK.....", "...................KVVVVWVVWVK....", "...................KVVVVKVVKVK..p.", "..................KVVVVXVVVVXKpp..", ".................KVVVVVVVVVVK...p.", "................KUVVUVVVVVVK......", "...............KUUVVLLUKKKK.......", "..............KVUUUVLVK...........", "..............KVVUULUK............", ".......KKKK..KVVVVLUVK............", "......KUVVVK.KUVVLLVK.............", ".....KUVVVUUKUUVVLVVK.............", "..K.KUUVUUUUUUUULLUK..............", ".KVKVVUVUUUVUUUULUUK..............", "KVVVVVUVLLVVVUULLUK...............", "KVUUUVVLULLUVUULUUK...............", "KVUUUVLLVVLLVVVLVK................", ".KVUUULUUVULVVLVVK................", ".KUVULLUKKULLVLVK.................", "..KVLLVK..KULLVUK................."], "snakeB": ["..................................", "..................................", ".....................KKKKKK.......", "....................KVVVVVVK......", "...................KVVVVVVVVK.....", "...................KVVVVWVVWVK....", "...................KVVVVKVVKVK....", "..................KVVVVXVVVVXK....", ".................KVVVVVVVVVVK.....", "................KUVVUVVVVVVK......", "...............KUUVVLLUKKKK.......", "..............KVUUUVLVK...........", "..............KVVUULUK............", ".......KKKK..KVVVVLUVK............", "......KUVVVK.KUVVLLVK.............", ".....KUVVVUUKUUVVLVVK.............", "..K.KUUVUUUUUUUULLUK..............", ".KVKVVUVUUUVUUUULUUK..............", "KVVVVVUVLLVVVUULLUK...............", "KVUUUVVLULLUVUULUUK...............", "KVUUUVLLVVLLVVVLVK................", ".KVUUULUUVULVVLVVK................", ".KUVULLUKKULLVLVK.................", "..KVLLVK..KULLVUK................."], "snakeC": ["..................................", "..................................", ".....................KKKKKK.......", "....................KVVVVVVK......", "...................KVVVVVVVVK.....", "...................KVVVVVVVVVK....", "...................KVVVKKKKKKK....", "..................KVVVVXVVVVXK....", ".................KVVVVVVVVVVK.....", "................KUVVUVVVVVVK......", "...............KUUVVLLUKKKK.......", "..............KVUUUVLVK...........", "..............KVVUULUK............", ".......KKKK..KVVVVLUVK............", "......KUVVVK.KUVVLLVK.............", ".....KUVVVUUKUUVVLVVK.............", "..K.KUUVUUUUUUUULLUK..............", ".KVKVVUVUUUVUUUULUUK..............", "KVVVVVUVLLVVVUULLUK...............", "KVUUUVVLULLUVUULUUK...............", "KVUUUVLLVVLLVVVLVK................", ".KVUUULUUVULVVLVVK................", ".KUVULLUKKULLVLVK.................", "..KVLLVK..KULLVUK................."]};
+
 /* ============================================================
    EDIT ME. Everything personal lives in this block.
    ============================================================ */
 const CONFIG = {
-  names: ["Alex", "Sam"],          // your names
-  startDate: "2026-06-21",         // the day you got together (YYYY-MM-DD)
+  names: ["Alayna", "Kaitlyn"],
+  startDate: "2026-06-27",
+  previewDates: ["2026-09-21"],   // extra dates that show the anniversary banner, so you can preview it         // the day you started dating (YYYY-MM-DD)
   unlockAfter: 10,                 // questions answered before the flirty stuff unlocks
   secret: "You found it.\nI hid this here in case you ever wondered whether I think about you when you're not around.\nI do.",
   milestoneNote: "Round numbers deserve a moment. Go find me and say hi.",
 
-  // "How well do you know me?"  (a = index of the right answer, starting at 0)
-  quiz: [
-    {q:"What's my ideal date?", o:["Going somewhere new","Staying in and watching something","Going out with friends","Something completely spontaneous"], a:0,
-      right:"Okay, you do know me.", wrong:"You really don't know me 😭", note:"But honestly, I would've accepted D."},
-    {q:"What's my go-to comfort food?", o:["Pasta","Something fried","Anything sweet","Whatever you're having"], a:2,
-      right:"Sugar. Obviously.", wrong:"Not even close.", note:"You will be making this up to me with dessert."},
-    {q:"How do I recharge after a long day?", o:["Alone with music","A long call with a friend","A walk","Sleep, immediately"], a:0,
-      right:"You get me.", wrong:"Ouch.", note:"Headphones in, world off."},
-    {q:"What's my biggest pet peeve?", o:["Being late","Loud chewing","Unread messages","Slow walkers"], a:1,
-      right:"Noted, and feared.", wrong:"You should know this by now.", note:"Yes, I'm serious."},
-    {q:"Where would I live if I could live anywhere?", o:["A beach town","A huge city","The mountains","Wherever you are"], a:3,
-      right:"Cheesy, but correct.", wrong:"Wrong, and a little heartbreaking.", note:"I meant it. Mostly."},
-    {q:"What did I think the first time we met?", o:["Who is this?","Wow.","I hope they text me","I need snacks"], a:2,
-      right:"You remembered.", wrong:"Nope.", note:"I checked my phone way too often that night."}
-  ],
-
-  // "Open when..."  (the last one stays locked until the anniversary)
+  // "For when you miss me"  (the locked one opens on the 1-year anniversary)
   letters: [
-    {t:"Open when you're sad", x:"Hey you.\nI'm sorry today is heavy. You don't have to fix it right now.\nPut the phone down, drink some water, breathe.\nWhatever it is, I'm on your side. Always."},
-    {t:"Open when you miss me", x:"I miss you too. Probably right now, actually.\nLook at something we did together, then text me. I'll answer faster than usual."},
-    {t:"Open when you're angry at me", x:"Okay. I probably deserve it.\nTake the time you need, then tell me exactly what I did. I'll listen properly.\nI'd rather be in an argument with you than fine without you."},
-    {t:"Open when you can't sleep", x:"Close your eyes and picture the laziest Sunday we could have.\nNo alarms, no plans, me being annoying.\nNow sleep. I'm rooting for you."},
-    {t:"Open when you need reassurance", x:"You are enough. You're more than enough.\nI chose you, and I'd choose you again on a bad day, a busy day, any day."},
-    {t:"Open when you want to laugh", x:"Remember the time we couldn't stop laughing and had no idea why?\nThat. I want more of that.\n(Now go find a photo of my worst face and enjoy it.)"},
-    {t:"Open when you want to know how much I love you", x:"More than I say out loud.\nMore than I know how to put in a letter.\nWrite the real version here."}
+    {t:"When you're feeling sad", x:"I know things maybe hard right now but i know you are going to get past this. You are one of the strongest people i know (and no i am not talking about your biceps).\nIf there's anyone in the world that can overcome any difficulty, its you.\n\nAnd I'm always there to listen if you ever want to talk about it.\n\nAnd if it'll help cheer you up then we can watch Miraculous Ladybug. But only this time !!\n\nI love you the most."},
+    {t:"When you're angry at me", x:"I'm sorry for whatever i did.\n\ni know i can be a pain in the ass sometimes but i'm your pain in the ass 🥺 (your words, not mine)\n\nSo forgive me, if i messed up but please talk to me about it so i can make sure it won't happen again.\n\nI love you the most."},
+    {t:"When you miss me", x:"Gay"},
+    {t:"When you want to know how much I love you", x:"I love you more than i ever imagined i could love a person.\n\nYou are more than my girlfriend or my partner, you are a part of me.\n\nI can't ever imagine my life without you.\n\nI love you the most"},
+    {t:"When you want reassurance", x:"When you ask me what we'll do if i ever lose feelings for you, i don't understand how you think its even a possibility.\nYou are everything I want and so much more.\nYou give me more love than I deserve and I wouldn't trade that for anything."}
   ],
   lockedLetter: {t:"Open on our 1 year anniversary", x:"Happy one year.\nWrite the letter you want her to read on that day."},
 
-  // "Our memories"
-  memories: [
-    {d:"2026-06-21", t:"The day it started", x:"Replace this with the story: where you were, what was said, what you remember most."},
-    {d:"2026-07-04", t:"Our first real date", x:"What you ate, what went wrong, what went right."},
-    {d:"2026-08-15", t:"The first trip", x:"A small detail only the two of you would remember."}
+  // Do something together
+  movies: [
+    ["The Conjuring","Movie"],["Hereditary","Movie"],["Midsommar","Movie"],["Get Out","Movie"],["It Follows","Movie"],["The Babadook","Movie"],
+    ["Talk to Me","Movie"],["Smile","Movie"],["Barbarian","Movie"],["The Witch","Movie"],["Scream","Movie"],["Ready or Not","Movie"],
+    ["Ginger Snaps","Movie"],["Jennifer's Body","Movie"],["Crimson Peak","Movie"],["The Craft","Movie"],["Practical Magic","Movie"],
+    ["Coraline","Movie"],["Corpse Bride","Movie"],["Beetlejuice","Movie"],["Fear Street: 1994","Movie"],["Bottoms","Movie"],
+    ["But I'm a Cheerleader","Movie"],["Carol","Movie"],["Portrait of a Lady on Fire","Movie"],["Bound","Movie"],["Thelma","Movie"],
+    ["Supernatural","Show"],["Buffy the Vampire Slayer","Show"],["Charmed","Show"],["Wednesday","Show"],["Interview with the Vampire","Show"],
+    ["The Haunting of Hill House","Show"],["The Haunting of Bly Manor","Show"],["Midnight Mass","Show"],["Yellowjackets","Show"],
+    ["Wynonna Earp","Show"],["Penny Dreadful","Show"],["The Vampire Diaries","Show"],["Locke & Key","Show"],["The Owl House","Show"],
+    ["Heartstopper","Show"],["What We Do in the Shadows","Show"],["Killing Eve","Show"],["Our Flag Means Death","Show"],["Stranger Things","Show"],
+    ["Jujutsu Kaisen","Anime"],["Demon Slayer","Anime"],["Attack on Titan","Anime"],["Death Note","Anime"],["Tokyo Ghoul","Anime"],
+    ["Chainsaw Man","Anime"],["Hellsing Ultimate","Anime"],["Yuri!!! on Ice","Anime"],["Revolutionary Girl Utena","Anime"],["Bloom Into You","Anime"],
+    ["Given","Anime"],["Black Butler","Anime"],["Devilman Crybaby","Anime"],["Dorohedoro","Anime"],["Hell's Paradise","Anime"],
+    ["Spirited Away","Anime"],["Howl's Moving Castle","Anime"],["Vampire Hunter D","Anime"],["Mob Psycho 100","Anime"]
   ],
+  foods: ["Your pancakes 🥺"],
+  places: ["The park","The cafe","Your bed 😉"],
 
-  // "Do something together"
-  movies: ["The Princess Bride","Knives Out","Crazy, Stupid, Love","About Time","Paddington 2","Before Sunrise","Everything Everywhere All at Once","The Grand Budapest Hotel","Palm Springs","La La Land","10 Things I Hate About You","Coco","Ratatouille","Inception","Mamma Mia!","Little Miss Sunshine","Bridesmaids","Kiki's Delivery Service"],
-  foods: ["🍝 Italian","🍣 Sushi","🌮 Tacos","🍛 Indian","🍜 Thai","🍔 Burgers","🍕 Pizza","🥟 Dim sum","🥩 Korean BBQ","🥞 Breakfast for dinner","🍜 Ramen","🥙 A street food crawl","🧑‍🍳 Cook something together","🍰 Dessert only"],
-  places: ["A sunset walk somewhere neither of us has been","A bookshop, then a coffee","A day trip on a random train","A picnic at the nearest park","A museum we've never visited","A late-night drive with a shared playlist","Arcade or bowling","Stargazing with blankets","A market and a mystery-ingredient dinner","A pottery or painting class","A spa night at home"],
+  activities: [
+    "Paint together","Play music","Just dance","Go for a walk","\uD83D\uDE09","Watch a show of {A}'s choice","Make pancakes \uD83E\uDD7A",
+    "Cosplay time !!!","Fun makeup","Take a nap. You need it.","Read a book","Drink some water. I'm looking at you, {B} \uD83E\uDD28"
+  ],
+  songs: [
+    {t:"Not Another Song About Love", by:"Hollywood Ending", src:"songs/not-another-song-about-love.mp3", yt:"", q:"Not Another Song About Love Hollywood Ending"},
+    {t:"True Love", by:"Pink", src:"songs/true-love.mp3", yt:"", q:"True Love Pink"},
+    {t:"Can't Help Falling in Love", by:"", src:"songs/cant-help-falling-in-love.mp3", yt:"", q:"Can't Help Falling in Love"},
+    {t:"Circus (Clown) Music", by:"", synth:"circus"},
+    {t:"Heat Waves", by:"Glass Animals", src:"songs/heat-waves.mp3", yt:"", q:"Heat Waves Glass Animals"}
+    // Each song plays from its "src" file (put a songs folder next to this page), or embeds the YouTube video whose ID you put in "yt".
+    // If neither is set up, it falls back to links that open the song on YouTube and Spotify.
+  ],
+  keyAfterFlips: 8,      // cards flipped before the key card starts turning up in Pick a card
+  door: {
+    message: ["Happy anniversary.", "Write the thing you really want to say here."],
+    photos: [],          // add photos as data: links
+    video: "secret-video.mp4"   // a video file saved next to this page; it plays in a popup when the door opens
+  },
 
-  // silly stats (numbers that you set yourself)
+  // Stats page: numbers you set yourself
   silly: [
-    {l:"Arguments over nothing", v:"∞"},
     {l:"Times you made me laugh", v:"???"},
     {l:"Times I was right", v:"87"}
   ],
@@ -238,68 +425,17 @@ const CONFIG = {
    ============================================================ */
 // ordered from light to deep, so "ease in" can start gentle
 const Q = {
-  us:[
-    "What's a tiny thing I do that makes you feel loved?",
-    "What's your favourite memory of us so far?",
-    "What's something about us that you hope never changes?",
-    "When did you first realize you felt differently about me?",
-    "What's something we do together that you'd miss the most?",
-    "What's something I've taught you without meaning to?",
-    "When have you felt the closest to me?",
-    "What do you think we're really good at as a couple?"],
-  know:[
-    "What's a small thing that instantly improves your day?",
-    "What's something you've changed your mind about in the last year?",
-    "What's a part of yourself you're still figuring out?",
-    "What's something you wish people understood about you?",
-    "What's a childhood memory you'd love to relive?",
-    "What do you need more of in your life right now?",
-    "What's something you're proud of that nobody notices?",
-    "What's a fear you'd like to be braver about?"],
-  deep:[
-    "What does feeling at home mean to you?",
-    "What does being understood mean to you?",
-    "What's something you're afraid to lose?",
-    "What's something you've never known how to ask for?",
-    "What's a moment that changed how you see yourself?",
-    "What would you tell yourself five years ago?",
-    "What's something you hope I never stop doing?",
-    "What do you want to be remembered for?"],
-  silly:[
-    "If we were both animals, what would we be?",
-    "Who would survive longer in a zombie apocalypse?",
-    "What's the dumbest thing we've ever argued about?",
-    "What would be the most useless but funniest superpower to have?",
-    "If we opened a business together, what would it be?",
-    "What would our reality TV show be called?",
-    "Which fictional couple are we most like, and who's the chaotic one?",
-    "What's the most ridiculous rule we'd have in our dream house?"],
-  flirty:[
-    "What's something I do that you find ridiculously attractive?",
-    "What's your favourite way for me to initiate affection?",
-    "What's something you've wanted to do with me but haven't told me?",
-    "What's the first thing you notice when I walk into a room?",
-    "What's a moment recently when you couldn't stop smiling at me?",
-    "What's something you'd love me to say to you more often?",
-    "What's your favourite thing about the way I hold you?",
-    "What would your ideal date night with me look like, start to finish?"],
-  future:[
-    "What would our perfect lazy Sunday look like?",
-    "Where do you want us to travel together?",
-    "What kind of life would you want us to have?",
-    "What's one tradition you'd love us to start?",
-    "What does our home look like in five years?",
-    "What's something you want us to learn together?",
-    "What's a dream you've never told me?",
-    "What do you hope we're laughing about in ten years?"]
+  us:["What's a tiny thing I do that makes you feel loved?","What's your favourite memory of us so far?","What's something about us that you hope never changes?","When did you first realize you felt differently about me?","What's something we do together that you'd miss the most?","What's something I've taught you without meaning to?","When have you felt the closest to me?","What do you think we're really good at as a couple?"],
+  know:["What's a small thing that instantly improves your day?","What's something you've changed your mind about in the last year?","What's a part of yourself you're still figuring out?","What's something you wish people understood about you?","What's a childhood memory you'd love to relive?","What do you need more of in your life right now?","What's something you're proud of that nobody notices?","What's a fear you'd like to be braver about?"],
+  deep:["What does feeling at home mean to you?","What does being understood mean to you?","What's something you're afraid to lose?","What's something you've never known how to ask for?","What's a moment that changed how you see yourself?","What would you tell yourself five years ago?","What's something you hope I never stop doing?","What do you want to be remembered for?"],
+  silly:["If we were both animals, what would we be?","Who would survive longer in a horror movie?","What's the dumbest thing we've ever argued about?","What would be the most useless but funniest superpower to have?","If we opened a business together, what would it be?","What would our reality TV show be called?","Which fictional couple are we most like, and who's the chaotic one?","What's the most ridiculous rule we'd have in our dream house?"],
+  flirty:["What's something I do that you find ridiculously attractive?","What's your favourite way for me to initiate affection?","What's something you've wanted to do with me but haven't told me?","What's the first thing you notice when I walk into a room?","What's a moment recently when you couldn't stop smiling at me?","What's something you'd love me to say to you more often?","What's your favourite thing about the way I hold you?","What would your ideal date night with me look like, start to finish?"],
+  future:["What would our perfect lazy Sunday look like?","Where do you want us to travel together?","What kind of life would you want us to have?","What's one tradition you'd love us to start?","What does our home look like in five years?","What's something you want us to learn together?","What's a dream you've never told me?","What do you hope we're laughing about in ten years?"]
 };
 const QCATS = [
-  {id:"us",e:"♡",n:"Us"},{id:"know",e:"🧠",n:"Get to know me"},{id:"deep",e:"🥹",n:"Deep"},
-  {id:"silly",e:"🤪",n:"Stupid"},{id:"flirty",e:"🔥",n:"Flirty",lock:true},{id:"future",e:"🌱",n:"Future"},
-  {id:"endless",e:"♾️",n:"Endless"},{id:"surprise",e:"✨",n:"Surprise me"}
+  {id:"us",n:"Us"},{id:"know",n:"Get to know me"},{id:"deep",n:"Deep"},{id:"silly",n:"Stupid"},
+  {id:"flirty",n:"Flirty",lock:true},{id:"future",n:"Future"},{id:"endless",n:"Endless"},{id:"surprise",n:"Surprise me"}
 ];
-
-// endless generator: each template only uses slots that always read naturally
 const GEN = [
   {t:"What's your favourite {thing} from {time}?", s:{
     thing:["memory","moment","conversation","inside joke","thing we ate","thing we said"],
@@ -315,31 +451,455 @@ const GEN = [
     when:["every week","every morning","before bed","whenever we travel","on Sundays"]}}
 ];
 
+const TYPES = [["cute","Cute"],["funny","Funny"],["deep","Deep"],["romantic","Romantic"],["flirty","Flirty"],["embarrassing","Embarrassing"],["unhinged","Unhinged"]];
 const TRUTHS = {
   cute:["Tell me the first thing you noticed about me.","What's a moment with me that you replay in your head?","What did you think of me the first time we met?","What's your favourite way we spend time together?","What nickname do you secretly love?","What small thing do I do that makes your whole day better?"],
   funny:["What's the most embarrassing thing you've done in front of me?","Which of my habits annoys you, but you'd never admit it?","If I were a cartoon character, who would I be?","What's the weirdest thing you've searched about us?","What's your most useless talent?","What's the dumbest thing we've ever argued about?"],
   deep:["What's something you're afraid to lose?","What's something you've never known how to ask me for?","When do you feel most understood by me?","What's something you wish I knew without you having to say it?","What's a part of yourself you're still figuring out?","What's something you're proud of that you rarely talk about?"],
+  romantic:["When did you know you were falling for me?","What's the most romantic thing you've imagined us doing?","What song makes you think of me?","What do you love most about the way I look at you?","What's a small moment with me that felt like a movie scene?","What's one thing you want us to do together before the year ends?"],
   flirty:["What's something I do that you find ridiculously attractive?","What's your favourite way for me to initiate affection?","What's something you've wanted to do with me but haven't said?","When did you last get butterflies around me?","Which outfit of mine do you like the most?","What's the first thing you'd do if I showed up at your door right now?"],
-  unhinged:["What's the most chaotic thought you've ever had about me?","Have you ever pretended to be busy so you didn't have to text back? Be honest.","What's the most irrational thing you've been jealous of?","If we had to fight over the last slice of pizza, what's your strategy?","What's a conspiracy theory you actually believe?","Which of my friends would survive longest in a zombie apocalypse?"]
+  embarrassing:["What's the most embarrassing thing you've ever searched?","What's the cringiest thing you did when you had a crush on me?","What's your most embarrassing childhood memory?","What's a small lie you told me early on that you never corrected?","What's the worst outfit you've worn to see me?","What's your most embarrassing habit when you think nobody's watching?"],
+  unhinged:["What's the most chaotic thought you've ever had about me?","Have you ever pretended to be busy so you didn't have to text back? Be honest.","What's the most irrational thing you've been jealous of?","If we had to fight over the last slice of pizza, what's your strategy?","What's a conspiracy theory you actually believe?","Which of my friends would survive longest in a horror movie?"]
 };
 const DARES = {
   cute:["Send me a photo of something that reminded you of me today.","Write down three things you love about me and read them out loud.","Give me the longest hug you can, and don't be the first to let go.","Draw a little picture of us in 30 seconds.","Say something kind about me in your best movie-trailer voice.","Pick a song that's ours and play it right now."],
   funny:["Do your best impression of me.","Speak in an accent until your next turn.","Send me the most unflattering selfie you can make.","Narrate what you're doing right now like a nature documentary.","Make up a 10-second commercial for me.","Walk across the room like a runway model."],
+  deep:["Look me in the eyes for one full minute without laughing.","Tell me one thing you're scared of and one thing that helps.","Write a promise you can keep this month and read it to me.","Tell me what you needed to hear most this year.","Describe the moment you felt safest with me.","Tell me something you've never said out loud, then let the silence sit for ten seconds."],
   romantic:["Tell me the moment you knew you liked me.","Send me a voice note saying something you'd normally be too embarrassed to say out loud.","Plan a mini date for this week and tell me the details.","Write me a two-line love note, right now.","Slow dance with me for one whole song.","Tell me three things you're looking forward to with me."],
+  flirty:["Tell me what you'd do if we had the whole day to ourselves.","Whisper something that's only for me to hear.","Give me a compliment that starts with \"You look...\" and doesn't hold back.","Send me your best \"thinking about you\" text.","Describe our next kiss in exactly five words.","Tell me the thing I do that gives you goosebumps."],
   embarrassing:["Show me the last photo in your camera roll.","Read out your most recent search.","Let me pick a filter, and keep it on for the next photo.","Call me by a ridiculous nickname for the rest of tonight.","Tell me the cringiest thing you did as a teenager.","Do a dramatic slow-motion run toward me."],
-  flirty:["Tell me what you'd do if we had the whole day to ourselves.","Whisper something that's only for me to hear.","Give me a compliment that starts with \"You look...\" and doesn't hold back.","Send me your best \"thinking about you\" text.","Describe our next kiss in exactly five words.","Tell me the thing I do that gives you goosebumps."]
+  unhinged:["Do your best villain monologue about why you love me.","Speak only in questions for the next three minutes.","Replace every noun with \"banana\" for one minute.","Sing a made-up song about me. It has to be at least 30 seconds.","Perform a dramatic death scene for ten seconds.","Spin around ten times, then try to walk in a straight line to me."]
 };
-const TRUTH_SUBS = [["cute","Cute"],["funny","Funny"],["deep","Deep"],["flirty","Flirty"],["unhinged","Unhinged"]];
-const DARE_SUBS  = [["cute","Cute"],["funny","Funny"],["romantic","Romantic"],["embarrassing","Embarrassing"],["flirty","Flirty"]];
 
 const DECKS = [
-  {id:"us",e:"💗",n:"Us",c:"var(--pink)",cards:["Tell me one thing about me that you don't think I realize you love.","Describe our first date in three words.","What's a moment from this month you want to keep forever?","What do we do together that nobody else would understand?","What's a song that reminds you of us?","What's the best thing I've ever said to you?","Which of our habits is the most \"us\"?","What's one thing you're grateful I noticed about you?"]},
-  {id:"dark",e:"🌶️",n:"After Dark",c:"var(--coral)",lock:true,cards:["What's a moment lately when you couldn't stop looking at me?","What's your idea of a perfect night in for just the two of us?","What's the most tempting thing about me?","What's something new you'd like us to try together?","If I had the whole evening to spoil you, what would you want first?","Where's your favourite place to be kissed? Show me.","What do you think about when you first see me after a long day apart?","What's a look I give you that you can't resist?"]},
-  {id:"chaos",e:"😂",n:"Chaos",c:"var(--butter)",cards:["Convince me, in 20 seconds, that you're the better driver.","Swap phones for one minute. No snooping (much).","Give me a new nickname and defend it.","What would our couple's fight over a board game look like?","Act out your favourite scene from a movie. I'll guess it.","Rank our friends by how likely they are to fall asleep at a party.","Come up with a conspiracy theory about how we met.","Invent a holiday for just the two of us. What do we do?"]},
-  {id:"deepstuff",e:"🧠",n:"Deep Stuff",c:"var(--sky)",cards:["What's something you've never told anyone, but you'd tell me?","What do you need from me when things get hard?","What's a belief you held five years ago that you no longer do?","What are you most afraid I'll misunderstand about you?","When have you felt the most yourself around me?","What's one thing you want us to be brave about?","What's a compliment you never quite believe?","What does a good life look like to you, honestly?"]},
-  {id:"future",e:"🌎",n:"Future",c:"var(--mint)",cards:["Where are we having breakfast one year from today?","What's the first thing we buy for a home together?","What trip should we plan, even if it takes years?","What's a skill we should learn side by side?","What's your dream weekend a year from now?","What do you want our mornings to look like?","What would we name a pet, a plant, and a car?","What are you most excited about for us?"]},
-  {id:"soft",e:"🥹",n:"Soft",c:"var(--pink)",cards:["Say three things you appreciate about me right now.","Tell me one thing that made you smile today.","What's a small way I can take care of you this week?","Describe your favourite hug we've had.","What's something I said once that stayed with you?","Tell me what you love most about being with me on a slow day.","What's one thing you want me to know today?","Give me a compliment, and mean it."]}
+  {id:"us",n:"Us",c:"var(--purple)",cards:["Tell me one thing about me that you don't think I realize you love.","Describe our first date in three words.","What's a moment from this month you want to keep forever?","What do we do together that nobody else would understand?","What's a song that reminds you of us?","What's the best thing I've ever said to you?","Which of our habits is the most \"us\"?","What's one thing you're grateful I noticed about you?"]},
+  {id:"dark",n:"After Dark",c:"var(--red2)",lock:true,cards:["What's a moment lately when you couldn't stop looking at me?","What's your idea of a perfect night in for just the two of us?","What's the most tempting thing about me?","What's something new you'd like us to try together?","If I had the whole evening to spoil you, what would you want first?","Where's your favourite place to be kissed? Show me.","What do you think about when you first see me after a long day apart?","What's a look I give you that you can't resist?"]},
+  {id:"chaos",n:"Chaos",c:"var(--red)",cards:["Convince me, in 20 seconds, that you're the better driver.","Swap phones for one minute. No snooping (much).","Give me a new nickname and defend it.","What would our couple's fight over a board game look like?","Act out your favourite scene from a movie. I'll guess it.","Rank our friends by how likely they are to fall asleep at a party.","Come up with a conspiracy theory about how we met.","Invent a holiday for just the two of us. What do we do?"]},
+  {id:"deepstuff",n:"Deep Stuff",c:"var(--purple2)",cards:["What's something you've never told anyone, but you'd tell me?","What do you need from me when things get hard?","What's a belief you held five years ago that you no longer do?","What are you most afraid I'll misunderstand about you?","When have you felt the most yourself around me?","What's one thing you want us to be brave about?","What's a compliment you never quite believe?","What does a good life look like to you, honestly?"]},
+  {id:"future",n:"Future",c:"var(--purple)",cards:["Where are we having breakfast one year from today?","What's the first thing we buy for a home together?","What trip should we plan, even if it takes years?","What's a skill we should learn side by side?","What's your dream weekend a year from now?","What do you want our mornings to look like?","What would we name a pet, a plant, and a car?","What are you most excited about for us?"]},
+  {id:"soft",n:"Soft",c:"var(--red2)",cards:["Say three things you appreciate about me right now.","Tell me one thing that made you smile today.","What's a small way I can take care of you this week?","Describe your favourite hug we've had.","What's something I said once that stayed with you?","Tell me what you love most about being with me on a slow day.","What's one thing you want me to know today?","Give me a compliment, and mean it."]}
 ];
+
+// Chaos generator: 100+ couple challenges
+const CHAOS = [
+  "For the next 5 minutes, you can't say each other's names.",
+  "For the next 5 minutes, you have to rhyme every sentence.",
+  "For the next 5 minutes, you both speak in a Russian accent.",
+  "For the next 5 minutes, you can only say one word at a time, taking turns.",
+  "For the next 5 minutes, no filler words. No um, uh, like or so.",
+  "For the next 5 minutes, speak in old-timey words. Thee, thou and prithee are mandatory.",
+  "For the next 5 minutes, whisper everything.",
+  "For the next 5 minutes, talk like pirates.",
+  "For the next 5 minutes, every sentence has to start with \"Honestly\".",
+  "For the next 3 minutes, you can only speak in questions.",
+  "For the next 5 minutes, refer to yourself in the third person.",
+  "For the next 3 minutes, narrate each other like a nature documentary.",
+  "For the next 5 minutes, you both speak in a posh British accent.",
+  "For the next 5 minutes, every sentence has to end with \"my dear\".",
+  "For the next 5 minutes, neither of you can say the word \"the\".",
+  "For the next 5 minutes, nobody can say \"yes\" or \"no\".",
+  "For the next 3 minutes, sing everything you say.",
+  "For the next 3 minutes, speak in slow motion.",
+  "For the next 5 minutes, talk like a dramatic anime protagonist. Every sentence is a declaration.",
+  "For the next 5 minutes, speak like a vampire lord from a gothic novel.",
+  "For the next 5 minutes, talk like a witch casting a spell.",
+  "For the next 3 minutes, use a horror-movie trailer voice for everything.",
+  "For the next 3 minutes, end every sentence with \"meow\".",
+  "For the next 5 minutes, speak in a slow, breathy ASMR voice.",
+  "For the next 5 minutes, talk like sports commentators reporting on each other.",
+  "For the next 5 minutes, you both talk like cowboys.",
+  "For the next 5 minutes, talk like a robot that just learned about love.",
+  "For the next 3 minutes, you can only speak in compliments.",
+  "For the next 5 minutes, you can only use words that start with the letter S.",
+  "For the next 5 minutes, every answer must be a full paragraph or a single word. No in-between.",
+  "For the next 10 minutes, neither of you can use your dominant hand.",
+  "For the next 5 minutes, you can't let go of each other's hands.",
+  "For the next 5 minutes, walk everywhere like a cat stalking prey.",
+  "For the next 3 minutes, do everything in slow motion.",
+  "For the next 3 minutes, communicate only with gestures and noises.",
+  "For the next 5 minutes, you can only walk backwards.",
+  "For the next 10 minutes, stay in physical contact at all times.",
+  "For the next 5 minutes, nobody can show their teeth. First one to smile loses and owes the other a compliment.",
+  "For the next 3 minutes, hop instead of walking.",
+  "For the next 10 minutes, you're only allowed to sit on the floor.",
+  "For the next 5 minutes, every time you stand up, you have to announce it dramatically.",
+  "For the next 3 minutes, move only in dramatic manga poses.",
+  "For the next 5 minutes, keep a serious face at all times, like strict vampire hunters.",
+  "For the next 3 minutes, communicate only with hand signals you invent right now.",
+  "For the next 5 minutes, have your whole conversation standing back to back.",
+  "For the next 5 minutes, apologise politely to every object you touch.",
+  "For the next 5 minutes, text each other from the same room and no talking allowed.",
+  "For the next 3 minutes, communicate only in sound effects.",
+  "For the next 3 minutes, the floor is lava.",
+  "For the next 3 minutes, move like you're in a silent film.",
+  "For the next 5 minutes, adopt a cushion as your child and parent it together.",
+  "For the next 5 minutes, you're both ghosts who don't know they're ghosts.",
+  "For the next 3 minutes, act like you're both trying to sneak past a sleeping dragon.",
+  "For the next 3 minutes, pretend you're a couple on a very awkward first date.",
+  "For the next 5 minutes, you're both rival witches meeting for the first time.",
+  "Swap one piece of clothing for the next hour.",
+  "Swap phone wallpapers for the rest of the day.",
+  "Give each other a new nickname and use it for the rest of the day.",
+  "Each of you makes up a fake backstory for how you met and tells it with a straight face.",
+  "Argue for 2 minutes about something ridiculous, like whether cereal is soup. Then hug it out.",
+  "Give each other a makeover with whatever's in the room in 5 minutes.",
+  "Invent a secret handshake and use it every time you greet each other for the next hour.",
+  "Give a tour of the room like a museum curator.",
+  "Invent a secret language of five words and use it for the rest of the day.",
+  "Compliment battle: 60 seconds each, the most creative wins.",
+  "Write and perform a 30-second horror-movie trailer about your day.",
+  "Draw each other in 60 seconds without looking at the paper.",
+  "Recreate how you met as a dramatic movie scene.",
+  "Build a blanket fort and defend it against the other person.",
+  "Pick an alter ego for each other and stay in character for 10 minutes.",
+  "Make up a song about the last thing you both ate.",
+  "Ghost story time: tell a two-minute scary story, one sentence each, taking turns.",
+  "Have a silent dance-off for 30 seconds. No music.",
+  "Give each other a prophecy for the next year, in your best mystical voice.",
+  "Make a tier list of everything in the room and defend it.",
+  "Give each other a fake horoscope for today.",
+  "Rate each other's outfits like judges on a cooking show.",
+  "Whoever speaks first loses. Sit in silence for 2 minutes.",
+  "Tell each other one tiny secret you've never mentioned.",
+  "For 3 minutes, every compliment has to be disguised as an insult, like \"You're so annoyingly beautiful\".",
+  "For the next 5 minutes, say I love you in any way except those three words.",
+  "Show each other the fifth photo in your camera roll and explain it with a straight face.",
+  "For the next 3 minutes, every complaint has to be a love confession in disguise.",
+  "Take a photo together every minute for 5 minutes, each in a different pose.",
+  "Argue for 2 minutes using only compliments.",
+  "Read the last text you sent each other out loud in dramatic voices.",
+  "Tell the story of how you met from the other person's point of view.",
+  "Interview each other as if you're guests on a talk show.",
+  "Trade seats and impersonate each other for 5 minutes.",
+  "Plan a fake wedding in 3 minutes, including the theme and the vows.",
+  "Give a 60-second speech nominating the other person for Partner of the Year.",
+  "Design a coat of arms for your relationship and describe it out loud.",
+  "Stare contest. The first one to laugh has to pick the next thing you both watch.",
+  "For the next hour, replace \"I\" with \"this humble servant\".",
+  "For the next 3 minutes, speak only in each other's catchphrases.",
+  "Each of you says three things you'd never confess in daylight.",
+  "Play whisper down the lane, but it's just the two of you and a 10-word love message.",
+  "Do a slow-motion action-movie hug from across the room.",
+  "For the next 5 minutes, communicate only through drawings.",
+  "Lock eyes and count to 30 without breaking. The loser gives the winner a compliment.",
+  "For the next 5 minutes, address each other by fancy titles like Your Majesty and Sir Knight.",
+  "Swap accents. Whatever accent the other person picks for you, you use for 5 minutes.",
+  "For the next 5 minutes, talk like you're in a soap opera and someone is always shocked.",
+  "Whisper secrets to each other for 3 minutes without stopping.",
+  "Take turns being a dramatic narrator of the other person's every move for 3 minutes.",
+  "Invent a fake couple's holiday and explain its traditions.",
+  "For the next 5 minutes, you both have to agree on everything the other says, enthusiastically.",
+  "For the next 5 minutes, you're both very serious detectives investigating who ate the last snack.",
+  "Pretend you both just woke up from a hundred-year sleep and explain the modern world to each other.",
+  "For the next 3 minutes, you can only communicate using movie titles.",
+  "For the next 3 minutes, you can only communicate using song titles.",
+  "For the next 5 minutes, one of you is the customer and the other is a very dramatic waiter. Then swap.",
+  "For the next 5 minutes, describe everything in the room like it's a haunted house tour.",
+  "For the next 5 minutes, act like you've never met and you're at a masquerade ball.",
+  "Make each other a crown out of whatever you can find and hold a coronation.",
+  "For the next 3 minutes, answer every question with another question."
+];
+
+const QUIZ_BANK = [
+  {q:"What's my ideal way to spend a Saturday?", pool:["Sleeping in and doing nothing","Exploring somewhere new","A horror movie marathon","Staying out late with friends","Cooking something elaborate","Reading somewhere cozy","A long drive with loud music","Gaming or watching anime"]},
+  {q:"What's my comfort food?", pool:["Pancakes","Pasta","Ramen","Fries","Chocolate","Soup","Pizza","Ice cream"]},
+  {q:"What would I pick to watch tonight?", pool:["A horror movie","An anime","A comfort show I've seen ten times","True crime","A documentary","Something gothic and moody"]},
+  {q:"What's my biggest pet peeve?", pool:["Loud chewing","Being late","Slow walkers","Unread messages","Being interrupted","A messy kitchen"]},
+  {q:"Which season am I?", pool:["Spring","Summer","Autumn","Winter"]},
+  {q:"What's my dream trip?", pool:["A cabin in the woods","A haunted castle in Europe","Tokyo","A beach with nothing to do","A big city weekend","A long road trip"]},
+  {q:"Which creature am I?", pool:["Vampire","Witch","Werewolf","Ghost","Dragon","Black cat"]},
+  {q:"What's my go-to drink?", pool:["Coffee","Tea","Iced latte","Hot chocolate","Energy drink","Just water"]},
+  {q:"How do I handle stress?", pool:["Go quiet","Talk it out","Clean everything","Take a nap","Eat a snack","Scroll my phone"]},
+  {q:"What's my love language?", pool:["Words of affirmation","Quality time","Physical touch","Acts of service","Gifts"]},
+  {q:"Which pet would I pick?", pool:["A cat","A parakeet","A dog","A snake","A raven","An axolotl"]},
+  {q:"What's my most likely hidden talent?", pool:["Singing in the shower","Drawing","Impressions","Remembering useless facts","Parallel parking","Making up songs"]},
+  {q:"What would I do first if I won the lottery?", pool:["Travel","Buy a house","Quit my job","Give some away","Buy something ridiculous","Save it all"]},
+  {q:"What time of day am I at my best?", pool:["Early morning","Afternoon","Evening","Midnight"]},
+  {q:"What would I pick for a date night?", pool:["Cook together","A scary movie","Dinner out","An arcade","A long walk","Stargazing"]},
+  {q:"What was I like as a kid?", pool:["Shy","Loud","Curious","Chaotic","Dramatic","A little goth"]},
+  {q:"What's my dream job if money didn't matter?", pool:["Writer","Artist","Ghost hunter","Traveller","Baker","Musician"]},
+  {q:"What would I pack first for a trip?", pool:["Snacks","Chargers","Comfort clothes","Books","My favourite hoodie","Headphones"]},
+  {q:"What's my ideal weather?", pool:["Rain","Snow","Sunshine","A thunderstorm","Cool and cloudy","Fog"]},
+  {q:"What's my worst habit?", pool:["Procrastinating","Overthinking","Leaving cups everywhere","Staying up too late","Being late","Scrolling in bed"]},
+  {q:"What's my favourite thing to do together?", pool:["Talk for hours","Watch something","Go out for food","Do nothing at all","Play games","Cuddle"]},
+  {q:"Which superpower would I pick?", pool:["Flying","Invisibility","Time travel","Mind reading","Teleportation","Talking to animals"]},
+  {q:"What do I check first when I wake up?", pool:["My phone","The time","The weather","Where you are","Snacks","Nothing, I'm still asleep"]},
+  {q:"What's my favourite holiday?", pool:["Halloween","Christmas","My birthday","Valentine's Day","New Year's","Summer holidays"]},
+  {q:"What would I never try?", pool:["Skydiving","Bungee jumping","Eating insects","Sober karaoke","A cold plunge","Public speaking"]},
+  {q:"What kind of music am I into right now?", pool:["Pop","Rock","Metal","Indie","Soundtracks","Something dark and moody"]},
+  {q:"What did I first notice about you?", pool:["Your eyes","Your smile","Your laugh","Your style","Your voice","Your confidence"]},
+  {q:"What's my go-to way to say I love you?", pool:["Saying it","A small gift","A long hug","Doing something for you","Making you laugh","Spending time"]},
+  {q:"What would I rather do on a rainy day?", pool:["Read","Nap","Watch horror movies","Bake","Play games","Go out in it"]},
+  {q:"What's my biggest fear?", pool:["Spiders","Heights","Being alone","Deep water","The dark","Being forgotten"]}
+];
+const RIGHT_LINES = ["Nailed it.","Suspiciously good.","You've been paying attention.","Okay, wow.","Correct. Frighteningly."];
+const WRONG_LINES = ["Wow. Bold guess.","Not even close, spiritually.","Do we even know each other?","Study harder.","The audacity.","Ouch."];
+
+const HEADS = {
+  anime:{n:"Anime characters", w:["Naruto Uzumaki","Sasuke Uchiha","Goku","Monkey D. Luffy","Eren Yeager","Levi Ackerman","Mikasa Ackerman","Tanjiro Kamado","Nezuko","Zenitsu","Satoru Gojo","Yuji Itadori","Light Yagami","L","Ryuk","Sailor Moon","Denji","Power","Makima","Pikachu","Totoro","Chihiro","Howl","Ken Kaneki","Spike Spiegel","Edward Elric","Killua Zoldyck","Izuku Midoriya","Katsuki Bakugo","Saitama","Rem","Asuka Langley","Sebastian Michaelis","Alucard","Anya Forger","Nobara Kugisaki"]},
+  animals:{n:"Animals", w:["Sloth","Platypus","Flamingo","Octopus","Axolotl","Capybara","Penguin","Giraffe","Hedgehog","Narwhal","Praying mantis","Red panda","Owl","Bat","Raccoon","Peacock","Koala","Hippo","Chameleon","Lobster","Jellyfish","Parakeet","Kangaroo","Otter","Seahorse","Tarantula","Wolf","Raven","Black cat","Snake"]},
+  celebs:{n:"Celebrities", w:["Taylor Swift","Beyonce","Rihanna","Zendaya","Timothee Chalamet","Harry Styles","Billie Eilish","Dwayne Johnson","Ariana Grande","Lady Gaga","Ryan Reynolds","Emma Watson","Tom Holland","Jenna Ortega","Doja Cat","Kristen Stewart","Elliot Page","Lil Nas X","Pedro Pascal","Sabrina Carpenter","Olivia Rodrigo","Keanu Reeves","Margot Robbie","Tilda Swinton","Janelle Monae","Hayley Kiyoko","Troye Sivan","Florence Pugh"]},
+  movies:{n:"Movies and shows", w:["The Conjuring","Hereditary","Midsommar","Get Out","The Nightmare Before Christmas","Coraline","The Craft","Practical Magic","Titanic","Frozen","Shrek","Jaws","Psycho","Scream","Beetlejuice","Twilight","Barbie","The Lion King","Inception","Crimson Peak","Mean Girls","Stranger Things","Wednesday","Supernatural","Buffy the Vampire Slayer","Heartstopper","The Haunting of Hill House","Yellowjackets","Interview with the Vampire","Hocus Pocus"]},
+  villains:{n:"Horror and villains", w:["Ghostface","Freddy Krueger","Pennywise","Dracula","Frankenstein's monster","Chucky","The Nun","Jason Voorhees","Michael Myers","Samara","Jack Torrance","Pinhead","Carmilla","Lestat","Maleficent","Ursula","Cruella de Vil","Regan MacNeil","Annabelle","The Babadook","Leatherface","The Wicked Witch","Count Olaf","Norman Bates"]},
+  witchy:{n:"Witchy and gothic", w:["Witch","Cauldron","Tarot deck","Vampire","Gargoyle","Graveyard","Haunted mansion","Black cat","Raven","Candelabra","Crystal ball","Broomstick","Potion","Grimoire","Ouija board","Full moon","Coffin","Lace gloves","Cathedral","Ghost","Spider web","Skeleton key","Poison apple","Werewolf","Cursed doll","Fog"]},
+  food:{n:"Food", w:["Pancakes","Sushi","Ramen","Pizza","Tacos","Pad thai","Croissant","Cheesecake","Dumplings","Burrito","Fries","Ice cream","Waffles","Popcorn","Curry","Lasagna","Cupcake","Donut","Nachos","Milkshake","Bubble tea","Mac and cheese","Grilled cheese","Cinnamon roll"]}
+};
+
+const TAROT = [
+  ["0","The Fool","star","A new beginning. Jump first, pack later.","Look before you leap. Or at least bring snacks."],
+  ["I","The Magician","key","You have everything you need. Make something.","Someone is being sneaky, or you're hiding a talent."],
+  ["II","The High Priestess","moon","Trust your gut. The answer is already inside.","A secret wants out."],
+  ["III","The Empress","heart","Comfort, love and plenty. Be soft on purpose.","Take care of yourself before everyone else."],
+  ["IV","The Emperor","key","Structure and steadiness. Make the plan.","Too rigid. Loosen your grip."],
+  ["V","The Hierophant","key","Shared rituals matter. Make one together.","Break the rules. Write your own."],
+  ["VI","The Lovers","heart","A real choice, made from the heart. Also, obviously good for you two.","Talk honestly about what you each want."],
+  ["VII","The Chariot","star","Momentum. Go after it together.","Slow down and check the map."],
+  ["VIII","Strength","sun","Gentle courage wins.","Self-doubt is loud today. Ignore it."],
+  ["IX","The Hermit","star","Quiet time recharges you.","Don't hide away. Reach out."],
+  ["X","Wheel of Fortune","sun","Luck turns your way.","Bad timing, not bad luck. It passes."],
+  ["XI","Justice","eye","Be fair and be honest.","Check your assumptions."],
+  ["XII","The Hanged Man","eye","Pause. See it from another side.","Stalling isn't the same as resting."],
+  ["XIII","Death","skull","An ending that clears space. Not literal, promise.","Resisting change only delays it."],
+  ["XIV","Temperance","moon","Balance. Mix the ingredients slowly.","Too much of a good thing. Ease off."],
+  ["XV","The Devil","skull","Temptation. Fun, but know your limits.","You're breaking free of a bad habit."],
+  ["XVI","The Tower","skull","A sudden shake-up. The rebuild will be better.","You're avoiding a collapse you need."],
+  ["XVII","The Star","star","Hope is back. Rest and heal.","Faith is low. Borrow some of mine."],
+  ["XVIII","The Moon","moon","Things aren't clear yet. Follow intuition, not fear.","The fog is lifting."],
+  ["XIX","The Sun","sun","Pure joy. Enjoy it without earning it.","Joy is just delayed."],
+  ["XX","Judgement","eye","A reckoning and a fresh start.","Stop replaying old mistakes."],
+  ["XXI","The World","heart","Completion. You did it. Celebrate.","Almost there. Finish the last piece."]
+];
+const EIGHT = [
+  ["YES","It is written in the stars."],["YES","Absolutely, no notes."],["YES","The candle flame leans yes."],["YES","Do it."],
+  ["YES","Yes, and soon."],["YES","The spirits approve."],["YES","Very likely."],
+  ["MAYBE","Ask again after a snack."],["MAYBE","The fog is thick. Try later."],["MAYBE","The spirits are undecided."],
+  ["MAYBE","Maybe. It depends on the moon."],["MAYBE","Focus and ask again."],["MAYBE","Cannot say right now."],
+  ["NO","The cat says no."],["NO","Doubtful."],["NO","Not today."],["NO","My sources say no."],
+  ["NO","Absolutely not."],["NO","The omens are bad."],["NO","The stars disagree."]
+];
+
+const SOLO = [
+  "{n} can't say {o}'s name for the next 5 minutes.",
+  "{n} has to rhyme every sentence for the next 5 minutes.",
+  "{n} speaks in a Russian accent for the next 5 minutes.",
+  "{n} can only say one word at a time for the next 5 minutes.",
+  "{n} can't use any filler words for the next 5 minutes. No um, uh, like or so.",
+  "{n} has to speak in old-timey words for the next 5 minutes.",
+  "{n} has to whisper everything for the next 5 minutes.",
+  "{n} has to talk like a pirate for the next 5 minutes.",
+  "{n} can only speak in questions for the next 3 minutes.",
+  "{n} has to refer to themselves in the third person for the next 5 minutes.",
+  "{n} has to narrate everything they do like a nature documentary for the next 3 minutes.",
+  "{n} has to speak in a posh British accent for the next 5 minutes.",
+  "{n} has to end every sentence with \"my dear\" for the next 5 minutes.",
+  "{n} can't say the word \"the\" for the next 5 minutes.",
+  "{n} can't say yes or no for the next 5 minutes.",
+  "{n} has to sing everything they say for the next 3 minutes.",
+  "{n} has to talk like a dramatic anime protagonist for the next 5 minutes.",
+  "{n} has to speak like a vampire lord for the next 5 minutes.",
+  "{n} has to talk like a witch casting a spell for the next 5 minutes.",
+  "{n} has to say \"meow\" at the end of every sentence for the next 3 minutes.",
+  "{n} can only walk backwards for the next 5 minutes.",
+  "{n} has to hop instead of walking for the next 3 minutes.",
+  "{n} has to hold {o}'s hand for the next 5 minutes.",
+  "{n} has to do everything in slow motion for the next 3 minutes.",
+  "{n} has to keep a serious face for the next 5 minutes while {o} tries to make them laugh.",
+  "{o} has 60 seconds to make {n} laugh. If {o} fails, {o} owes {n} a compliment.",
+  "{n} has to act like {o} for the next 3 minutes. {o} rates the impression.",
+  "{n} has to give {o} a new compliment every minute for the next 5 minutes.",
+  "{o} picks a new nickname for {n}, and {n} has to answer to it for the rest of the day.",
+  "{n} has to close their eyes and describe {o} from memory in as much detail as possible.",
+  "{n} has to stay in physical contact with {o} for the next 10 minutes.",
+  "{n} has to do whatever silly, safe thing {o} says for the next 3 minutes.",
+  "{n} has to draw {o} in 60 seconds without looking at the paper.",
+  "{n} has to tell a two-minute ghost story, and {o} gets to add one plot twist.",
+  "{n} has to perform a dramatic death scene, then come back as a ghost for the next 3 minutes.",
+  "{n} can only speak in movie titles for the next 3 minutes.",
+  "{n} can only speak in song titles for the next 3 minutes.",
+  "{n} has to call {o} \"Your Majesty\" for the next 5 minutes.",
+  "{n} has to agree enthusiastically with everything {o} says for the next 5 minutes.",
+  "{n} has to describe everything in the room like a haunted house tour for the next 5 minutes.",
+  "{n} has to tell {o} the story of how you met, exaggerating everything, for 2 minutes.",
+  "{n} has to close their eyes and guess three objects {o} hands them.",
+  "{n} gets to narrate the next 3 minutes, and {o} has to act out whatever {n} says.",
+  "{n} has to say something nice about {o} every time they speak for the next 5 minutes.",
+  "{n} has to answer every question with another question for the next 3 minutes."
+];
+
+const FANTASY = [
+  {title:"What mythical creature are you?",
+   results:[
+    {n:"Dragon", d:"Fierce, dramatic and secretly very cozy. You hoard the things you love, mostly snacks and people."},
+    {n:"Vampire", d:"Elegant, nocturnal, and always a little dramatic about it. You're awake at 3 a.m. and unbothered."},
+    {n:"Siren", d:"Charming and a little dangerous. People follow your voice and sometimes regret it."},
+    {n:"Werewolf", d:"Loyal, loud around your pack, and chaotic when the moon is full. You'd fight for your people."},
+    {n:"Phoenix", d:"Resilient. You burn down, come back better, and look great doing it."},
+    {n:"Kitsune", d:"Clever, playful and impossible to fool. You have at least nine tricks up your sleeve."}],
+   questions:[
+    {q:"It's midnight. Where are you?", o:[["Awake, scheming something fun",5],["On a rooftop, watching the storm roll in",0],["Near water, humming to yourself",2],["Out with your favourite people, being loud",3]]},
+    {q:"Pick a treasure.", o:[["A hoard of gold and old books",0],["A dusty antique with a story",1],["A mirror that shows you what you want",2],["A warm campfire and good company",3]]},
+    {q:"How do you handle a bad day?", o:[["Burn it all down and start over",4],["Retreat somewhere dark and quiet",1],["Prank someone to feel better",5],["Sing until it improves",2]]},
+    {q:"Pick a setting.", o:[["A misty castle at dusk",1],["A volcano with excellent views",0],["A forest under a full moon",3],["A shrine hidden in the trees",5]]},
+    {q:"What's your special talent?", o:[["Coming back stronger",4],["Being effortlessly charming",2],["Outsmarting everyone",5],["Protecting my people",3]]},
+    {q:"Pick a snack.", o:[["Something spicy that hurts a little",0],["Something dark and rich, like chocolate",1],["Whatever's being shared",3],["Something warm that glows",4]]}]},
+  {title:"What magical power would you have?",
+   results:[
+    {n:"Shapeshifting", d:"You'd be whoever the moment needs. A cat at breakfast, a bat at midnight."},
+    {n:"Mind reading", d:"You'd know exactly what everyone's thinking. Use it kindly. Or don't."},
+    {n:"Time control", d:"You'd pause the good moments and skip the boring ones. Dangerous and delightful."},
+    {n:"Fire magic", d:"Passionate and a little reckless. Your candles are always lit."},
+    {n:"Shadow walking", d:"You'd slip through the dark unseen. You'd also always find your keys."},
+    {n:"Healing hands", d:"You'd mend what's broken, from scraped knees to bad moods."}],
+   questions:[
+    {q:"What would you do with your power first?", o:[["Change my whole look and go out",0],["Listen in on the best gossip",1],["Rewind to fix an awkward moment",2],["Light every candle in the house",3]]},
+    {q:"Pick a hidden talent you already have.", o:[["Fitting in anywhere",0],["Knowing what someone means, not what they say",1],["Always being on time, or exactly late",2],["Making people feel cared for",5]]},
+    {q:"Your favourite time of day?", o:[["Golden hour",2],["Twilight",4],["Dawn, barely awake",5],["Noon, loud and bright",3]]},
+    {q:"Pick a companion.", o:[["A raven who talks back",1],["A shadow that follows me",4],["A phoenix chick",3],["A shy fox who's more than he seems",0]]},
+    {q:"What scares you most?", o:[["Being stuck in one shape forever",0],["Being misunderstood",1],["Running out of time",2],["Being alone in the dark",4]]},
+    {q:"Your ideal cozy night?", o:[["A fireplace and a good book",3],["Tea, blankets and someone to look after",5],["Rewatching a favourite show for the tenth time",2],["A long night walk with nobody around",4]]}]},
+  {title:"What would your role be in a medieval kingdom?",
+   results:[
+    {n:"The Ruler", d:"You wear the crown, even if it gives you a headache. Everyone secretly relies on your decisions."},
+    {n:"The Court Sorcerer", d:"You keep the kingdom's secrets and a suspicious number of potions."},
+    {n:"The Royal Spy", d:"You know things. You've always known things. Please don't ask how."},
+    {n:"The Knight", d:"Brave, loyal and dramatic about honour. You'd carry someone across a river without being asked."},
+    {n:"The Court Jester", d:"Everyone loves you, and half the truth in the kingdom comes out of your mouth as a joke."},
+    {n:"The Herbalist", d:"You grow, brew and heal. The village would fall apart without your garden."}],
+   questions:[
+    {q:"A feast is announced. You...", o:[["Give the toast",0],["Slip into the kitchens to make a suspiciously good soup",5],["Stand near the window, watching everyone",2],["Perform for the crowd",4]]},
+    {q:"A dragon appears. You...", o:[["Negotiate",0],["Cast something spectacular",1],["Charge in",3],["Quietly find out what it wants",2]]},
+    {q:"Pick your weapon.", o:[["A signet ring and a sharp tongue",0],["A spellbook",1],["A well-kept sword",3],["A lute with a hidden dagger",4]]},
+    {q:"Where in the castle are you found?", o:[["The throne room",0],["The tower with too many candles",1],["Behind a tapestry",2],["The garden",5]]},
+    {q:"What's your reputation?", o:[["Fair, but scary",0],["Mysterious",1],["Brave to a fault",3],["Delightful and unreliable",4]]},
+    {q:"What do you do on a quiet night?", o:[["Plot something clever",2],["Brew something new",5],["Sharpen the sword and overthink",3],["Write a song about the last argument",4]]}]},
+  {title:"How would you die in a YA romantasy novel?",
+   results:[
+    {n:"A heroic sacrifice", d:"You step in front of the villain's blade at the final battle, whisper something devastating, and everyone rereads that chapter four times."},
+    {n:"Poisoned at the ball", d:"A glass of something sparkling, a rival smirking across the room. You look incredible while it happens."},
+    {n:"The mentor dies", d:"You die in chapter three, mid-wisdom, and the protagonist carries your words for six hundred pages."},
+    {n:"Fake death, dramatic return", d:"Everyone mourns. You show up in book two, in a cloak, with a new haircut and a plan."},
+    {n:"Eaten by something cute", d:"It looked like a fluffy friend. It was not. The narrator had warned everyone."},
+    {n:"Cursed to sleep", d:"You don't technically die. You just nap for a hundred years and miss the plot."}],
+   questions:[
+    {q:"The book's opening line about you?", o:[["She had never been afraid of anything, until now.",0],["Nobody noticed her at the ball, which was exactly the point.",1],["Wise, tired, and carrying a mysterious satchel.",2],["She was dead. Almost. It was complicated.",3]]},
+    {q:"Your fatal flaw?", o:[["Loving too fiercely",0],["Trusting the wrong charming person",1],["Knowing too much and saying it out loud",2],["Petting strange creatures",4]]},
+    {q:"The love interest is...", o:[["Brooding, with secrets and a scar",0],["A fae prince with perfect manners and bad intentions",1],["Your best friend, who is definitely also the traitor",3],["A tired knight who keeps sighing",2]]},
+    {q:"Your outfit at the climax?", o:[["Armor that somehow leaves my arms free",0],["A gown that matches my poison",1],["A cloak that hides everything",3],["Pajamas, because I was asleep for the drama",5]]},
+    {q:"The last thing you'd say?", o:[["Tell them I loved them.",0],["Interesting. I've never tasted this vintage.",1],["Remember what I taught you.",2],["See you in the sequel.",3]]},
+    {q:"Where does it happen?", o:[["A burning battlefield",0],["A glittering ballroom",1],["A cozy tower",2],["A mystical wood full of adorable animals",4]]}]}
+];
+
+const FORTUNES = [
+  "Someone is thinking about you right now. It's me.",
+  "You will find something you lost. Probably your keys.",
+  "A good snack is in your near future.",
+  "Do the thing you've been putting off. Then take a nap.",
+  "Today's lucky number is however many kisses you're owed.",
+  "A black cat will cross your path. It's a good omen. Pet it.",
+  "Your next idea is a good one. Trust it.",
+  "Be kind to yourself today. The stars insist.",
+  "An unexpected message will make you smile.",
+  "You will win an argument today, but not the one you think.",
+  "Something small will go your way. Notice it.",
+  "Drink some water. The snake insists.",
+  "Someone will laugh at your joke, and it will be the right person.",
+  "The moon is on your side tonight.",
+  "You will be adored in a way that feels slightly embarrassing.",
+  "Go outside for five minutes. Something is waiting.",
+  "An old friend will cross your mind. Send the message.",
+  "Your future includes pancakes.",
+  "Today is a good day to start something.",
+  "Say the sweet thing out loud.",
+  "Something brass is hiding among the cards. Keep flipping.",
+  "Your feet are cold. Put socks on.",
+  "You are more haunted than you think, in a good way.",
+  "A tiny door is not as locked as it looks."
+];
+const ACH = {mush:"Mushroom Menace", cat:"Cat Botherer", key:"Key Keeper", door:"Found It"};
+
+const TC={ink:"#180A2B",pur:"#4E20A0",lil:"#B79CF0",red:"#A8122F",pnk:"#FF8FAE",crm:"#F4EEFF",bg:"#DCCBF8",gold:"#F2B33D"};
+const _c=(x,y,r,f,s)=>`<circle cx="${x}" cy="${y}" r="${r}" fill="${f}"${s?` stroke="${TC.ink}" stroke-width="1.4"`:""}/>`;
+const _r=(x,y,w,h,f)=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${f}"/>`;
+const _p=(d,f,s,w)=>`<path d="${d}" fill="${f||"none"}"${s?` stroke="${s}" stroke-width="${w||2}" stroke-linecap="round" stroke-linejoin="round"`:""}/>`;
+const _l=(x1,y1,x2,y2,w,col)=>_p(`M${x1} ${y1}L${x2} ${y2}`,null,col||TC.ink,w||2);
+const _e=(x,y,rx,ry,f,s)=>`<ellipse cx="${x}" cy="${y}" rx="${rx}" ry="${ry}" fill="${f}"${s?` stroke="${TC.ink}" stroke-width="1.4"`:""}/>`;
+const _star=(x,y,R,f,n)=>{n=n||5;const pts=[];for(let i=0;i<n*2;i++){const a=-Math.PI/2+i*Math.PI/n,rr=i%2?R*.45:R;pts.push((x+Math.cos(a)*rr).toFixed(1)+","+(y+Math.sin(a)*rr).toFixed(1));}return `<polygon points="${pts.join(" ")}" fill="${f}"/>`;};
+const _heart=(x,y,s,f)=>`<path transform="translate(${x} ${y}) scale(${s})" d="M0 6 C-10 -2 -6 -10 0 -5 C6 -10 10 -2 0 6Z" fill="${f}"/>`;
+const _man=(x,y,robe,w,h)=>{w=w||16;h=h||28;return `<path d="M${x-w/2} ${y+5+h} L${x-w/4} ${y+4} L${x+w/4} ${y+4} L${x+w/2} ${y+5+h}Z" fill="${robe}"/>`+_c(x,y,4.6,TC.crm,1);};
+const _ring=(x,y)=>`<circle cx="${x-5}" cy="${y}" r="4.6" fill="none" stroke="${TC.red}" stroke-width="2"/><circle cx="${x+5}" cy="${y}" r="4.6" fill="none" stroke="${TC.red}" stroke-width="2"/>`;
+const _halo=(x,y,r)=>`<circle cx="${x}" cy="${y}" r="${r}" fill="none" stroke="${TC.lil}" stroke-width="2.4"/>`;
+const _rays=(x,y,r1,r2,n,col,w)=>{let s="";for(let i=0;i<n;i++){const a=i/n*Math.PI*2;s+=_l((x+Math.cos(a)*r1).toFixed(1),(y+Math.sin(a)*r1).toFixed(1),(x+Math.cos(a)*r2).toFixed(1),(y+Math.sin(a)*r2).toFixed(1),w||2,col);}return s;};
+
+const TAROT_ART=[
+/* 0 Fool */ ()=>[_r(10,14,20,5,TC.crm),_r(64,26,22,5,TC.crm),_c(78,20,10,TC.red),
+  _p("M0 70L58 70L62 78L58 84L62 100L0 100Z",TC.pur),_man(40,38,TC.ink,16,24),
+  _l(46,47,59,34,2.4),_l(59,34,68,50,1.6),_c(69,53,4.4,TC.red),
+  _e(20,66,6,3.6,TC.ink),_c(27,62,3.4,TC.ink),_p("M26 58L28 53L30 59Z",TC.ink)].join(""),
+/* I Magician */ ()=>[_ring(50,12),_man(50,34,TC.red,18,26),_l(43,44,31,28,2.6),_c(30,26,3,TC.crm,1),_l(57,46,68,60,2.6),
+  _r(14,74,72,6,TC.ink),_r(20,80,5,16,TC.ink),_r(75,80,5,16,TC.ink),
+  _c(26,69,4.4,TC.red),_p("M40 63L50 63L48 72L42 72Z",TC.lil),_l(60,62,60,72,2),_l(72,60,72,72,2.4,TC.crm),_l(69,64,75,64,2,TC.crm)].join(""),
+/* II High Priestess */ ()=>[_r(8,6,18,5,TC.ink),_r(11,11,12,84,TC.ink),_r(74,6,18,5,TC.ink),_r(77,11,12,84,TC.crm),
+  _p("M23 12H77V96H23Z",TC.pur),_p("M23 30Q36 38 50 30Q64 38 77 30",null,TC.lil,1.6),
+  _man(50,46,TC.lil,24,38),_p("M50 18A10 10 0 1 0 50 38A8 8 0 1 1 50 18Z",TC.crm),_r(43,78,14,8,TC.crm),_l(46,81,54,81,1.2,TC.ink)].join(""),
+/* III Empress */ ()=>{let w="";for(let x=6;x<=94;x+=8){w+=_l(x,100,x-1,80,1.6,TC.ink)+_e(x-1,78,1.8,3.2,TC.red);}
+  return [_man(50,34,TC.red,28,34),_p("M41 30L43 22L47 28L50 20L53 28L57 22L59 30Z",TC.pnk),_star(38,16,3,TC.crm),_star(62,16,3,TC.crm),_star(50,9,3,TC.crm),
+  _heart(76,62,1.6,TC.red),w].join("");},
+/* IV Emperor */ ()=>[_p("M0 100L22 72L40 100Z",TC.ink),_p("M60 100L80 68L100 100Z",TC.ink),
+  _r(28,14,44,72,TC.pur),_p("M28 14Q50 2 72 14",TC.pur),_man(50,40,TC.red,26,34),_p("M43 34L45 27L48 32L50 26L52 32L55 27L57 34Z",TC.pnk),
+  _l(68,38,68,74,2.6),_c(68,35,4,TC.crm,1),_c(31,62,5,TC.lil,1)].join(""),
+/* V Hierophant */ ()=>[_p("M46 16H54L53 22H47Z",TC.pnk),_p("M44 22H56L55 28H45Z",TC.pnk),_p("M42 28H58L57 34H43Z",TC.pnk),
+  _man(50,42,TC.pur,26,36),_l(70,26,70,84,2.6),_l(65,34,75,34,2),_l(66,42,74,42,2),_l(67,50,73,50,2),
+  _c(28,78,3.6,TC.crm,1),_p("M22 96L25 84H31L34 96Z",TC.red),_c(80,84,3.6,TC.crm,1),
+  _l(42,94,58,84,2.2),_l(42,84,58,94,2.2)].join(""),
+/* VI Lovers */ ()=>[_p("M50 14L22 26L48 26Z",TC.red),_p("M50 14L78 26L52 26Z",TC.red),_c(50,17,5,TC.crm,1),_halo(50,17,9),
+  _p("M34 100L50 60L66 100Z",TC.pur),_man(30,52,TC.ink,16,26),_man(70,52,TC.red,16,26),_heart(50,44,1.4,TC.red)].join(""),
+/* VII Chariot */ ()=>[_r(22,14,56,5,TC.ink),_star(32,10,3,TC.crm),_star(50,8,3,TC.crm),_star(68,10,3,TC.crm),
+  _l(26,19,26,46,2),_l(74,19,74,46,2),_man(50,32,TC.ink,16,18),
+  _r(22,52,56,18,TC.red),_c(34,74,9,TC.crm,1),_c(66,74,9,TC.crm,1),_c(34,74,2.4,TC.ink),_c(66,74,2.4,TC.ink),
+  _e(12,88,11,5,TC.ink),_c(4,82,4,TC.ink),_e(88,88,11,5,TC.crm,1),_c(96,82,4,TC.crm,1)].join(""),
+/* VIII Strength */ ()=>[_star(70,64,26,TC.red,14),_c(70,64,14,TC.pnk,1),_c(65,61,1.8,TC.ink),_c(75,61,1.8,TC.ink),_p("M66 70Q70 74 74 70",null,TC.ink,1.6),
+  _man(30,44,TC.crm,20,34),_ring(30,26),_l(38,56,58,64,2.6,TC.crm)].join(""),
+/* IX Hermit */ ()=>[_star(20,14,3,TC.crm),_star(78,12,3,TC.crm),_star(88,28,2.4,TC.crm),
+  _p("M0 100L40 48L68 82L100 58L100 100Z",TC.pur),_p("M32 58L40 48L48 58Z",TC.crm),
+  _man(38,40,TC.ink,22,34),_l(26,34,26,84,2.6),_r(50,42,11,13,TC.lil),_star(55.5,48.5,4,TC.red),_l(44,50,50,46,2.2)].join(""),
+/* X Wheel */ ()=>{let s=_c(50,50,38,TC.crm,1)+_c(50,50,27,TC.bg,1);for(let i=0;i<4;i++){const a=i*Math.PI/4;s+=_l((50-Math.cos(a)*38).toFixed(1),(50-Math.sin(a)*38).toFixed(1),(50+Math.cos(a)*38).toFixed(1),(50+Math.sin(a)*38).toFixed(1),2);}
+  for(let i=0;i<8;i++){const a=i/8*Math.PI*2;s+=_c((50+Math.cos(a)*32.5).toFixed(1),(50+Math.sin(a)*32.5).toFixed(1),3,TC.ink);}
+  return s+_c(50,50,8,TC.red,1)+_star(50,50,4,TC.crm);},
+/* XI Justice */ ()=>[_r(30,12,40,84,TC.pur),_man(50,34,TC.red,24,38),_p("M43 28L45 21L48 26L50 20L52 26L55 21L57 28Z",TC.pnk),
+  _l(64,50,64,12,3),_l(59,28,69,28,2.6),_l(28,46,28,56,2),_l(14,56,42,56,2.4),_p("M14 56L9 66H19Z",TC.lil),_p("M42 56L37 66H47Z",TC.lil)].join(""),
+/* XII Hanged Man */ ()=>[_r(12,10,76,6,TC.ink),_r(12,10,6,86,TC.ink),_r(82,10,6,86,TC.ink),_l(50,16,50,34,2),
+  `<g transform="rotate(180 50 60)">${_man(50,44,TC.pur,16,26)}</g>`,_halo(50,86,8)].join(""),
+/* XIII Death */ ()=>[_r(64,12,28,18,TC.ink),_l(64,12,64,92,2.2),_c(78,21,5,TC.crm),_c(78,21,2.2,TC.red),
+  _l(18,18,18,92,2.4),_p("M18 18Q38 10 46 26Q34 20 18 26Z",TC.lil),
+  _p("M20 92L28 44H48L56 92Z",TC.ink),_c(38,34,7.4,TC.crm,1),_c(35.5,34,1.7,TC.ink),_c(40.5,34,1.7,TC.ink),_l(35,38,41,38,1.2),
+  _l(31,54,45,54,1.4,TC.crm),_l(30,62,46,62,1.4,TC.crm),_l(29,70,47,70,1.4,TC.crm),_c(86,88,9,TC.red)].join(""),
+/* XIV Temperance */ ()=>[_p("M50 20L16 44L44 44Z",TC.red),_p("M50 20L84 44L56 44Z",TC.red),_man(50,32,TC.crm,24,34),_halo(50,32,9),
+  _p("M22 60H36L33 74H25Z",TC.lil),_p("M62 76H76L73 90H65Z",TC.lil),_p("M34 60Q52 44 68 76",null,TC.pnk,2.6),_p("M50 60Q56 68 64 72",null,TC.pnk,1.4)].join(""),
+/* XV Devil */ ()=>[_p("M50 46L14 30L24 58Z",TC.ink),_p("M50 46L86 30L76 58Z",TC.ink),
+  _r(28,64,44,12,TC.ink),_p("M40 44H60L66 66H34Z",TC.red),_c(50,34,7.2,TC.crm,1),_p("M44 30L39 17L48 27Z",TC.red),_p("M56 30L61 17L52 27Z",TC.red),
+  _c(30,82,3.6,TC.crm,1),_p("M24 98L27 86H33L36 98Z",TC.pur),_c(70,82,3.6,TC.crm,1),_p("M64 98L67 86H73L76 98Z",TC.pur),
+  _l(38,70,32,80,1.4,TC.lil),_l(62,70,68,80,1.4,TC.lil)].join(""),
+/* XVI Tower */ ()=>[_p("M34 98L40 34H60L66 98Z",TC.crm,TC.ink,2),
+  `<g transform="rotate(-16 50 30)">${_p("M36 32L40 20L44 27L50 17L56 27L60 20L64 32Z",TC.red)}</g>`,
+  _r(47,46,7,9,TC.ink),_r(47,66,7,9,TC.ink),_p("M80 4L62 28H72L58 54",null,"#FFD766",3.4),
+  _p("M30 86L34 76L38 88Z",TC.red),_p("M62 90L66 78L70 92Z",TC.red),_c(20,52,3,TC.crm,1),_l(20,55,18,64,2),_c(82,70,3,TC.crm,1),_l(82,73,84,82,2)].join(""),
+/* XVII Star */ ()=>[_star(50,24,16,TC.red,8),_star(18,14,4,TC.crm),_star(84,18,4,TC.crm),_star(26,44,3,TC.crm),_star(76,44,3,TC.crm),
+  _p("M4 82Q50 66 96 82L96 100L4 100Z",TC.pur),_man(36,56,TC.crm,14,22),_l(44,62,56,70,2),_l(56,70,60,78,2),_p("M56 72Q66 78 62 88",null,TC.lil,2.2)].join(""),
+/* XVIII Moon */ ()=>[_c(50,26,15,TC.crm,1),_c(44,24,2,TC.ink),_p("M42 32Q46 36 50 32",null,TC.ink,1.4),_halo(50,26,20),
+  _r(6,46,14,38,TC.ink),_p("M6 46L13 34L20 46Z",TC.ink),_r(80,46,14,38,TC.ink),_p("M80 46L87 34L94 46Z",TC.ink),
+  _p("M52 100Q40 86 50 72Q62 62 52 52",null,TC.lil,6),_p("M30 92L36 80L42 92Z",TC.ink),_p("M60 92L66 80L72 92Z",TC.crm,TC.ink,1.2),
+  _p("M32 96Q50 90 68 96V100H32Z",TC.pur),_c(50,92,2.4,TC.red)].join(""),
+/* XIX Sun */ ()=>[_rays(50,30,20,30,14,TC.red,3),_c(50,30,16,TC.red),_c(45,28,2,TC.ink),_c(55,28,2,TC.ink),_p("M44 35Q50 40 56 35",null,TC.ink,1.8),
+  _r(0,64,100,8,TC.ink),_c(12,58,5,TC.pnk,1),_c(88,58,5,TC.pnk,1),_c(30,60,4,TC.pnk,1),_c(70,60,4,TC.pnk,1),
+  _e(50,82,18,8,TC.crm,1),_c(70,76,5,TC.crm,1),_l(40,90,40,98,2.4),_l(60,90,60,98,2.4),_c(50,66,3.6,TC.crm,1),_p("M44 88L46 70H54L56 88Z",TC.red)].join(""),
+/* XX Judgement */ ()=>{let f="";[22,50,78].forEach(x=>{f+=_r(x-10,90,20,8,TC.ink)+_c(x,72,3.6,TC.crm,1)+_p(`M${x-6} 90L${x-3} 77H${x+3}L${x+6} 90Z`,TC.crm)+_l(x-5,80,x-10,68,1.8)+_l(x+5,80,x+10,68,1.8);});
+  return [_e(22,42,16,5,TC.crm),_e(76,46,18,5,TC.crm),_p("M50 24L22 34L46 42Z",TC.red),_p("M50 24L78 34L54 42Z",TC.red),_c(50,17,6,TC.crm,1),_halo(50,17,10),
+  _l(58,24,82,10,3,TC.lil),_p("M82 5L90 5L86 14Z",TC.lil),f].join("");},
+/* XXI World */ ()=>{let l="";for(let i=0;i<22;i++){const a=i/22*Math.PI*2;l+=_c((50+Math.cos(a)*30).toFixed(1),(50+Math.sin(a)*38).toFixed(1),3.4,TC.pnk);}
+  return [`<ellipse cx="50" cy="50" rx="30" ry="38" fill="none" stroke="${TC.pur}" stroke-width="7"/>`,l,_r(38,8,24,5,TC.red),_r(38,86,24,5,TC.red),
+  _man(50,42,TC.pnk,14,24),_l(44,54,36,44,2.2),_l(56,54,64,60,2.2),_l(36,44,33,36,1.8),_c(8,8,5,TC.ink),_c(92,8,5,TC.ink),_c(8,92,5,TC.ink),_c(92,92,5,TC.ink)].join("");}
+];
+const tarotSVG=(i,px)=>`<svg viewBox="0 0 100 100" width="${px}" height="${px}" aria-hidden="true"><rect width="100" height="100" fill="${TC.bg}"/>${TAROT_ART[i]()}</svg>`;
 
 /* ============================================================
    HELPERS + STATE
@@ -348,11 +908,28 @@ const $ = s => document.querySelector(s);
 const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const pick = a => a[Math.floor(Math.random()*a.length)];
 const shuffle = a => { a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]];} return a; };
+const REDUCE = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const nameA = CONFIG.names[0], nameB = CONFIG.names[1];
 document.title = nameA + " & " + nameB;
 
-const KEY = "us-site-v1";
-const fresh = () => ({answered:0, byCat:{}, truths:0, dares:0, kept:[], opened:[], quizBest:0, jokes:0});
+function sprite(rows, px, cls){
+  const h = rows.length, w = rows[0].length; let r = "";
+  for(let y=0;y<h;y++){
+    let x = 0;
+    while(x<w){
+      const c = rows[y][x];
+      if(c==="." || !PAL[c]){ x++; continue; }
+      let e = x; while(e<w && rows[y][e]===c) e++;
+      r += `<rect x="${x}" y="${y}" width="${e-x}" height="1.02" fill="${PAL[c]}"/>`;
+      x = e;
+    }
+  }
+  return `<svg class="${cls||""}" viewBox="0 0 ${w} ${h}" style="width:${w*px}px;max-width:100%;height:auto" shape-rendering="crispEdges" aria-hidden="true">${r}</svg>`;
+}
+const heart = px => sprite(SPR.heart, px);
+
+const KEY = "us-site-v2";
+const fresh = () => ({answered:0, byCat:{}, truths:0, dares:0, kept:[], opened:[], flips:0, key:false, doorOpen:false, mush:0, ach:{}, fq:0});
 let S = load();
 function load(){ try{ const r = localStorage.getItem(KEY); return Object.assign(fresh(), r ? JSON.parse(r) : {}); }catch(e){ return fresh(); } }
 function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
@@ -363,6 +940,8 @@ const anniversary = () => { const d = new Date(start); d.setFullYear(d.getFullYe
 const unlocked = () => S.answered >= CONFIG.unlockAfter;
 const togo = () => Math.max(0, CONFIG.unlockAfter - S.answered);
 const fmtDate = d => new Intl.DateTimeFormat(undefined,{day:"numeric",month:"long",year:"numeric"}).format(d);
+const fmt = s => String(Math.floor(s/60)).padStart(2,"0") + ":" + String(s%60).padStart(2,"0");
+const lockedPanel = () => `<div class="panel"><span class="tab">Locked</span><p class="big">Answer ${togo()} more question${togo()===1?"":"s"} to unlock this.</p></div>`;
 
 let cleanups = [];
 const onLeave = fn => cleanups.push(fn);
@@ -371,26 +950,117 @@ function toast(msg){
   const t = $("#toast"); t.firstElementChild.textContent = msg; t.classList.add("on");
   clearTimeout(toast.h); toast.h = setTimeout(() => t.classList.remove("on"), 2800);
 }
-function overlay(html){
+function dialog(title, text){
   document.querySelector(".overlay")?.remove();
   const o = document.createElement("div");
-  o.className = "overlay"; o.setAttribute("role","dialog"); o.setAttribute("aria-modal","true");
-  o.innerHTML = `<div class="sheet">${html}<button class="btn ghost close">Close</button></div>`;
-  o.addEventListener("click", e => { if(e.target===o || e.target.classList.contains("close")) o.remove(); });
-  document.body.appendChild(o); o.querySelector(".close").focus();
+  o.className = "overlay"; o.setAttribute("role","dialog"); o.setAttribute("aria-modal","true"); o.setAttribute("aria-label", title);
+  o.innerHTML = `<div class="sheet"><span class="tab">${esc(title)}</span><p class="letter"><span></span><span class="rest"></span></p><button class="btn ghost close">Close</button></div>`;
+  document.body.appendChild(o);
+  const [a,b] = o.querySelectorAll(".letter span"); let i = 0, iv = null;
+  const paint = n => { a.textContent = text.slice(0,n); b.textContent = text.slice(n); };
+  paint(REDUCE ? text.length : 0);
+  if(!REDUCE) iv = setInterval(() => { i++; paint(i); if(i >= text.length) clearInterval(iv); }, Math.max(8, Math.min(22, 7000/text.length)));
+  o.querySelector(".sheet").addEventListener("click", e => { if(!e.target.closest(".close")){ clearInterval(iv); paint(text.length); } });
+  o.addEventListener("click", e => { if(e.target===o || e.target.closest(".close")){ clearInterval(iv); o.remove(); } });
+  o.querySelector(".close").focus();
 }
 document.addEventListener("keydown", e => { if(e.key==="Escape") document.querySelector(".overlay")?.remove(); });
+
 function burst(){
-  if(matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-  for(let i=0;i<26;i++){
-    const s = document.createElement("span"); s.className="fly";
-    s.textContent = pick(["❤️","💗","💖","💕","✨"]);
-    s.style.left = Math.random()*100+"vw"; s.style.animationDelay = Math.random()*.6+"s";
-    s.style.fontSize = (16+Math.random()*22)+"px";
-    document.body.appendChild(s); setTimeout(()=>s.remove(), 3400);
+  if(REDUCE) return;
+  for(let i=0;i<24;i++){
+    const s = document.createElement("span"); s.className = "fly";
+    s.innerHTML = heart(3 + Math.floor(Math.random()*4));
+    s.style.left = Math.random()*95+"vw"; s.style.animationDelay = Math.random()*.6+"s";
+    document.body.appendChild(s); setTimeout(() => s.remove(), 3400);
   }
 }
-function checkUnlock(before){ if(before < CONFIG.unlockAfter && S.answered >= CONFIG.unlockAfter) toast("🔓 Something new just unlocked: the flirty stuff."); }
+function petFX(host, n){
+  n = n || 7;
+  for(let i=0;i<n;i++){
+    const h = document.createElement("span"); h.className = "hp";
+    h.innerHTML = heart(4);
+    h.style.left = (36 + Math.random()*28) + "%";
+    h.style.setProperty("--dx", (Math.random()*90-45) + "px");
+    h.style.animationDelay = (i*70) + "ms";
+    host.appendChild(h); setTimeout(() => h.remove(), 1900);
+  }
+}
+function wirePet(host, btns, bubble, words){
+  let bt;
+  const go = () => {
+    petFX(host);
+    btns.forEach(b => { if(b.classList.contains("pet")){ b.classList.remove("on"); void b.offsetWidth; b.classList.add("on"); } });
+    if(bubble){ bubble.textContent = pick(words); bubble.classList.add("on"); clearTimeout(bt); bt = setTimeout(() => bubble.classList.remove("on"), 1100); }
+  };
+  btns.forEach(b => b.addEventListener("click", go));
+}
+function timerUI(host, secs, msg){
+  let left = secs, iv = null;
+  host.innerHTML = `<div class="timer">${fmt(left)}</div><div class="actions" style="margin-top:12px"><button class="btn" data-a="go">Start</button><button class="btn ghost" data-a="reset">Reset</button></div>`;
+  const disp = host.querySelector(".timer"), go = host.querySelector('[data-a="go"]');
+  const stop = () => { clearInterval(iv); iv = null; go.textContent = left===secs ? "Start" : "Resume"; };
+  onLeave(() => clearInterval(iv));
+  go.onclick = () => {
+    if(iv){ stop(); return; }
+    go.textContent = "Pause";
+    iv = setInterval(() => {
+      left--; disp.textContent = fmt(Math.max(left,0));
+      if(left <= 0){ clearInterval(iv); iv = null; left = secs; go.textContent = "Start"; toast(msg || "Time's up."); }
+    }, 1000);
+  };
+  const reset = () => { stop(); left = secs; disp.textContent = fmt(left); go.textContent = "Start"; };
+  host.querySelector('[data-a="reset"]').onclick = reset;
+  return {reset};
+}
+function checkUnlock(before){ if(before < CONFIG.unlockAfter && S.answered >= CONFIG.unlockAfter) toast("Unlocked: the flirty stuff."); }
+function videoPopup(src){
+  document.querySelector(".overlay")?.remove();
+  const o = document.createElement("div");
+  o.className = "overlay"; o.setAttribute("role","dialog"); o.setAttribute("aria-modal","true"); o.setAttribute("aria-label","A video");
+  o.innerHTML = `<div class="sheet vidsheet"><video src="${esc(src)}" controls playsinline autoplay></video><button class="btn ghost close">Close</button></div>`;
+  document.body.appendChild(o);
+  const v = o.querySelector("video");
+  const kill = () => { try{ v.pause(); }catch(e){} o.remove(); };
+  v.addEventListener("error", kill, {once:true});
+  const p = v.play(); if(p && p.catch) p.catch(() => {});
+  o.addEventListener("click", e => { if(e.target===o || e.target.closest(".close")) kill(); });
+  o.querySelector(".close").focus();
+}
+function award(id){
+  if(S.ach[id]) return;
+  S.ach[id] = true; save();
+  toast("Achievement unlocked: " + ACH[id]);
+}
+function fortuneOfTheDay(){
+  const d = new Date(), k = d.getFullYear()*372 + d.getMonth()*31 + d.getDate();
+  return FORTUNES[(k*7919) % FORTUNES.length];
+}
+// original circus tune, synthesised in the browser
+function startCircus(){
+  const AC = window.AudioContext || window.webkitAudioContext; if(!AC) return null;
+  const ctx = new AC(), master = ctx.createGain(); master.gain.value = .22; master.connect(ctx.destination);
+  const mel = [76,76,79,76, 72,76,79,84, 83,81,79,77, 74,77,79,0, 76,76,79,76, 77,81,84,81, 83,79,74,79, 72,76,72,0];
+  const roots = [48,48,43,43,48,41,43,48];
+  const chords = [[60,64,67],[60,64,67],[59,62,67],[59,62,67],[60,64,67],[60,65,69],[59,62,67],[60,64,67]];
+  const ei = .19, f = n => 440*Math.pow(2,(n-69)/12);
+  const note = (type,n,t,d,v) => {
+    const o = ctx.createOscillator(), g = ctx.createGain(); o.type = type; o.frequency.value = f(n);
+    g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(v,t+.01); g.gain.exponentialRampToValueAtTime(.0001,t+d);
+    o.connect(g); g.connect(master); o.start(t); o.stop(t+d+.02);
+  };
+  const bars = start => {
+    for(let b=0;b<8;b++) for(let k=0;k<4;k++){
+      const t = start + (b*4+k)*ei, m = mel[b*4+k];
+      if(m){ note("square",m,t,ei*.9,.09); note("square",m+12,t,ei*.9,.03); }
+      if(k%2===0) note("triangle",roots[b],t,ei*.9,.25); else chords[b].forEach(n => note("sawtooth",n,t,ei*.6,.05));
+    }
+    return start + 32*ei;
+  };
+  let next = bars(ctx.currentTime + .1);
+  const iv = setInterval(() => { if(next - ctx.currentTime < 2) next = bars(next); }, 500);
+  return () => { clearInterval(iv); try{ ctx.close(); }catch(e){} };
+}
 
 // prompt drawing
 const seen = new Set();
@@ -411,58 +1081,240 @@ function drawQ(cat, ease){
   const size = ease ? Math.min(list.length, 3 + (S.byCat[cat]||0)) : list.length;
   return {t:fromList(list, size), cat};
 }
+const catName = id => id==="endless" ? "Endless" : (QCATS.find(c => c.id===id)||{}).n;
 
 /* ============================================================
    VIEWS
    ============================================================ */
-const TITLES = {questions:"The Question Room", tod:"Truth or Dare", cards:"Pick a card", quiz:"How well do you know me?", together:"Do something together", memories:"Our memories", letters:"For when you miss me", random:"Random", stats:"Our stats"};
-const routes = {home, questions, tod, cards, quiz, together, memories, letters, random, stats};
+const TITLES = {questions:"Question room", tod:"Truth or dare", chaos:"Chaos generator", cards:"Pick a card", quiz:"How well do you know me", headsup:"Heads up", fantasy:"Fantasy quizzes", door:"", together:"Do something together", hut:"The witch's hut", records:"Record player", mailbox:"Mailbox", random:"Random", stats:"Our stats"};
+const routes = {home, questions, tod, chaos, cards, quiz, headsup, fantasy, together, hut, records, mailbox: letters, random, stats, door};
 
 function route(){
   cleanups.forEach(f => { try{f();}catch(e){} }); cleanups = [];
   document.querySelector(".overlay")?.remove();
   const name = (location.hash.replace(/^#\/?/,"") || "home");
-  const fn = routes[name] || home;
   const key = routes[name] ? name : "home";
-  $("#bar").innerHTML = key==="home" ? "" : `<div class="bar"><a class="back" href="#/">Back</a><h2>${esc(TITLES[key])}</h2></div>`;
-  fn($("#app"));
+  $("#bar").innerHTML = (key==="home" || key==="door") ? "" : `<div class="bar"><a class="back" href="#/">Back</a><h2>${esc(TITLES[key])}</h2></div>`;
+  routes[key]($("#app"));
   window.scrollTo(0,0);
 }
 addEventListener("hashchange", route);
 
 /* ---------- home ---------- */
+function anniversaryBanner(){
+  const now = new Date(), y = now.getFullYear(), m = now.getMonth(), d = now.getDate();
+  const iso = `${y}-${String(m+1).padStart(2,"0")}-${String(d).padStart(2,"0")}`;
+  if((CONFIG.previewDates||[]).includes(iso)) return {t:"Happy anniversary", note:"Preview day. This is the banner you'll get on the 27th of every month, and on the yearly one."};
+  const last = new Date(y, m+1, 0).getDate(), target = Math.min(start.getDate(), last);
+  const months = (y - start.getFullYear())*12 + (m - start.getMonth());
+  if(months > 0 && d === target) return {t: months % 12 === 0 ? `Happy ${months/12} year anniversary` : `Happy ${months} month anniversary`};
+  return null;
+}
+function idleLoop(fn, min, max){
+  if(REDUCE) return;
+  let id; const go = () => { id = setTimeout(() => { fn(); go(); }, min + Math.random()*(max - min)); };
+  go(); onLeave(() => clearTimeout(id));
+}
 function home(el){
   const d = days();
   const isMilestone = d>0 && ([100,200,300,500,1000].includes(d) || d % 365 === 0);
-  const tiles = [
-    ["questions","💬","Questions","Unlimited, by mood","var(--pink)","wide"],
-    ["tod","🎲","Truth or Dare","Five flavours each","var(--sky)",""],
-    ["cards","🃏","Pick a card","Six decks","var(--butter)",""],
-    ["quiz","💭","How well do you know me?","Be honest","var(--mint)",""],
-    ["together","🧩","Do something together","Movie, food, place, timer","var(--pink)",""],
-    ["memories","📸","Our memories","The story so far","var(--butter)",""],
-    ["letters","💌","For when you miss me","Little envelopes","var(--coral)","wide"],
-    ["random","🔮","Random","Anything at all","var(--sky)",""],
-    ["stats","❤️","Our stats","Not serious ones","var(--mint)","wide"]
-  ];
+  const ann = anniversaryBanner();
+  const games = [["questions","Questions"],["tod","Truth or dare"],["chaos","Chaos generator"],["cards","Pick a card"],["quiz","How well do you know me"],["headsup","Heads up"],["fantasy","Fantasy quizzes"],["together","Do something together"],["random","Random"]];
+  const more = [["hut","The witch's hut",sprite(SPR.hut,3)],["records","Record player",sprite(SPR.gramo,2)],["mailbox","Mailbox",sprite(SPR.env,8)],["stats","Our stats",sprite(SPR.bars,8)]];
+  const B = {a:sprite(SPR.birdA,3), b:sprite(SPR.birdB,3)};
+  const SN = {a:sprite(SPR.snakeA,3), b:sprite(SPR.snakeB,3), c:sprite(SPR.snakeC,3)};
   el.innerHTML = `
-    <section class="hero">
-      <h1 class="names">${esc(nameA)}<span class="amp"> &amp; </span>${esc(nameB)}</h1>
-      <p class="tag">A little place for us.</p>
-      <div class="hero-row">
-        <button class="heart" id="heart" aria-label="A small heart">❤️</button>
-        <span class="chip-days">${d} days together</span>
+    ${ann ? `<div class="abanner" role="status"><span class="ar">${heart(3)}<span><b>${esc(ann.t)}</b>${ann.note ? `<small>${esc(ann.note)}</small>` : ""}</span>${heart(3)}</span></div>` : ""}
+    <div class="hud">
+      <span class="lives">1UP <button class="hbtn" id="heart" aria-label="A small heart">${heart(3)}</button>${S.key ? `<span class="keyi">${sprite(SPR.key,3)}</span>` : ""}</span>
+      <span>Day ${d}</span>
+    </div>
+    <div class="perch">
+      <div class="bwrap" id="bwrap">
+        <div class="bubble" id="bub" aria-hidden="true">chirp!</div>
+        <span class="br">${sprite(SPR.branch,3)}</span>
+        <button class="pet bird" id="pet" aria-label="Pet the parakeet">${B.a}</button>
       </div>
-      ${isMilestone ? `<div class="banner">Day ${d}. ${esc(CONFIG.milestoneNote)}</div>` : ""}
-    </section>
-    <nav class="tiles" aria-label="Sections">
-      ${tiles.map(t => `<a class="tile ${t[5]}" style="--c:${t[4]}" href="#/${t[0]}"><span class="em" aria-hidden="true">${t[1]}</span><span><b>${esc(t[2])}</b><span class="s">${esc(t[3])}</span></span></a>`).join("")}
-    </nav>`;
+    </div>
+    <h1 class="names">${esc(nameA)} <span class="amp">&amp;</span> ${esc(nameB)}</h1>
+    <p class="tag">A little place for us.</p>
+    ${isMilestone ? `<div class="banner" style="margin-top:20px">Day ${d}. ${esc(CONFIG.milestoneNote)}</div>` : ""}
+    <p class="sel">Select a mode<span class="cursor"></span></p>
+    <ul class="menu" data-spot="menu">${games.map((t,i) => `<li><a href="#/${t[0]}" ${t[0]==="cards" ? 'data-spot="cardsrow"' : ""}><span class="n">${String(i+1).padStart(2,"0")}</span><b>${esc(t[1])}</b></a></li>`).join("")}</ul>
+
+    <p class="sel" style="margin-top:44px">Around the house</p>
+    <div class="more" data-spot="more">${more.map(m => `<a class="mt" href="#/${m[0]}"><span class="ic">${m[2]}</span><b>${esc(m[1])}</b></a>`).join("")}</div>
+
+    <div class="nook">
+      <div class="doorw"><button class="door ${S.key && !S.doorOpen ? "glint" : ""}" id="door" data-spot="door" aria-label="A small door">${sprite(SPR.door,3)}</button><span class="dlab">Locked</span></div>
+      <div class="mushw"><div class="bubble" id="mbub" aria-hidden="true"></div><button class="mush" id="mush" data-spot="mush" aria-label="A mushroom">${sprite(SPR.mush,4)}</button></div>
+    </div>
+
+    <footer class="foot">
+      <div class="skywrap">
+        <div class="snkrow" id="snkrow">
+          <div class="bubble" id="sbub" aria-hidden="true">sss</div>
+          <div class="paper" id="paper" hidden></div>
+          <button class="pet snake" id="spet" aria-label="Pet the snake">${SN.b}</button>
+        </div>
+        <div class="sky" data-spot="sky" aria-hidden="true">${sprite(SPR.sun,5)}<span class="st">${sprite(SPR.star,4)}</span>${sprite(SPR.moon,5)}</div>
+      </div>
+      <p>us, and what made us happen</p>
+    </footer>`;
+
+  // parakeet: pet + idle
+  const bird = $("#pet"), bb = $("#bub");
+  wirePet($("#bwrap"), [bird], bb, ["chirp!","tweet!","peep peep","more please","squawk!"]);
+  let bt; const bsay = t => { bb.textContent = t; bb.classList.add("on"); clearTimeout(bt); bt = setTimeout(() => bb.classList.remove("on"), 1300); };
+  onLeave(() => clearTimeout(bt));
+  idleLoop(() => { bird.innerHTML = B.b; setTimeout(() => { bird.innerHTML = B.a; }, 170); }, 2200, 4800);
+  idleLoop(() => { bird.classList.remove("hop"); void bird.offsetWidth; bird.classList.add("hop"); }, 6000, 11000);
+  idleLoop(() => bsay("tweet"), 15000, 26000);
+
+  // snake: pet, fortune, idle
+  const snk = $("#spet"), paper = $("#paper");
+  wirePet($("#snkrow"), [snk], $("#sbub"), ["sss","hiss?","sss...","hic","urp"]);
+  let pt; onLeave(() => clearTimeout(pt));
+  paper.addEventListener("click", () => { paper.hidden = true; });
+  const throwUp = () => {
+    paper.innerHTML = `<b>Fortune of the day</b><span>${esc(fortuneOfTheDay())}</span>`;
+    paper.hidden = false; paper.classList.remove("pop"); void paper.offsetWidth; paper.classList.add("pop");
+    clearTimeout(pt); pt = setTimeout(() => { paper.hidden = true; }, 9000);
+  };
+  snk.addEventListener("click", () => setTimeout(throwUp, 450));
+  idleLoop(() => { snk.innerHTML = SN.a; setTimeout(() => { snk.innerHTML = SN.b; }, 320); }, 1400, 3200);
+  idleLoop(() => { snk.innerHTML = SN.c; setTimeout(() => { snk.innerHTML = SN.b; }, 170); }, 3500, 6500);
+
+  // secret heart
   let taps = 0, timer;
   $("#heart").addEventListener("click", () => {
     taps++; clearTimeout(timer); timer = setTimeout(() => taps = 0, 1500);
-    if(taps >= 5){ taps = 0; burst(); overlay(`<p class="title">Hidden message</p><p class="letter">${esc(CONFIG.secret)}</p>`); }
+    if(taps >= 5){ taps = 0; burst(); dialog("Hidden message", CONFIG.secret); }
   });
+
+  // door
+  const door = $("#door");
+  door.addEventListener("click", () => {
+    if(S.key){ toast("The key fits."); S.doorOpen = true; save(); setTimeout(() => { location.hash = "#/door"; }, 900); }
+    else { door.classList.remove("shake"); void door.offsetWidth; door.classList.add("shake"); }
+  });
+
+  // mushroom
+  const mush = $("#mush"), mb = $("#mbub"); let mt;
+  const mushSay = t => { mb.textContent = t; mb.classList.add("on"); clearTimeout(mt); mt = setTimeout(() => mb.classList.remove("on"), 1600); };
+  onLeave(() => clearTimeout(mt));
+  mush.addEventListener("click", () => {
+    S.mush = (S.mush||0) + 1; save();
+    mush.classList.remove("wob"); void mush.offsetWidth; mush.classList.add("wob");
+    const n = S.mush;
+    if(n === 4) mushSay("Stop.");
+    else if(n === 7) mushSay("I'm serious.");
+    else if(n === 10) award("mush");
+    else if(n > 10 && n % 5 === 0) mushSay(pick(["...","Nothing.","You need a hobby."]));
+  });
+
+  startCat(el);
+}
+
+/* ---------- the wandering cat ---------- */
+function startCat(root){
+  const CANCEL = {}, waiters = new Set(), tm = new Set();
+  let alive = true, frameIv = null, lastSleep = "", next = null, annoyedUntil = 0, clicks = [];
+  const T = (fn, ms) => { const id = setTimeout(() => { tm.delete(id); fn(); }, ms); tm.add(id); };
+  const wait = ms => new Promise((res, rej) => { const w = {}; w.id = setTimeout(() => { waiters.delete(w); res(); }, ms); w.rej = rej; waiters.add(w); });
+  const cancelAll = () => { waiters.forEach(w => { clearTimeout(w.id); w.rej(CANCEL); }); waiters.clear(); clearInterval(frameIv); };
+  onLeave(() => { alive = false; cancelAll(); tm.forEach(clearTimeout); });
+
+  const cat = document.createElement("button");
+  cat.className = "wcat"; cat.setAttribute("aria-label", "The black cat");
+  cat.innerHTML = `<span class="csp"></span><span class="bubble cb" aria-hidden="true"></span><span class="zz" aria-hidden="true">z</span>`;
+  root.appendChild(cat);
+  const csp = cat.querySelector(".csp"), cb = cat.querySelector(".cb"), zz = cat.querySelector(".zz");
+  const FR = {sit:sprite(SPR.catSit,3), w0:sprite(SPR.catW0,3), w1:sprite(SPR.catW1,3), sleep:sprite(SPR.catSleep,3)};
+  let x = 0, y = 0, facing = 1, pose = "sit";
+  const setPose = p => { pose = p; csp.innerHTML = FR[p]; zz.style.display = p==="sleep" ? "block" : "none"; };
+  const face = f => { facing = f; csp.style.transform = `scaleX(${f})`; };
+  const place = (nx, ny, dur) => { x = nx; y = ny; cat.style.transitionDuration = dur + "s"; cat.style.transform = `translate(${nx}px,${ny}px)`; };
+  const say = (t, ms) => { cb.textContent = t; cb.classList.add("on"); T(() => cb.classList.remove("on"), ms || 1600); };
+  const W = 64, H = 56;
+
+  const geo = el => { const rr = root.getBoundingClientRect(), r = el.getBoundingClientRect(); return {l:r.left-rr.left, t:r.top-rr.top, w:r.width, b:r.bottom-rr.top, r:r.right-rr.left}; };
+  const clampX = v => Math.max(0, Math.min(root.clientWidth - W, v));
+  const vis = n => { const e = root.querySelector(`[data-spot="${n}"]`); if(!e) return false; const r = e.getBoundingClientRect(); return r.bottom > -80 && r.top < innerHeight + 80; };
+  const spot = name => {
+    const e = root.querySelector(`[data-spot="${name}"]`); if(!e) return null; const g = geo(e);
+    if(name==="door") return {x:clampX(g.r+4), y:g.b-H, look:-1, g};
+    if(name==="mush") return {x:clampX(g.l-W+8), y:g.b-H, look:1, g};
+    if(name==="cardsrow") return {x:clampX(g.r-W-10), y:g.b-H-3, look:-1, g};
+    if(name==="sky") return {x:clampX(g.l + 8 + Math.random()*Math.max(8, g.w*.4-W)), y:g.t-H+5, look:1, g};
+    return {x:clampX(g.l + g.w*.35 + Math.random()*Math.max(8, g.w*.65-W)), y:g.t-H+5, look:Math.random()<.5?1:-1, g};
+  };
+  const SIT = ["menu","more","sky"], SLEEP = ["sky","more","mush"];
+  const near = list => { const v = list.filter(vis); return pick(v.length ? v : list); };
+
+  const walk = async t => {
+    const dx = t.x - x, dy = t.y - y, dist = Math.hypot(dx, dy);
+    if(dist < 6) return;
+    if(Math.abs(dx) > 6) face(dx > 0 ? 1 : -1);
+    const dur = Math.min(Math.max(dist/95, .6), 9);
+    let f = 0; setPose("w0"); clearInterval(frameIv);
+    frameIv = setInterval(() => setPose(++f % 2 ? "w1" : "w0"), 220);
+    place(t.x, t.y, dur);
+    await wait(dur*1000 + 60);
+    clearInterval(frameIv); setPose("sit");
+  };
+  const sitAt = async (name, ms, talk) => { const s = spot(name); if(!s) return; await walk(s); face(s.look); setPose("sit"); if(talk) say(talk, 1800); await wait(ms); };
+  const sleepAt = async name => {
+    const s = spot(name); if(!s) return; await walk(s); face(s.look); setPose("sleep"); lastSleep = name;
+    await wait(12000 + Math.random()*8000); setPose("sit"); say("mrrp", 1200); await wait(900);
+  };
+  const lead = async () => {
+    if(S.key && !S.doorOpen){
+      const s = spot("door"); await walk(s); face(s.look); setPose("sit");
+      for(let i=0; i<4 && alive && !S.doorOpen; i++){ say("mrrp!", 1500); await wait(3500); }
+      return true;
+    }
+    if(!S.key && (S.flips||0) >= Math.floor(CONFIG.keyAfterFlips/2)){
+      const s = spot("cardsrow"); await walk(s); face(s.look); setPose("sit"); say("?", 1800); await wait(6500); return true;
+    }
+    return false;
+  };
+  const choose = async () => {
+    const r = Math.random();
+    if(r < .25 && await lead()) return;
+    if(r < .5 && vis("door")){ const s = spot("door"); await walk(s); face(s.look); setPose("sit"); say(S.key ? "!" : "?", 1600); await wait(5000 + Math.random()*3000); return; }
+    if(r < .75){ const v = SLEEP.filter(n => n !== lastSleep && vis(n)); if(v.length){ await sleepAt(pick(v)); return; } }
+    await sitAt(near(SIT), 4000 + Math.random()*4000);
+  };
+  const flee = async () => {
+    const far = SLEEP.filter(n => n !== lastSleep); await sleepAt(pick(far));
+  };
+
+  cat.addEventListener("click", () => {
+    const now = Date.now(); clicks = clicks.filter(t => now - t < 8000); clicks.push(now);
+    if(now < annoyedUntil){ say("hiss", 1200); return; }
+    if(clicks.length >= 5){
+      annoyedUntil = now + 25000; clicks = []; say("hmph.", 2200); award("cat"); face(-facing);
+      if(!REDUCE){ next = flee; cancelAll(); }
+      return;
+    }
+    petFX(cat, 4);
+    if(pose === "sleep"){ setPose("sit"); say("mrrp?", 1400); cancelAll(); } else say(pick(["purr","mrrp","prrr"]), 1200);
+  });
+
+  const s0 = spot("menu");
+  setPose("sit"); face(1); place(s0.x, s0.y, 0);
+  if(REDUCE) return;
+  (async () => {
+    try{ await wait(1500); }catch(e){}
+    while(alive){
+      try{
+        if(document.hidden){ await wait(1500); continue; }
+        if(next){ const n = next; next = null; await n(); } else await choose();
+        await wait(1200 + Math.random()*2500);
+      }catch(e){ if(e !== CANCEL) throw e; }
+    }
+  })();
 }
 
 /* ---------- question room ---------- */
@@ -477,103 +1329,109 @@ function questions(el){
   const drawChips = () => {
     cats.innerHTML = QCATS.map(c => {
       const lk = c.lock && !unlocked();
-      return `<button class="chip ${lk?"locked":""}" data-c="${c.id}" aria-pressed="${c.id===cat}">${lk?"🔒":c.e} ${esc(c.n)}</button>`;
+      return `<button class="chip ${lk?"locked":""}" data-c="${c.id}" aria-pressed="${c.id===cat}">${esc(c.n)}${lk?"<small>locked</small>":""}</button>`;
     }).join("");
   };
   const show = () => {
     const c = QCATS.find(x => x.id === cat);
-    if(c.lock && !unlocked()){
-      out.innerHTML = `<div class="panel note"><span class="kind">🔒 Locked for now</span><p class="big">Answer ${togo()} more question${togo()===1?"":"s"} to unlock this.</p></div>`;
-      return;
-    }
+    if(c.lock && !unlocked()){ out.innerHTML = lockedPanel(); return; }
     cur = drawQ(cat, ease);
-    const label = cur.cat==="endless" ? "♾️ Endless" : (QCATS.find(x=>x.id===cur.cat)||{}).e + " " + (QCATS.find(x=>x.id===cur.cat)||{}).n;
     out.innerHTML = `
-      <div class="panel"><span class="kind">${esc(label)}</span><p class="big">${esc(cur.t)}</p></div>
-      <div class="actions">
-        <button class="btn" id="done">Answered, next</button>
-        <button class="btn ghost" id="skip">Skip</button>
-      </div>`;
+      <div class="panel"><span class="tab">${esc(catName(cur.cat))}</span><p class="big">${esc(cur.t)}</p></div>
+      <div class="actions"><button class="btn" id="done">Answered, next</button><button class="btn ghost" id="skip">Skip</button></div>`;
     $("#done").onclick = () => {
       const before = S.answered; S.answered++; S.byCat[cur.cat] = (S.byCat[cur.cat]||0)+1; save();
       checkUnlock(before); drawChips(); show();
     };
     $("#skip").onclick = show;
   };
-  cats.addEventListener("click", e => {
-    const b = e.target.closest(".chip"); if(!b) return;
-    cat = b.dataset.c; drawChips(); show();
-  });
+  cats.addEventListener("click", e => { const b = e.target.closest(".chip"); if(!b) return; cat = b.dataset.c; drawChips(); show(); });
   $("#ease").addEventListener("change", e => { ease = e.target.checked; });
   drawChips(); show();
 }
 
 /* ---------- truth or dare ---------- */
 function tod(el){
-  let mode = null, sub = null, cur = null;
+  let type = null;
   el.innerHTML = `
-    <p class="lead">Choose one. Then choose how brave you're feeling.</p>
-    <div class="two">
-      <button class="mode truth" data-m="truth" aria-pressed="false">Truth</button>
-      <button class="mode dare" data-m="dare" aria-pressed="false">Dare</button>
-    </div>
-    <div class="row" id="subs" role="group" aria-label="Flavour"></div>
+    <div class="step">Step 1: pick a type</div>
+    <div class="row" id="types" role="group" aria-label="Type"></div>
+    <div class="step">Step 2: truth or dare</div>
+    <div class="two"><button class="mode truth" data-m="truth" disabled>Truth</button><button class="mode dare" data-m="dare" disabled>Dare</button></div>
     <div id="out"></div>`;
-  const subs = $("#subs"), out = $("#out");
-  const drawSubs = () => {
-    if(!mode){ subs.innerHTML = ""; return; }
-    const list = mode==="truth" ? TRUTH_SUBS : DARE_SUBS;
-    subs.innerHTML = list.map(([id,n]) => {
+  const types = $("#types"), out = $("#out"), modes = el.querySelectorAll(".mode");
+  const canPlay = () => type && !(type==="flirty" && !unlocked());
+  const drawTypes = () => {
+    types.innerHTML = TYPES.map(([id,n]) => {
       const lk = id==="flirty" && !unlocked();
-      return `<button class="chip ${lk?"locked":""}" data-s="${id}" aria-pressed="${id===sub}">${lk?"🔒 ":""}${n}</button>`;
+      return `<button class="chip ${lk?"locked":""}" data-t="${id}" aria-pressed="${id===type}">${n}${lk?"<small>locked</small>":""}</button>`;
     }).join("");
+    modes.forEach(m => m.disabled = !canPlay());
   };
-  const show = () => {
-    if(!mode || !sub){ out.innerHTML = ""; return; }
-    if(sub==="flirty" && !unlocked()){
-      out.innerHTML = `<div class="panel note"><span class="kind">🔒 Locked for now</span><p class="big">Answer ${togo()} more question${togo()===1?"":"s"} in the Question Room or Truths to unlock this.</p></div>`;
-      return;
-    }
-    const bank = (mode==="truth" ? TRUTHS : DARES)[sub];
-    cur = fromList(bank);
+  types.addEventListener("click", e => {
+    const b = e.target.closest(".chip"); if(!b) return;
+    type = b.dataset.t; out.innerHTML = ""; drawTypes();
+    if(type==="flirty" && !unlocked()) out.innerHTML = lockedPanel();
+  });
+  modes.forEach(m => m.addEventListener("click", () => {
+    if(!canPlay()) return;
+    const mode = m.dataset.m;
+    const text = fromList((mode==="truth" ? TRUTHS : DARES)[type]);
     out.innerHTML = `
-      <div class="panel"><span class="kind">${mode==="truth"?"Truth":"Dare"}</span><p class="big">${esc(cur)}</p></div>
-      <div class="actions">
-        <button class="btn" id="done">${mode==="truth"?"Answered":"Done"}</button>
-        <button class="btn ghost" id="next">Another ${mode}</button>
-      </div>`;
+      <div class="panel"><span class="tab">${mode==="truth"?"Truth":"Dare"}, ${esc(type)}</span><p class="big">${esc(text)}</p></div>
+      <div class="actions"><button class="btn" id="done">${mode==="truth"?"Answered":"Done"}</button></div>
+      <p class="lead">Tap ${mode==="truth"?"Truth":"Dare"} again for another, or switch.</p>`;
     $("#done").onclick = () => {
       const before = S.answered;
       if(mode==="truth"){ S.truths++; S.answered++; } else { S.dares++; }
-      save(); checkUnlock(before); drawSubs(); show();
+      save(); checkUnlock(before); out.innerHTML = ""; drawTypes(); toast(mode==="truth" ? "Truth survived." : "Dare completed.");
     };
-    $("#next").onclick = show;
-  };
-  el.querySelectorAll(".mode").forEach(b => b.addEventListener("click", () => {
-    mode = b.dataset.m; sub = (mode==="truth" ? TRUTH_SUBS : DARE_SUBS)[0][0];
-    el.querySelectorAll(".mode").forEach(x => x.setAttribute("aria-pressed", x===b));
-    drawSubs(); show();
   }));
-  subs.addEventListener("click", e => {
-    const b = e.target.closest(".chip"); if(!b) return;
-    sub = b.dataset.s; drawSubs(); show();
-  });
+  drawTypes();
+}
+
+/* ---------- chaos generator ---------- */
+function chaos(el){
+  let who = "any";
+  el.innerHTML = `
+    <p class="lead">Not a truth. Not a dare. A rule you have to live with.</p>
+    <div class="step">Who gets it</div>
+    <div class="row" id="cw" role="group" aria-label="Who gets it">${[["any","Anyone"],["both","Both of us"],["a",nameA],["b",nameB]].map(([id,n]) => `<button class="chip" data-w="${id}" aria-pressed="${id===who}">${esc(n)}</button>`).join("")}</div>
+    <div class="panel"><span class="tab" id="ct">Chaos</span><p class="big" id="cz">Press the button. No take-backs.</p></div>
+    <div id="tm"></div>
+    <div class="actions"><button class="btn xl" id="gen">Generate chaos</button></div>`;
+  $("#cw").onclick = e => { const b = e.target.closest(".chip"); if(!b) return; who = b.dataset.w; $("#cw").querySelectorAll(".chip").forEach(x => x.setAttribute("aria-pressed", x===b)); };
+  $("#gen").onclick = () => {
+    const target = who==="any" ? pick(["both","a","b"]) : who;
+    let t, tag;
+    if(target==="both"){ t = fromList(CHAOS); tag = "For both of you"; }
+    else {
+      const n = target==="a" ? nameA : nameB, o = target==="a" ? nameB : nameA;
+      t = fromList(SOLO).replace(/\{n\}/g, n).replace(/\{o\}/g, o); tag = "For " + n;
+    }
+    $("#ct").textContent = tag; $("#cz").textContent = t;
+    const m = t.match(/(\d+)\s*(minutes?|seconds?)/i), host = $("#tm");
+    if(m){
+      const secs = +m[1] * (/^s/i.test(m[2]) ? 1 : 60);
+      host.innerHTML = `<div class="tcard" id="tbox" style="margin-top:8px"></div>`;
+      timerUI($("#tbox"), secs, "Chaos over. You survived.");
+    } else host.innerHTML = "";
+    $("#gen").textContent = "More chaos";
+  };
 }
 
 /* ---------- pick a card ---------- */
 function cards(el){
   let deck = DECKS[0];
-  const dealt = {};   // per deck: set of seen indices
+  const dealt = {};
   el.innerHTML = `
     <p class="lead">Five cards, face down. Trust your gut.</p>
     <div class="row" id="decks" role="group" aria-label="Decks"></div>
-    <div id="deal"></div>
-    <div id="panel"></div>
-    <details class="kept" id="kept"></details>`;
+    <div id="deal"></div><div id="panel"></div><details class="kept" id="kept"></details>`;
   const drawDecks = () => {
     $("#decks").innerHTML = DECKS.map(d => {
       const lk = d.lock && !unlocked();
-      return `<button class="chip ${lk?"locked":""}" data-d="${d.id}" aria-pressed="${d.id===deck.id}">${lk?"🔒":d.e} ${esc(d.n)}</button>`;
+      return `<button class="chip ${lk?"locked":""}" data-d="${d.id}" aria-pressed="${d.id===deck.id}">${esc(d.n)}${lk?"<small>locked</small>":""}</button>`;
     }).join("");
   };
   const drawKept = () => {
@@ -584,86 +1442,373 @@ function cards(el){
   };
   const deal = () => {
     $("#panel").innerHTML = "";
-    if(deck.lock && !unlocked()){
-      $("#deal").innerHTML = `<div class="panel note"><span class="kind">🔒 Locked for now</span><p class="big">Answer ${togo()} more question${togo()===1?"":"s"} to unlock this deck.</p></div>`;
-      return;
-    }
+    if(deck.lock && !unlocked()){ $("#deal").innerHTML = lockedPanel(); return; }
     const seenSet = dealt[deck.id] || (dealt[deck.id] = new Set());
     let idx = deck.cards.map((_,i)=>i).filter(i => !seenSet.has(i));
     if(idx.length < 5){ seenSet.clear(); idx = deck.cards.map((_,i)=>i); }
     const hand = shuffle(idx).slice(0,5);
     hand.forEach(i => seenSet.add(i));
-    $("#deal").innerHTML = `<div class="deal" style="--deck:${deck.c}">${hand.map(i => `
-      <button class="pc" data-i="${i}" aria-label="Face-down card"><span class="in"><span class="face back"></span><span class="face front">#${i+1}</span></span></button>`).join("")}</div>`;
+    const keyPos = (!S.key && (S.flips||0) >= CONFIG.keyAfterFlips) ? Math.floor(Math.random()*5) : -1;
+    $("#deal").innerHTML = `<div class="deal" style="--deck:${deck.c}">${hand.map((i,k) => {
+      const isKey = k === keyPos;
+      return `<button class="pc" data-i="${isKey ? "key" : i}" aria-label="Face-down card"><span class="in"><span class="face back"></span><span class="face front">${isKey ? sprite(SPR.key,3) : "#"+(i+1)}</span></span></button>`;
+    }).join("")}</div>`;
     $("#deal").querySelectorAll(".pc").forEach(b => b.addEventListener("click", () => flip(b)));
   };
   const flip = b => {
-    const i = +b.dataset.i, text = deck.cards[i];
+    const isKey = b.dataset.i === "key";
+    S.flips = (S.flips||0) + 1; save();
     $("#deal").querySelectorAll(".pc").forEach(x => { x.disabled = true; if(x!==b) x.classList.add("dim"); });
     b.classList.add("flipped");
-    $("#panel").innerHTML = `
-      <div class="panel"><span class="kind">Card #${i+1}, ${esc(deck.n)}</span><p class="big">${esc(text)}</p></div>
-      <div class="actions"><button class="btn" id="keep">Keep it</button><button class="btn ghost" id="nextc">Next card</button></div>`;
-    $("#keep").onclick = () => {
-      if(!S.kept.some(c => c.deck===deck.n && c.n===i+1)){ S.kept.push({deck:deck.n, n:i+1, t:text}); save(); drawKept(); toast("Kept."); }
-      else toast("Already kept.");
-    };
+    if(isKey){
+      $("#panel").innerHTML = `
+        <div class="panel"><span class="tab">Something is taped to this card</span><p class="big">A small brass key. It looks like it fits something.</p></div>
+        <div class="actions"><button class="btn" id="keep">Keep it</button><button class="btn ghost" id="nextc">Next card</button></div>`;
+      $("#keep").onclick = () => { if(!S.key){ S.key = true; save(); award("key"); } $("#keep").disabled = true; };
+    } else {
+      const i = +b.dataset.i, text = deck.cards[i];
+      $("#panel").innerHTML = `
+        <div class="panel"><span class="tab">Card #${i+1}, ${esc(deck.n)}</span><p class="big">${esc(text)}</p></div>
+        <div class="actions"><button class="btn" id="keep">Keep it</button><button class="btn ghost" id="nextc">Next card</button></div>`;
+      $("#keep").onclick = () => {
+        if(!S.kept.some(c => c.deck===deck.n && c.n===i+1)){ S.kept.push({deck:deck.n, n:i+1, t:text}); save(); drawKept(); toast("Kept."); }
+        else toast("Already kept.");
+      };
+    }
     $("#nextc").onclick = deal;
-    $("#panel").scrollIntoView({behavior:"smooth", block:"nearest"});
+    $("#panel").scrollIntoView({behavior:REDUCE?"auto":"smooth", block:"nearest"});
   };
-  $("#decks").addEventListener("click", e => {
-    const b = e.target.closest(".chip"); if(!b) return;
-    deck = DECKS.find(d => d.id === b.dataset.d); drawDecks(); deal();
-  });
+  $("#decks").addEventListener("click", e => { const b = e.target.closest(".chip"); if(!b) return; deck = DECKS.find(d => d.id===b.dataset.d); drawDecks(); deal(); });
   drawDecks(); drawKept(); deal();
 }
 
-/* ---------- quiz ---------- */
+/* ---------- how well do you know me (pass the phone) ---------- */
 function quiz(el){
-  const list = CONFIG.quiz;
-  let i = 0, score = 0;
-  const L = ["A","B","C","D","E","F"];
-  const ask = () => {
-    const q = list[i];
-    el.innerHTML = `
-      <p class="progress">Question ${i+1} of ${list.length}</p>
-      <div class="panel"><p class="big">${esc(q.q)}</p></div>
-      <div class="opts">${q.o.map((o,k) => `<button class="opt" data-k="${k}"><i>${L[k]}</i><span>${esc(o)}</span></button>`).join("")}</div>
-      <div id="res"></div>`;
-    el.querySelectorAll(".opt").forEach(b => b.addEventListener("click", () => answer(+b.dataset.k)));
+  const L = ["A","B","C","D"];
+  const seenQ = new Set();
+  let asker = 0, scores = [0,0], cur = null, truth = null;
+  const N = () => CONFIG.names;
+  const board = () => `<div class="score" aria-label="Score">${N().map((n,i) => `<span class="${i===asker?"on":""}">${esc(n)} ${scores[i]}</span>`).join("")}</div>`;
+  const newQ = () => {
+    let pool = QUIZ_BANK.filter(x => !seenQ.has(x.q)); if(!pool.length){ seenQ.clear(); pool = QUIZ_BANK; }
+    const q = pick(pool); seenQ.add(q.q);
+    cur = {q:q.q, o:shuffle(q.pool).slice(0,4)};
   };
-  const answer = k => {
-    const q = list[i], ok = k === q.a;
-    if(ok) score++;
-    el.querySelectorAll(".opt").forEach((b,n) => { b.disabled = true; if(n===q.a) b.classList.add("correct"); else if(n===k) b.classList.add("wrong"); });
-    const last = i === list.length-1;
-    $("#res").innerHTML = `
-      <div class="panel ${ok?"":"note"}">
-        <p class="verdict">${ok?"✅ Right":"❌ Wrong"}</p>
-        <p style="margin:0 0 8px">${esc(ok?q.right:q.wrong)}</p>
-        <p style="margin:0"><b>The answer was ${L[q.a]}.</b> ${esc(q.note||"")}</p>
+  const opts = (cls) => `<div class="opts">${cur.o.map((o,k) => `<button class="opt ${cls||""}" data-k="${k}"><i>${L[k]}</i><span>${esc(o)}</span></button>`).join("")}</div>`;
+
+  const setup = () => {
+    el.innerHTML = `
+      <p class="lead">One of you answers a question about themselves. Then you pass the phone, and the other guesses what they picked.</p>
+      <div class="step">Who answers first?</div>
+      <div class="two">${N().map((n,i) => `<button class="btn ${i?"alt":""}" data-w="${i}" style="min-height:72px">${esc(n)}</button>`).join("")}</div>`;
+    el.querySelectorAll("[data-w]").forEach(b => b.onclick = () => { asker = +b.dataset.w; scores = [0,0]; newQ(); answerScreen(); });
+  };
+  const answerScreen = () => {
+    const a = N()[asker], g = N()[1-asker];
+    el.innerHTML = `${board()}
+      <div class="panel"><span class="tab">${esc(a)} answers</span><p class="big">${esc(cur.q)}</p><p class="sub">${esc(a)}, answer honestly about yourself. ${esc(g)}, look away.</p></div>
+      ${opts()}`;
+    el.querySelectorAll(".opt").forEach(b => b.onclick = () => { truth = +b.dataset.k; passScreen(); });
+  };
+  const passScreen = () => {
+    const g = N()[1-asker];
+    el.innerHTML = `${board()}
+      <div class="panel"><span class="tab">Locked in</span><p class="big">Now pass the phone to your partner to see if you got it right.</p></div>
+      <div class="actions"><button class="btn" id="rdy">${esc(g)} is ready</button></div>`;
+    $("#rdy").onclick = guessScreen;
+  };
+  const guessScreen = () => {
+    const a = N()[asker], g = N()[1-asker];
+    el.innerHTML = `${board()}
+      <div class="panel"><span class="tab">${esc(g)} guesses</span><p class="big">${esc(cur.q)}</p><p class="sub">${esc(g)}, what did ${esc(a)} pick?</p></div>
+      ${opts()}`;
+    el.querySelectorAll(".opt").forEach(b => b.onclick = () => reveal(+b.dataset.k));
+  };
+  const reveal = guess => {
+    const a = N()[asker], g = N()[1-asker], ok = guess === truth;
+    if(ok) scores[1-asker]++;
+    el.innerHTML = `${board()}
+      <div class="panel"><span class="tab">Result</span>
+        <p class="sub" style="margin:0 0 10px">${esc(cur.q)}</p>
+        <p class="verdict">${ok ? "Right" : "Wrong"}</p>
+        <p style="margin:0 0 8px;font-weight:600">${esc(pick(ok ? RIGHT_LINES : WRONG_LINES))}</p>
+        <p style="margin:0">${esc(a)} picked <b>${L[truth]}: ${esc(cur.o[truth])}</b>.${ok ? "" : ` ${esc(g)} guessed ${L[guess]}: ${esc(cur.o[guess])}.`}</p>
       </div>
-      <div class="actions"><button class="btn" id="nq">${last?"See my score":"Next question"}</button></div>`;
-    $("#nq").onclick = () => { if(last) finish(); else { i++; ask(); } };
-    $("#res").scrollIntoView({behavior:"smooth", block:"nearest"});
+      <div class="actions"><button class="btn" id="nq">Next question, swap roles</button><button class="btn ghost" id="end">End game</button></div>`;
+    $("#nq").onclick = () => { asker = 1-asker; newQ(); answerScreen(); };
+    $("#end").onclick = finish;
   };
   const finish = () => {
-    if(score > S.quizBest){ S.quizBest = score; save(); }
-    const f = score / list.length;
-    const msg = f===1 ? "Perfect. Suspiciously perfect." : f>=.7 ? "Okay, you were paying attention." : f>=.4 ? "Not bad. Room to improve." : "We need to talk.";
+    const [x,y] = scores;
+    const msg = x===y ? "A tie. Suspicious." : `${N()[x>y?0:1]} knows ${N()[x>y?1:0]} better.`;
     el.innerHTML = `
-      <div class="panel"><span class="kind">Your score</span><p class="big">${score} out of ${list.length}</p><p style="margin:12px 0 0">${msg}</p></div>
-      <div class="actions"><button class="btn" id="again">Try again</button><a class="btn ghost" style="display:inline-flex;align-items:center;text-decoration:none" href="#/">Home</a></div>`;
-    $("#again").onclick = () => { i = 0; score = 0; ask(); };
+      <div class="panel"><span class="tab">Final score</span><p class="big">${esc(N()[0])} ${x}, ${esc(N()[1])} ${y}</p><p class="sub">${esc(msg)}</p></div>
+      <div class="actions"><button class="btn" id="again">Play again</button></div>`;
+    $("#again").onclick = setup;
   };
-  ask();
+  setup();
 }
 
-/* ---------- open when ---------- */
+/* ---------- heads up ---------- */
+function headsup(el){
+  let cat = "anime", len = 60;
+  const menu = () => {
+    el.innerHTML = `
+      <p class="lead">One of you holds the phone to their forehead. The other gives clues, and taps Got it or Pass. You can also use the arrow keys.</p>
+      <div class="step">Category</div>
+      <div class="row" id="hc" role="group" aria-label="Category">${Object.entries(HEADS).map(([id,c]) => `<button class="chip" data-c="${id}" aria-pressed="${id===cat}">${esc(c.n)}</button>`).join("")}</div>
+      <div class="step">Time</div>
+      <div class="row" id="hl" role="group" aria-label="Time">${[30,60,90].map(s => `<button class="chip" data-l="${s}" aria-pressed="${s===len}">${s} sec</button>`).join("")}</div>
+      <div class="actions"><button class="btn xl" id="go">Start</button></div>`;
+    $("#hc").onclick = e => { const b = e.target.closest(".chip"); if(!b) return; cat = b.dataset.c; $("#hc").querySelectorAll(".chip").forEach(x => x.setAttribute("aria-pressed", x===b)); };
+    $("#hl").onclick = e => { const b = e.target.closest(".chip"); if(!b) return; len = +b.dataset.l; $("#hl").querySelectorAll(".chip").forEach(x => x.setAttribute("aria-pressed", x===b)); };
+    $("#go").onclick = countdown;
+  };
+  const countdown = () => {
+    let n = 3;
+    el.innerHTML = `<p class="lead" style="text-align:center">Phone to your forehead. Screen facing your partner.</p><div class="count" id="c">${n}</div>`;
+    const iv = setInterval(() => { n--; if(n<=0){ clearInterval(iv); play(); } else $("#c").textContent = n; }, 1000);
+    onLeave(() => clearInterval(iv));
+  };
+  const play = () => {
+    let words = shuffle(HEADS[cat].w), wi = 0, left = len; const got = [], passed = [];
+    el.innerHTML = `
+      <div class="hu-top"><span>Time <b id="t">${left}</b></span><span>Score <b id="s">0</b></span></div>
+      <div class="hu-word" id="w"></div>
+      <div class="hu-btns"><button class="btn ghost" id="pass">Pass</button><button class="btn alt" id="got">Got it</button></div>`;
+    const w = $("#w");
+    const show = () => { if(wi >= words.length){ words = shuffle(HEADS[cat].w); wi = 0; } w.textContent = words[wi]; };
+    const flash = ok => { w.classList.toggle("ok", ok); try{ navigator.vibrate && navigator.vibrate(ok?40:[20,40,20]); }catch(e){} };
+    const gotIt = () => { got.push(words[wi]); wi++; $("#s").textContent = got.length; flash(true); show(); };
+    const passIt = () => { passed.push(words[wi]); wi++; flash(false); show(); };
+    $("#got").onclick = gotIt; $("#pass").onclick = passIt;
+    const key = e => { if(e.key==="ArrowRight"||e.key==="Enter"){ gotIt(); } else if(e.key==="ArrowLeft"||e.key===" "){ e.preventDefault(); passIt(); } };
+    document.addEventListener("keydown", key);
+    const iv = setInterval(() => { left--; $("#t").textContent = left; if(left<=0) end(); }, 1000);
+    const end = () => { clearInterval(iv); document.removeEventListener("keydown", key); summary(got, passed); };
+    onLeave(() => { clearInterval(iv); document.removeEventListener("keydown", key); });
+    show();
+  };
+  const summary = (got, passed) => {
+    el.innerHTML = `
+      <div class="panel"><span class="tab">Time's up</span><p class="big">${got.length} correct</p></div>
+      <div class="two-col">
+        <div><div class="step" style="margin-top:0">Got it</div><ul>${got.map(x => `<li>${esc(x)}</li>`).join("") || "<li>None</li>"}</ul></div>
+        <div><div class="step" style="margin-top:0">Passed</div><ul>${passed.map(x => `<li>${esc(x)}</li>`).join("") || "<li>None</li>"}</ul></div>
+      </div>
+      <div class="actions"><button class="btn" id="again">Play again</button><button class="btn ghost" id="chg">Change category</button></div>`;
+    $("#again").onclick = countdown; $("#chg").onclick = menu;
+  };
+  menu();
+}
+
+/* ---------- fantasy quizzes (two players, alternating) ---------- */
+function fantasy(el){
+  const N = CONFIG.names, L = ["A","B","C","D"];
+  let quiz = null, qi = 0, turn = 0, picks = [[],[]];
+  const menu = () => {
+    el.innerHTML = `
+      <p class="lead">Take turns on every question. ${esc(N[0])} answers first, then ${esc(N[1])}, and so on. You both get your results at the end.</p>
+      <div class="actions" style="flex-direction:column;align-items:stretch">${FANTASY.map((f,i) => `<button class="btn ${i%2?"alt":""}" data-q="${i}" style="min-height:64px;text-align:left">${esc(f.title)}</button>`).join("")}</div>`;
+    el.querySelectorAll("[data-q]").forEach(b => b.onclick = () => { quiz = FANTASY[+b.dataset.q]; qi = 0; turn = 0; picks = [[],[]]; ask(); });
+  };
+  const ask = () => {
+    const q = quiz.questions[qi];
+    el.innerHTML = `
+      <div class="score"><span class="on">${esc(N[turn])}'s turn</span><span>Question ${qi+1} of ${quiz.questions.length}</span></div>
+      <div class="panel"><span class="tab">${esc(N[turn])} answers</span><p class="big">${esc(q.q)}</p></div>
+      <div class="opts">${q.o.map((o,k) => `<button class="opt" data-k="${k}"><i>${L[k]}</i><span>${esc(o[0])}</span></button>`).join("")}</div>`;
+    el.querySelectorAll(".opt").forEach(b => b.onclick = () => {
+      picks[turn].push(q.o[+b.dataset.k][1]);
+      if(turn === 0){ turn = 1; ask(); }
+      else { turn = 0; qi++; if(qi >= quiz.questions.length) results(); else ask(); }
+    });
+    window.scrollTo(0,0);
+  };
+  const outcome = p => {
+    const sc = Array(quiz.results.length).fill(0); picks[p].forEach(r => sc[r]++);
+    const max = Math.max(...sc), top = sc.map((s,i) => s===max ? i : -1).filter(i => i >= 0);
+    return top[Math.floor(Math.random()*top.length)];
+  };
+  const results = () => {
+    const a = outcome(0), b = outcome(1);
+    S.fq = (S.fq||0) + 1; save();
+    el.innerHTML = `
+      <p class="lead">${esc(quiz.title)}</p>
+      ${[a,b].map((r,p) => `<div class="panel res"><span class="tab">${esc(N[p])}</span><h3>${esc(quiz.results[r].n)}</h3><p>${esc(quiz.results[r].d)}</p></div>`).join("")}
+      ${a===b ? `<p class="lead">Same result. Of course.</p>` : ""}
+      <div class="actions"><button class="btn" id="again">Another quiz</button><button class="btn ghost" id="redo">Take this one again</button></div>`;
+    $("#again").onclick = menu;
+    $("#redo").onclick = () => { qi = 0; turn = 0; picks = [[],[]]; ask(); };
+    window.scrollTo(0,0);
+  };
+  menu();
+}
+
+/* ---------- the door ---------- */
+function door(el){
+  if(!S.key){ location.hash = "#/"; return; }
+  document.body.classList.add("hush");
+  onLeave(() => document.body.classList.remove("hush"));
+  S.doorOpen = true; save(); award("door");
+  const D = CONFIG.door;
+  const lines = ["You found this.","I wasn't sure if you'd actually get here.","So here's something I wanted you to have."];
+  let i = 0;
+  const fade = t => `<p class="hl" style="animation-delay:${(i++)*1.7}s">${t}</p>`;
+  el.innerHTML = `<div class="hushpage">
+    ${lines.map(l => fade(esc(l))).join("")}
+    ${D.message.map(m => fade(`<span class="msg">${esc(m)}</span>`)).join("")}
+    ${D.photos.map(src => `<div class="hl hphoto" style="animation-delay:${(i++)*1.7}s"><img src="${esc(src)}" alt=""></div>`).join("")}
+    ${D.video ? `<div class="hl" style="animation-delay:${(i++)*1.7}s"><button class="hlink" id="rewatch">Watch the video again</button></div>` : ""}
+    <div class="hl" style="animation-delay:${(i++)*1.7}s"><a class="hback" href="#/">Go back</a></div>
+  </div>`;
+  if(D.video){
+    $("#rewatch").onclick = () => videoPopup(D.video);
+    const vt = setTimeout(() => videoPopup(D.video), 600);
+    onLeave(() => clearTimeout(vt));
+  }
+}
+
+/* ---------- do something together ---------- */
+function together(el){
+  el.innerHTML = `
+    <p class="lead">For when you'd rather do than read.</p>
+    <div class="tcard"><span class="tab">Movie or show</span><button class="btn" id="mv">Give us three</button><ul class="result" id="mvo"></ul></div>
+    <div class="tcard"><span class="tab">Pick our food</span><button class="btn" id="fd">Decide for us</button><ul class="result" id="fdo"></ul></div>
+    <div class="tcard"><span class="tab">Pick a place</span><button class="btn" id="pl">Surprise us</button><ul class="result" id="plo"></ul></div>
+    <div class="tcard"><span class="tab">Pick an activity</span><button class="btn" id="ac">Pick one</button><ul class="result" id="aco"></ul></div>
+    <div class="tcard"><span class="tab">10-minute conversation</span>
+      <p id="tq" style="margin:0;font-weight:700">Press New question, then start the clock.</p>
+      <div id="tmh"></div>
+      <div class="actions"><button class="btn ghost" id="tr">New question</button></div>
+    </div>`;
+  const li = t => `<li>${esc(t)}</li>`;
+  $("#mv").onclick = () => { $("#mvo").innerHTML = shuffle(CONFIG.movies).slice(0,3).map(m => `<li>${esc(m[0])}<small>${esc(m[1])}</small></li>`).join(""); $("#mv").textContent = "Give us three more"; };
+  $("#fd").onclick = () => { $("#fdo").innerHTML = li(pick(CONFIG.foods)); $("#fd").textContent = "Try again"; };
+  $("#pl").onclick = () => { $("#plo").innerHTML = li(pick(CONFIG.places)); $("#pl").textContent = "Try again"; };
+  $("#ac").onclick = () => { const a = pick(CONFIG.activities).replace("{A}", nameA).replace("{B}", nameB); $("#aco").innerHTML = `<li class="${a.length<=3?"emo":""}">${esc(a)}</li>`; $("#ac").textContent = "Pick another"; };
+  const tm = timerUI($("#tmh"), 600, "Time's up. Keep talking if you don't want to stop.");
+  $("#tr").onclick = () => { $("#tq").textContent = drawQ("surprise", false).t; tm.reset(); };
+}
+
+/* ---------- record player ---------- */
+function records(el){
+  el.innerHTML = `
+    <p class="lead">Pick a song and the record starts spinning.</p>
+    <div class="gwrap"><div class="gs" id="gs">${sprite(SPR.gramo,7)}<span class="spin"></span><span id="notes"></span></div></div>
+    <p class="now" id="now">Pick a song.</p>
+    <div id="yt"></div>
+    <div class="actions gact" id="gact"></div>
+    <ul class="tracks" id="tracks">${CONFIG.songs.map((s,i) => `<li><button class="track" data-i="${i}"><span class="tn">${i+1}</span><span class="tt">${esc(s.t)}${s.by ? `<small>${esc(s.by)}</small>` : ""}</span></button></li>`).join("")}</ul>`;
+  const gs = $("#gs"), notes = $("#notes"), now = $("#now"), gact = $("#gact"), yt = $("#yt");
+  let stopAudio = null, noteIv = null;
+  const stopAll = () => {
+    if(stopAudio){ stopAudio(); stopAudio = null; }
+    clearInterval(noteIv); noteIv = null; gs.classList.remove("on");
+    now.textContent = "Pick a song."; gact.innerHTML = ""; yt.innerHTML = "";
+    el.querySelectorAll(".track.on").forEach(t => t.classList.remove("on"));
+  };
+  onLeave(stopAll);
+  const links = s => {
+    const q = encodeURIComponent(s.q || s.t);
+    return `<a class="btn ghost" target="_blank" rel="noopener noreferrer" href="https://www.youtube.com/results?search_query=${q}">Open on YouTube</a><a class="btn ghost" target="_blank" rel="noopener noreferrer" href="https://open.spotify.com/search/${q}">Open on Spotify</a>`;
+  };
+  const embed = s => {
+    if(s.yt) yt.innerHTML = `<div class="ytbox"><iframe src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(s.yt)}?autoplay=1&rel=0" title="${esc(s.t)}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>`;
+  };
+  $("#tracks").addEventListener("click", e => {
+    const b = e.target.closest(".track"); if(!b) return;
+    const s = CONFIG.songs[+b.dataset.i];
+    stopAll(); b.classList.add("on"); gs.classList.add("on"); now.textContent = "Now spinning: " + s.t;
+    if(!REDUCE) noteIv = setInterval(() => {
+      const n = document.createElement("span"); n.className = "nt"; n.innerHTML = sprite(SPR.note,3);
+      n.style.setProperty("--dx", (-10 - Math.random()*40) + "px"); notes.appendChild(n); setTimeout(() => n.remove(), 2000);
+    }, 700);
+    let fell = false;
+    const fallback = () => { if(fell) return; fell = true; embed(s); };
+    if(s.synth === "circus"){ stopAudio = startCircus(); if(!stopAudio) now.textContent = "This browser can't play the circus tune."; }
+    else if(s.src){
+      const a = new Audio(s.src); a.loop = true; stopAudio = () => { a.pause(); };
+      a.addEventListener("error", fallback, {once:true});
+      a.play().catch(fallback);
+    } else fallback();
+    gact.innerHTML = `<button class="btn" id="gstop">Stop</button>${s.synth ? "" : links(s)}`;
+    $("#gstop").onclick = stopAll;
+  });
+}
+
+/* ---------- the witch's hut ---------- */
+function hut(el){
+  el.innerHTML = `
+    <p class="lead">Come in. Wipe your feet.</p>
+    <div class="scene">${sprite(SPR.hut, 10)}</div>
+
+    <section class="panel"><span class="tab">Tarot</span>
+      <p style="margin:0">Take a breath, think of something, then pull a card. Just for fun.</p>
+      <div class="tarot-wrap" id="tw"></div>
+      <div id="tmean"></div>
+      <div class="actions"><button class="btn" id="pull">Pull a card</button></div>
+    </section>
+
+    <section class="panel"><span class="tab">Magic eight ball</span>
+      <p style="margin:0">Think of a yes or no question, then shake.</p>
+      <div class="ball eight" id="ball"><div class="win" id="bw">8</div></div>
+      <p class="big" id="ba" style="text-align:center;min-height:2.4em"></p>
+      <div class="actions" style="justify-content:center"><button class="btn alt" id="shake">Shake</button></div>
+    </section>
+`;
+
+  // tarot
+  let lastTarot = -1;
+  $("#pull").onclick = () => {
+    let i; do { i = Math.floor(Math.random()*TAROT.length); } while(i === lastTarot); lastTarot = i;
+    const c = TAROT[i], rev = Math.random() < .3;
+    $("#tw").innerHTML = `<div class="t3 ${rev?"rev":""}" id="t3"><span class="in"><span class="face back">${sprite(SPR.icons.eye, 6).replace(/fill="#3A1F80"/g,'fill="#F4EEFF"')}</span><span class="face front"><span class="num">${c[0]}</span><span class="art">${tarotSVG(i,170)}</span><span class="nm">${esc(c[1])}</span></span></span></div>`;
+    $("#tmean").innerHTML = "";
+    requestAnimationFrame(() => requestAnimationFrame(() => $("#t3").classList.add("flipped")));
+    setTimeout(() => {
+      $("#tmean").innerHTML = `<p class="big" style="text-align:center;font-size:1.5rem">${esc(c[1])}${rev?` <span class="rev-tag">Reversed</span>`:""}</p><p style="text-align:center;margin:8px 0 0">${esc(rev ? c[4] : c[3])}</p>`;
+    }, REDUCE ? 0 : 700);
+    $("#pull").textContent = "Pull another";
+  };
+
+  // eight ball
+  $("#shake").onclick = () => {
+    const ball = $("#ball"); ball.classList.remove("shake"); void ball.offsetWidth; ball.classList.add("shake");
+    ball.classList.remove("eight"); $("#bw").textContent = "..."; $("#ba").textContent = "";
+    setTimeout(() => { const [tag,text] = pick(EIGHT); $("#bw").textContent = tag; $("#ba").textContent = text; }, REDUCE ? 0 : 700);
+  };
+
+}
+
+/* ---------- random ---------- */
+function random(el){
+  const one = () => {
+    const locked = !unlocked();
+    const kinds = [
+      () => ({k:"Question", t:drawQ("surprise", false).t}),
+      () => ({k:"Truth", t:pick(TRUTHS[pick(TYPES.filter(x => !(locked && x[0]==="flirty")))[0]])}),
+      () => ({k:"Dare", t:pick(DARES[pick(TYPES.filter(x => !(locked && x[0]==="flirty")))[0]])}),
+      () => { const d = pick(DECKS.filter(x => !(locked && x.lock))); return {k:"Card, " + d.n, t:pick(d.cards)}; },
+      () => ({k:"Chaos", t:pick(CHAOS)})
+    ];
+    return pick(kinds)();
+  };
+  const show = () => {
+    const r = one();
+    el.innerHTML = `<p class="lead">No choices. Whatever comes up, comes up.</p>
+      <div class="panel"><span class="tab">${esc(r.k)}</span><p class="big">${esc(r.t)}</p></div>
+      <div class="actions"><button class="btn" id="ag">Again</button></div>`;
+    $("#ag").onclick = show;
+  };
+  show();
+}
+
+/* ---------- letters ---------- */
 function letters(el){
   const all = CONFIG.letters.concat([Object.assign({locked:true}, CONFIG.lockedLetter)]);
   el.innerHTML = `<p class="lead">Each one is for a different kind of day.</p><div class="env-grid">${
-    all.map((l,i) => `<button class="env ${l.locked?"lock":""} ${S.opened.includes(i)?"opened":""}" data-i="${i}"><span>${l.locked?"🔒":"✉️"} ${esc(l.t)}</span></button>`).join("")
+    all.map((l,i) => `<button class="env ${l.locked?"lock":""} ${S.opened.includes(i)?"opened":""}" data-i="${i}"><span>${esc(l.t)}</span></button>`).join("")
   }</div>`;
   el.querySelector(".env-grid").addEventListener("click", e => {
     const b = e.target.closest(".env"); if(!b) return;
@@ -678,77 +1823,8 @@ function letters(el){
       }
     }
     if(!S.opened.includes(i)){ S.opened.push(i); save(); b.classList.add("opened"); }
-    overlay(`<p class="title">${esc(l.t)}</p><p class="letter">${esc(l.x)}</p>`);
+    dialog(l.t, l.x);
   });
-}
-
-/* ---------- memories ---------- */
-function memories(el){
-  el.innerHTML = `<p class="lead">The story so far.</p><ol class="timeline">${
-    CONFIG.memories.map(m => `<li><time datetime="${esc(m.d)}">${esc(fmtDate(new Date(m.d+"T00:00:00")))}</time><h3>${esc(m.t)}</h3><p>${esc(m.x)}</p></li>`).join("")
-  }</ol>`;
-}
-
-/* ---------- do something together ---------- */
-function together(el){
-  el.innerHTML = `
-    <p class="lead">For when you'd rather do than read.</p>
-    <div class="tcard"><h3>🎬 Pick a movie</h3><button class="btn" id="mv">Give us three</button><ul class="result" id="mvo"></ul></div>
-    <div class="tcard"><h3>🍕 Pick our food</h3><button class="btn" id="fd">Decide for us</button><ul class="result" id="fdo"></ul></div>
-    <div class="tcard"><h3>🌎 Pick a place</h3><button class="btn" id="pl">Surprise us</button><ul class="result" id="plo"></ul></div>
-    <div class="tcard"><h3>💬 10-minute conversation</h3>
-      <p id="tq" style="margin:0 0 6px;font-weight:600">Press start to get a question.</p>
-      <div class="timer" id="tm" aria-live="off">10:00</div>
-      <div class="actions" style="margin-top:8px"><button class="btn" id="ts">Start</button><button class="btn ghost" id="tr">New question</button></div>
-    </div>
-    <div class="tcard"><h3>Inside jokes recorded</h3>
-      <div class="counter"><button class="round" id="jm" aria-label="One fewer">−</button><output id="jc">${S.jokes}</output><button class="round" id="jp" aria-label="One more">+</button></div>
-    </div>`;
-  const li = t => `<li>${esc(t)}</li>`;
-  $("#mv").onclick = () => { $("#mvo").innerHTML = shuffle(CONFIG.movies).slice(0,3).map(li).join(""); };
-  $("#fd").onclick = () => { $("#fdo").innerHTML = li(pick(CONFIG.foods)); $("#fd").textContent = "Try again"; };
-  $("#pl").onclick = () => { $("#plo").innerHTML = li(pick(CONFIG.places)); $("#pl").textContent = "Try again"; };
-  // timer
-  let left = 600, iv = null;
-  const paint = () => { $("#tm").textContent = String(Math.floor(left/60)).padStart(2,"0") + ":" + String(left%60).padStart(2,"0"); };
-  const stop = () => { clearInterval(iv); iv = null; $("#ts").textContent = left===600 ? "Start" : "Resume"; };
-  const newQ = () => { $("#tq").textContent = drawQ("surprise", false).t; };
-  onLeave(() => clearInterval(iv));
-  $("#ts").onclick = () => {
-    if(iv){ stop(); return; }
-    if(left===600 && $("#tq").textContent.startsWith("Press start")) newQ();
-    if(left<=0){ left = 600; }
-    $("#ts").textContent = "Pause";
-    iv = setInterval(() => {
-      left--; paint();
-      if(left<=0){ clearInterval(iv); iv = null; $("#ts").textContent = "Start"; left = 600; $("#tm").textContent = "Time's up"; toast("Time's up. Keep talking if you don't want to stop."); }
-    }, 1000);
-  };
-  $("#tr").onclick = () => { newQ(); if(iv){ clearInterval(iv); iv = null; } left = 600; paint(); $("#ts").textContent = "Start"; };
-  const jokes = d => { S.jokes = Math.max(0, S.jokes + d); save(); $("#jc").textContent = S.jokes; };
-  $("#jp").onclick = () => jokes(1); $("#jm").onclick = () => jokes(-1);
-}
-
-/* ---------- random ---------- */
-function random(el){
-  const one = () => {
-    const locked = !unlocked();
-    const kinds = [
-      () => ({k:"Question", t:drawQ("surprise", false).t}),
-      () => { const s = pick(TRUTH_SUBS.filter(x => !(locked && x[0]==="flirty")))[0]; return {k:"Truth", t:pick(TRUTHS[s])}; },
-      () => { const s = pick(DARE_SUBS.filter(x => !(locked && x[0]==="flirty")))[0]; return {k:"Dare", t:pick(DARES[s])}; },
-      () => { const d = pick(DECKS.filter(x => !(locked && x.lock))); return {k:"Card, " + d.n, t:pick(d.cards)}; }
-    ];
-    return pick(kinds)();
-  };
-  const show = () => {
-    const r = one();
-    el.innerHTML = `<p class="lead">No choices. Whatever comes up, comes up.</p>
-      <div class="panel"><span class="kind">${esc(r.k)}</span><p class="big">${esc(r.t)}</p></div>
-      <div class="actions"><button class="btn" id="ag">Again</button></div>`;
-    $("#ag").onclick = show;
-  };
-  show();
 }
 
 /* ---------- stats ---------- */
@@ -760,8 +1836,8 @@ function stats(el){
     ["Dares completed", S.dares],
     ["Cards kept", S.kept.length],
     ["Letters opened", S.opened.length],
-    ["Best quiz score", `${S.quizBest} / ${CONFIG.quiz.length}`],
-    ["Inside jokes recorded", S.jokes]
+    ["Fantasy quizzes finished", S.fq || 0],
+    ["Achievements", Object.keys(S.ach).length + " / " + Object.keys(ACH).length]
   ];
   el.innerHTML = `
     <p class="lead">Numbers that don't matter, kept very carefully.</p>
@@ -772,9 +1848,7 @@ function stats(el){
     </ul>
     <button class="reset" id="rs">Reset our counts</button>`;
   let taps = 0;
-  $("#adm").addEventListener("click", () => {
-    taps++; if(taps >= 3){ $("#admv").textContent = CONFIG.admitted.secret; burst(); }
-  });
+  $("#adm").addEventListener("click", () => { taps++; if(taps >= 3){ $("#admv").textContent = CONFIG.admitted.secret; burst(); } });
   $("#rs").onclick = () => { if(confirm("Reset all counts, kept cards and opened letters on this device?")){ S = fresh(); save(); stats(el); } };
 }
 
